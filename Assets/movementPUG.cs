@@ -13,14 +13,26 @@ public enum State
 public class movementPUG : MonoBehaviour
 {
     public const float PI = 3.1415926535897931f;
-    public float speedMovement = (PI /180f) * 90f;
+    public float speedMovement = 10f;
     public float speedRotation = 30f;
     private State stateObj;
+    public GameObject player;
+    private bool iscollision;   
 
+    void OnCollisionEnter(Collision collision)
+    {
+        iscollision = true;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+    void OnCollisionExit(Collision collision)
+    {
+        iscollision = false;
+    }
     // Start is called before the first frame update
     void Start()
     {
         stateObj = State.FRONT;
+        iscollision = false;
     }
 
     // Update is called once per frame
@@ -54,7 +66,7 @@ public class movementPUG : MonoBehaviour
                     transform.position = pos;
                     transform.Rotate(0.0f, 90.0f, 0.0f);
                 }
-                else if (Input.GetKey("s"))
+                else if (Input.GetKey("s") /*&& !iscollision*/)
                 {
                     stateObj = State.FRONT;
                     pos.z -= speedMovement * Time.deltaTime;
@@ -85,7 +97,7 @@ public class movementPUG : MonoBehaviour
                     transform.position = pos;
                     transform.Rotate(0.0f, -90.0f, 0.0f);
                 }
-                else if (Input.GetKey("w"))
+                else if (Input.GetKey("w") /*&& !iscollision*/)
                 {
                     stateObj = State.BACK;
                     pos.z += speedMovement * Time.deltaTime;
@@ -116,7 +128,7 @@ public class movementPUG : MonoBehaviour
                     transform.position = pos;
                     transform.Rotate(0.0f, 90.0f, 0.0f);
                 }
-                else if (Input.GetKey("a"))
+                else if (Input.GetKey("a") /*&& !iscollision*/)
                 {
                     stateObj = State.LEFT;
                     pos.x -= speedMovement * Time.deltaTime;
@@ -148,7 +160,7 @@ public class movementPUG : MonoBehaviour
                     transform.position = pos;
                     transform.Rotate(0.0f, -90.0f, 0.0f);
                 }
-                else if (Input.GetKey("d"))
+                else if (Input.GetKey("d") /*&& !iscollision*/)
                 {
                     stateObj = State.RIGHT;
                     pos.x += speedMovement * Time.deltaTime;
@@ -157,39 +169,6 @@ public class movementPUG : MonoBehaviour
                 }
                 break;
         }
-            
-        
-
-
-        /*if (Input.GetKey("w"))
-        {
-            stateObj = State.BACK;
-            pos.z += speedMovement * Time.deltaTime;
-            transform.position = pos;
-
-        }
-        if (Input.GetKey("a"))
-        {
-            stateObj = State.LEFT;
-            pos.x -= speedMovement * Time.deltaTime;
-            transform.position = pos;
-            transform.Rotate(Vector3.up * speedMovement);
-        }
-        if (Input.GetKey("s"))
-        {
-            stateObj = State.FRONT;
-            pos.z -= speedMovement * Time.deltaTime;
-            transform.position = pos;
-        }
-        if (Input.GetKey("d"))
-        {
-            stateObj = State.RIGHT;
-            pos.x += speedMovement * Time.deltaTime;
-            transform.position = pos;
-            transform.Rotate(-Vector3.up * speedMovement);
-        }     */ 
-
-
-        
+                    
     }
 }

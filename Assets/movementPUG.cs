@@ -27,20 +27,141 @@ public class movementPUG : MonoBehaviour
     void Update()
     {
         Vector3 pos = transform.position;
+       
+        switch (stateObj)
+        {
 
-        /*switch (stateObj) {
-            case FRONT:
+            case State.FRONT:
+                if (Input.GetKey("w"))
+                {
+                    stateObj = State.BACK;
+                    pos.z += speedMovement * Time.deltaTime;
+                    transform.position = pos;
+                    transform.Rotate(0.0f, 180.0f, 0.0f);
+
+                }
+                else if (Input.GetKey("d"))
+                {
+                    stateObj = State.RIGHT;
+                    pos.x += speedMovement * Time.deltaTime;
+                    transform.position = pos;
+                    transform.Rotate(0.0f, -90.0f, 0.0f);
+                }
+                else if (Input.GetKey("a"))
+                {
+                    stateObj = State.LEFT;
+                    pos.x -= speedMovement * Time.deltaTime;
+                    transform.position = pos;
+                    transform.Rotate(0.0f, 90.0f, 0.0f);
+                }
+                else if (Input.GetKey("s"))
+                {
+                    stateObj = State.FRONT;
+                    pos.z -= speedMovement * Time.deltaTime;
+                    transform.position = pos;
+
+                }
                 break;
-            case BACK:
+            case State.BACK:
+                if (Input.GetKey("s"))
+                {
+                    stateObj = State.FRONT;
+                    pos.z += speedMovement * Time.deltaTime;
+                    transform.position = pos;
+                    transform.Rotate(0.0f, 180.0f, 0.0f);
+
+                }
+                else if (Input.GetKey("d"))
+                {
+                    stateObj = State.RIGHT;
+                    pos.x += speedMovement * Time.deltaTime;
+                    transform.position = pos;
+                    transform.Rotate(0.0f, 90.0f, 0.0f);
+                }
+                else if (Input.GetKey("a"))
+                {
+                    stateObj = State.LEFT;
+                    pos.x -= speedMovement * Time.deltaTime;
+                    transform.position = pos;
+                    transform.Rotate(0.0f, -90.0f, 0.0f);
+                }
+                else if (Input.GetKey("w"))
+                {
+                    stateObj = State.BACK;
+                    pos.z += speedMovement * Time.deltaTime;
+                    transform.position = pos;
+
+                }
                 break;
-            case FRONT:
+            case State.LEFT:
+                if (Input.GetKey("s"))
+                {
+                    stateObj = State.FRONT;
+                    pos.z += speedMovement * Time.deltaTime;
+                    transform.position = pos;
+                    transform.Rotate(0.0f, -90.0f, 0.0f);
+
+                }
+                else if (Input.GetKey("d"))
+                {
+                    stateObj = State.RIGHT;
+                    pos.x += speedMovement * Time.deltaTime;
+                    transform.position = pos;
+                    transform.Rotate(0.0f, 180.0f, 0.0f);
+                }
+                else if (Input.GetKey("w"))
+                {
+                    stateObj = State.BACK;
+                    pos.z += speedMovement * Time.deltaTime;
+                    transform.position = pos;
+                    transform.Rotate(0.0f, 90.0f, 0.0f);
+                }
+                else if (Input.GetKey("a"))
+                {
+                    stateObj = State.LEFT;
+                    pos.x -= speedMovement * Time.deltaTime;
+                    transform.position = pos;
+
+                }
                 break;
-            case FRONT:
+            case State.RIGHT:
+                if (Input.GetKey("s"))
+                {
+                    stateObj = State.FRONT;
+                    pos.z += speedMovement * Time.deltaTime;
+                    transform.position = pos;
+                    transform.Rotate(0.0f, 90.0f, 0.0f);
+
+                }
+                else if (Input.GetKey("a"))
+                {
+                    stateObj = State.LEFT;
+                    pos.x -= speedMovement * Time.deltaTime;
+
+                    transform.position = pos;
+                    transform.Rotate(0.0f, 180.0f, 0.0f);
+                }
+                else if (Input.GetKey("w"))
+                {
+                    stateObj = State.BACK;
+                    pos.z += speedMovement * Time.deltaTime;
+                    transform.position = pos;
+                    transform.Rotate(0.0f, -90.0f, 0.0f);
+                }
+                else if (Input.GetKey("d"))
+                {
+                    stateObj = State.RIGHT;
+                    pos.x += speedMovement * Time.deltaTime;
+                    transform.position = pos;
+
+                }
                 break;
-        }*/
+        }
+            
+        
 
 
-        if (Input.GetKey("w"))
+        /*if (Input.GetKey("w"))
         {
             stateObj = State.BACK;
             pos.z += speedMovement * Time.deltaTime;
@@ -66,7 +187,7 @@ public class movementPUG : MonoBehaviour
             pos.x += speedMovement * Time.deltaTime;
             transform.position = pos;
             transform.Rotate(-Vector3.up * speedMovement);
-        }      
+        }     */ 
 
 
         

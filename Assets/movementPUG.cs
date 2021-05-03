@@ -15,14 +15,18 @@ public class movementPUG : MonoBehaviour
     public const float PI = 3.1415926535897931f;
     public float speedMovement = 10f;
     public float speedRotation = 30f;
+    
     private State stateObj;
-    public GameObject player;
-    private bool iscollision;   
+    private bool iscollision;
+    private Rigidbody rbody;
+    private
 
     void OnCollisionEnter(Collision collision)
     {
-        iscollision = true;
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Debug.Log("Detecta col");
+        Debug.Log("coolision: " + collision.gameObject.name);
+        iscollision = true;        
+       
     }
     void OnCollisionExit(Collision collision)
     {
@@ -31,8 +35,10 @@ public class movementPUG : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rbody = GetComponent<Rigidbody>();
         stateObj = State.FRONT;
         iscollision = false;
+        Debug.Log("asdasd");
     }
 
     // Update is called once per frame

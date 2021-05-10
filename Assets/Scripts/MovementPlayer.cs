@@ -7,7 +7,7 @@ public class MovementPlayer : MonoBehaviour
     public float speed = 10f;
 
     [SerializeField]
-    private Rigidbody rBody;
+    public Rigidbody rBody;
     private Vector3 moveDir;
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class MovementPlayer : MonoBehaviour
         float zDir = Input.GetAxis("Vertical");
 
         moveDir = new Vector3(xDir, 0.0f, zDir) * speed;
-        transform.LookAt(transform.position + new Vector3(-moveDir.x, 0, -moveDir.z));
+        transform.LookAt(transform.position + new Vector3(moveDir.x, 0, moveDir.z));
 
     }
 

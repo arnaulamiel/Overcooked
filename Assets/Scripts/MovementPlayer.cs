@@ -6,6 +6,8 @@ public class MovementPlayer : MonoBehaviour
 {
     public float speed = 10f;
 
+    public Animator animator;
+
     [SerializeField]
     public Rigidbody rBody;
     private Vector3 moveDir;
@@ -24,6 +26,9 @@ public class MovementPlayer : MonoBehaviour
 
         moveDir = new Vector3(xDir, 0.0f, zDir) * speed;
         transform.LookAt(transform.position + new Vector3(moveDir.x, 0, moveDir.z));
+
+        animator.SetFloat("MovX", xDir);
+        animator.SetFloat("MovZ", zDir);
 
     }
 

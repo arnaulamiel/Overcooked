@@ -8,6 +8,7 @@ public class PickUpObject : MonoBehaviour
     public GameObject ObjectToPickUp;
     public GameObject PickedObject;
     public Transform interactionZone;
+    public Animator animator;
     
     void Update()
     {
@@ -21,6 +22,7 @@ public class PickUpObject : MonoBehaviour
                 PickedObject.transform.position = interactionZone.position;
                 PickedObject.GetComponent<Rigidbody>().useGravity = false;
                 PickedObject.GetComponent<Rigidbody>().isKinematic = true;
+                animator.SetBool("Carry", true);
             }
         }
         else if (PickedObject != null)
@@ -32,6 +34,7 @@ public class PickUpObject : MonoBehaviour
                 PickedObject.GetComponent<Rigidbody>().useGravity = true;
                 PickedObject.GetComponent<Rigidbody>().isKinematic = false;
                 PickedObject = null;
+                animator.SetBool("Carry", false);
             }
         }
     }

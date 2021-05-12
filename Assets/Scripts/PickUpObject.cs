@@ -24,7 +24,7 @@ public class PickUpObject : MonoBehaviour
                 PickedObject.GetComponent<Rigidbody>().isKinematic = true;
                 PickedObject.transform.position = interactionZone.position;
                 PickedObject.transform.rotation = player.rotation;
-                PickedObject.transform.Translate(-2.5f, 2f, -0.5f);
+                PickedObject.transform.Translate(-0.1f, 2f, -0.5f);
                 animator.SetBool("Carry", true);
             }
         }

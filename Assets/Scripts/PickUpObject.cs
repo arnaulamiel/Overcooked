@@ -9,6 +9,7 @@ public class PickUpObject : MonoBehaviour
     public GameObject PickedObject;
     public Transform interactionZone;
     public Animator animator;
+    public Transform player;
     
     void Update()
     {
@@ -19,9 +20,11 @@ public class PickUpObject : MonoBehaviour
                 PickedObject = ObjectToPickUp;
                 PickedObject.GetComponent<PickableObject>().isPickable = false;
                 PickedObject.transform.SetParent(interactionZone);
-                PickedObject.transform.position = interactionZone.position;
                 PickedObject.GetComponent<Rigidbody>().useGravity = false;
                 PickedObject.GetComponent<Rigidbody>().isKinematic = true;
+                PickedObject.transform.position = interactionZone.position;
+                PickedObject.transform.rotation = player.rotation;
+                PickedObject.transform.Translate(-2.5f, 2f, -0.5f);
                 animator.SetBool("Carry", true);
             }
         }
@@ -34,6 +37,7 @@ public class PickUpObject : MonoBehaviour
                 PickedObject.GetComponent<Rigidbody>().useGravity = true;
                 PickedObject.GetComponent<Rigidbody>().isKinematic = false;
                 PickedObject = null;
+                ObjectToPickUp = null;
                 animator.SetBool("Carry", false);
             }
         }

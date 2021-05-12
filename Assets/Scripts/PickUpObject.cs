@@ -33,6 +33,7 @@ public class PickUpObject : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 PickedObject.GetComponent<PickableObject>().isPickable = true;
+                PickedObject.transform.Translate(0.0f, -0.5f, 1.6f);
                 PickedObject.transform.SetParent(null);
                 PickedObject.GetComponent<Rigidbody>().useGravity = true;
                 PickedObject.GetComponent<Rigidbody>().isKinematic = false;

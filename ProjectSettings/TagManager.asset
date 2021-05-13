@@ -6,6 +6,9 @@ TagManager:
   tags:
   - cook
   - PlayerInteractionZone
+  - knife
+  - food
+  - plato
   layers:
   - Default
   - TransparentFX

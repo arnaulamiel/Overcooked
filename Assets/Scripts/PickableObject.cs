@@ -5,12 +5,14 @@ using UnityEngine;
 public class PickableObject : MonoBehaviour
 {
     public bool isPickable = true;
+    public bool isPicked = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "PlayerInteractionZone")
         {
             other.GetComponentInParent<PickUpObject>().ObjectToPickUp = this.gameObject;
+            
         }
     }
 
@@ -19,6 +21,7 @@ public class PickableObject : MonoBehaviour
         if (other.tag == "PlayerInteractionZone")
         {
             other.GetComponentInParent<PickUpObject>().ObjectToPickUp = null;
+           
         }
     }
 }

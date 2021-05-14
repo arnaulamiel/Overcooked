@@ -20,16 +20,17 @@ public class MovementPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Si no esta cortando
+        if (!gameObject.GetComponent<PickUpObject>().hasToCut) {
+            float xDir = Input.GetAxis("Horizontal");
+            float zDir = Input.GetAxis("Vertical");
 
-        float xDir = Input.GetAxis("Horizontal");
-        float zDir = Input.GetAxis("Vertical");
+            moveDir = new Vector3(xDir, 0.0f, zDir) * speed;
+            transform.LookAt(transform.position + new Vector3(moveDir.x, 0, moveDir.z));
 
-        moveDir = new Vector3(xDir, 0.0f, zDir) * speed;
-        transform.LookAt(transform.position + new Vector3(moveDir.x, 0, moveDir.z));
-
-        animator.SetFloat("MovX", xDir);
-        animator.SetFloat("MovZ", zDir);
-
+            animator.SetFloat("MovX", xDir);
+            animator.SetFloat("MovZ", zDir);
+        }
     }
 
     private void FixedUpdate()

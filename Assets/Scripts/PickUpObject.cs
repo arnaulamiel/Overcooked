@@ -10,6 +10,9 @@ public class PickUpObject : MonoBehaviour
     public Transform interactionZone;
     public Animator animator;
     public Transform player;
+    public bool hasToCut = false;
+
+    private int counter = 420;
     
     void Update()
     {
@@ -33,20 +36,30 @@ public class PickUpObject : MonoBehaviour
         }
         else if (PickedObject != null)
         {
-            
 
-
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F) || (hasToCut && Input.GetKey(KeyCode.F) ))
             {
                 
-                //Si el objeto k tenemos delante es un knife i el objeto que tenemos encima es tipo food, que corte (animacion y eso), sino la logica normal
-                if (ObjectToPickUp != null )
+                
+                if (ObjectToPickUp != null  )
                 {
-                    if (ObjectToPickUp.tag == "knife" && PickedObject.tag == "food"  )
+                    --counter;
+                    //Si el objeto k tenemos delante es un knife i el objeto que tenemos encima es tipo food, que corte, sino la logica normal
+                    if (ObjectToPickUp.tag == "knife" && PickedObject.tag == "food" && !PickedObject.GetComponent<PickableObject>().isCutted )
                     {
-                        Debug.Log("Entra");
+                        //Si hay que cortar lo indicamos
+                        if(!hasToCut) hasToCut = true;
+
+                        Debug.Log(counter);
+                        //Cuando haya pasado el tiempo que hemos indicado, se para de indicar que estamos cortando, y se indica que el objeto ahora esta cortado
+                        if (counter == 0) {
+                            Debug.Log("COUNTER 0");
+                            hasToCut = false;
+                            counter = 420;
+                            PickedObject.GetComponent<PickableObject>().isCutted = true;
+                        }
                     }
-                    else if(ObjectToPickUp.tag == "plato")
+                    else if(ObjectToPickUp.tag == "plato" && counter == 420 )
                     {
                         PickedObject.GetComponent<PickableObject>().isPickable = true;
                         PickedObject.GetComponent<PickableObject>().isPicked = false;

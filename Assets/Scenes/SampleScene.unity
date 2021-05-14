@@ -776,6 +776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 1
   isPicked: 0
+  isCutted: 0
 --- !u!54 &386070342
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1297,6 +1298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 1
   isPicked: 0
+  isCutted: 0
 --- !u!54 &718351755
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1599,6 +1601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 1
   isPicked: 0
+  isCutted: 0
 --- !u!54 &956723915
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1999,6 +2002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 1
   isPicked: 0
+  isCutted: 0
 --- !u!54 &1090780742
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2076,6 +2080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 1
   isPicked: 0
+  isCutted: 0
 --- !u!54 &1177259657
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2604,6 +2609,7 @@ MonoBehaviour:
   interactionZone: {fileID: 1347488388}
   animator: {fileID: 1298923698}
   player: {fileID: 1507091432}
+  hasToCut: 0
 --- !u!114 &1507091429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2699,8 +2705,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.7, z: 0.7}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.7, y: 0.7, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0.56}
 --- !u!4 &1595390781
 Transform:
   m_ObjectHideFlags: 0
@@ -2730,6 +2736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 0
   isPicked: 0
+  isCutted: 0
 --- !u!54 &1595390783
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2784,6 +2791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 1
   isPicked: 0
+  isCutted: 0
 --- !u!54 &1623461935
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2862,6 +2870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 1
   isPicked: 0
+  isCutted: 0
 --- !u!54 &1645192387
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2889,7 +2898,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.7, z: 2}
+  m_Size: {x: 0.7, y: 0.7, z: 1.43}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1645192389
 Transform:
@@ -2967,6 +2976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 1
   isPicked: 0
+  isCutted: 0
 --- !u!54 &1681643669
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3062,8 +3072,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.7, z: 0.7}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.7, y: 0.7, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0.82}
 --- !u!4 &1767005086
 Transform:
   m_ObjectHideFlags: 0
@@ -3093,6 +3103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 0
   isPicked: 0
+  isCutted: 0
 --- !u!54 &1767005088
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3396,6 +3407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 1
   isPicked: 0
+  isCutted: 0
 --- !u!54 &1870597250
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3459,6 +3471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 1
   isPicked: 0
+  isCutted: 0
 --- !u!54 &1884665129
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3700,6 +3713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 1
   isPicked: 0
+  isCutted: 0
 --- !u!54 &1899031124
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4039,6 +4053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPickable: 1
   isPicked: 0
+  isCutted: 0
 --- !u!54 &2080242468
 Rigidbody:
   m_ObjectHideFlags: 0

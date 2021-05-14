@@ -7,6 +7,13 @@ public class PickableObject : MonoBehaviour
     public bool isPickable = true;
     public bool isPicked = false;
     public bool isCutted = false;
+    public string ObjectName;
+
+    void Start()
+    {
+        ObjectName = this.gameObject.name;
+        Debug.Log("ObjectName: "+ObjectName);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

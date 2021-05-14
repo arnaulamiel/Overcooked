@@ -59,11 +59,15 @@ public class PickUpObject : MonoBehaviour
                             hasToCut = false;
                             counter = 420;
                             PickedObject.GetComponent<PickableObject>().isCutted = true;
+                            PickedObject.tag = "cuttedFood";
                         }
                     }
-                    else if(ObjectToPickUp.tag == "plato" && counter == 420 )
+                    //Si la comida que llevas esta cortada y tienes un plato delante, dejas el alimento (SE DEBERIA ELIMINAR LA COMIDA Y TRANSFORMAR EL PLATO EN PLATO CON LA COMIDA QUE SEA) 
+                    //TODO Hay que programar la parte de si es sartén o olla tambien!!
+                    else if(PickedObject.tag == "cuttedFood" && ObjectToPickUp.tag == "plato"/* && counter == 420*/ )
                     {
                         Debug.Log("PLATO");
+                        
                         PickedObject.GetComponent<PickableObject>().isPickable = true;
                         PickedObject.GetComponent<PickableObject>().isPicked = false;
                         PickedObject.transform.Translate(0.0f, -0.5f, 1.6f);
@@ -73,6 +77,30 @@ public class PickUpObject : MonoBehaviour
                         PickedObject = null;
                         ObjectToPickUp = null;
                         animator.SetBool("Carry", false);
+                    }
+                    else if (PickedObject.GetComponent<PickableObject>().ObjectName == "Tarta" && ObjectToPickUp.tag == "plato")
+                    {
+                        string path = "Prefab/PlatoLleno";
+                        GameObject prefab = Resources.Load(path) as GameObject;
+                        GameObject ObjectBefore = ObjectToPickUp;
+                       
+                        Destroy(PickedObject);
+                        Destroy(ObjectToPickUp);
+
+                        GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                        tartaObject.GetComponent<PickableObject>().isPickable = true;
+                        tartaObject.GetComponent<PickableObject>().isPicked = false;
+                        
+                        tartaObject.transform.SetParent(null);
+                        tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                        tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                        tartaObject = null;
+                        ObjectToPickUp = null;
+                        animator.SetBool("Carry", false);
+
+                        
+
                     }
                 }
                 else {

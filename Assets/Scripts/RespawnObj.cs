@@ -24,6 +24,7 @@ public class RespawnObj : MonoBehaviour
             GameObject newObject = Instantiate(gameObject, originalPos, originalRot);
             newObject.GetComponent<PickableObject>().isPicked = false;
             newObject.GetComponent<PickableObject>().isPickable = true;
+            newObject.GetComponent<PickableObject>().isCutted = false;
             newObject.GetComponent<RespawnObj>().isRespawned = true;
             this.isRespawned = false;
         }

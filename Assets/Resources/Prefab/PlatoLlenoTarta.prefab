@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 7186851543234294840}
   - component: {fileID: 7186851543234294847}
   m_Layer: 0
-  m_Name: PlatoLleno
+  m_Name: PlatoLlenoTarta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

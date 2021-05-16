@@ -13,6 +13,7 @@ public class PickUpObject : MonoBehaviour
     public bool hasToCut = false;
 
     private int counter = 420;
+    public int numEnsaladas = 0;
     
     void Update()
     {
@@ -67,8 +68,108 @@ public class PickUpObject : MonoBehaviour
                     //TODO Hay que programar la parte de si es sartén o olla tambien!!
                     else if (ObjectToPickUp.tag == "plato"/* && counter == 420*/ )
                     {
-                        if (PickedObject.tag == "cuttedFood") { 
-                            
+                        if (PickedObject.tag == "cuttedFood") {
+
+                            //Receta Ensalada
+                            if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Repollo") || PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Tomate")){
+                                Debug.Log("Reconoce tomate o lechuga");
+                                if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Repollo"))
+                                {
+                                    Debug.Log("Reconoce lechuga");
+                                    if (!ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLleno")) { 
+                                        string path = "Prefab/PlatoLlenoEnsaladaL";
+                                        GameObject prefab = Resources.Load(path) as GameObject;
+                                        GameObject ObjectBefore = ObjectToPickUp;
+
+                                        Destroy(PickedObject);
+                                        Destroy(ObjectToPickUp);
+
+                                        GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                                        tartaObject.GetComponent<PickableObject>().isPickable = true;
+                                        tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                                        tartaObject.transform.SetParent(null);
+                                        tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                                        tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                        tartaObject = null;
+                                        ObjectToPickUp = null;
+                                        animator.SetBool("Carry", false);
+                                    }//Si donde queremos poner el repollo es un plato ya lleno pero de tomate, creamos la ensalada
+                                    else if(ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLlenoEnsaladaT"))
+                                    {
+                                        string path = "Prefab/PlatoLlenoEnsalada";
+                                        GameObject prefab = Resources.Load(path) as GameObject;
+                                        GameObject ObjectBefore = ObjectToPickUp;
+
+                                        Destroy(PickedObject);
+                                        Destroy(ObjectToPickUp);
+
+                                        GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                                        tartaObject.GetComponent<PickableObject>().isPickable = true;
+                                        tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                                        tartaObject.transform.SetParent(null);
+                                        tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                                        tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                        tartaObject = null;
+                                        ObjectToPickUp = null;
+                                        animator.SetBool("Carry", false);
+                                        ++numEnsaladas;
+                                    }
+                                }
+                                else
+                                {
+                                    Debug.Log("Reconoce toamte");
+                                    if (!ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLleno"))
+                                    {
+                                        
+                                        string path = "Prefab/PlatoLlenoEnsaladaT";
+                                        GameObject prefab = Resources.Load(path) as GameObject;
+                                        GameObject ObjectBefore = ObjectToPickUp;
+
+                                        Destroy(PickedObject);
+                                        Destroy(ObjectToPickUp);
+
+                                        GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                                        tartaObject.GetComponent<PickableObject>().isPickable = true;
+                                        tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                                        tartaObject.transform.SetParent(null);
+                                        tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                                        tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                        tartaObject = null;
+                                        ObjectToPickUp = null;
+                                        animator.SetBool("Carry", false);
+                                    }//Si donde queremos poner el repollo es un plato ya lleno pero de tomate, creamos la ensalada
+                                    else if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLlenoEnsaladaL"))
+                                    {
+                                        string path = "Prefab/PlatoLlenoEnsalada";
+                                        GameObject prefab = Resources.Load(path) as GameObject;
+                                        GameObject ObjectBefore = ObjectToPickUp;
+
+                                        Destroy(PickedObject);
+                                        Destroy(ObjectToPickUp);
+
+                                        GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                                        tartaObject.GetComponent<PickableObject>().isPickable = true;
+                                        tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                                        tartaObject.transform.SetParent(null);
+                                        tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                                        tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                        tartaObject = null;
+                                        ObjectToPickUp = null;
+                                        animator.SetBool("Carry", false);
+                                        ++numEnsaladas;
+                                    }
+                                }
+                                
+
+                            }
                             //Se tiene que cambiar por la creación de la nueva instancia con el prefab que sea
                             PickedObject.GetComponent<PickableObject>().isPickable = true;
                             PickedObject.GetComponent<PickableObject>().isPicked = false;
@@ -79,7 +180,8 @@ public class PickUpObject : MonoBehaviour
                             PickedObject = null;
                             ObjectToPickUp = null;
                             animator.SetBool("Carry", false);
-                        }
+
+                        }//Esto era para probar la funcionalidad, la tarta no creo que la pongamos 
                         else if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Tarta") )
                         {
                             string path = "Prefab/PlatoLlenoTarta";

@@ -46,13 +46,18 @@ public class PickUpObject : MonoBehaviour
                     Debug.Log("ObjectToPickUp " + ObjectToPickUp.tag + " counter " + counter);
 
                     //Si el objeto k tenemos delante es un knife i el objeto que tenemos encima es tipo food, que corte, sino la logica normal
-                    if (ObjectToPickUp.tag == "knife" && PickedObject.tag == "food" && !PickedObject.GetComponent<PickableObject>().isCutted)
+                    if (ObjectToPickUp.tag == "tablaCortar" && PickedObject.tag == "food" && !PickedObject.GetComponent<PickableObject>().isCutted)
                     {
                         --counter;
                         Debug.Log("NO PLATO");
                         //Si hay que cortar lo indicamos
-                        if (!hasToCut) hasToCut = true;
-
+                        if (!hasToCut)
+                        {
+                            hasToCut = true;
+                            PickedObject.transform.SetParent(ObjectToPickUp.transform);
+                            PickedObject.transform.position = ObjectToPickUp.transform.position;
+                            animator.SetBool("isCutting", true);
+                        }
                         Debug.Log(counter);
                         //Cuando haya pasado el tiempo que hemos indicado, se para de indicar que estamos cortando, y se indica que el objeto ahora esta cortado
                         if (counter == 0)
@@ -62,6 +67,11 @@ public class PickUpObject : MonoBehaviour
                             counter = 420;
                             PickedObject.GetComponent<PickableObject>().isCutted = true;
                             PickedObject.tag = "cuttedFood";
+                            PickedObject.transform.SetParent(interactionZone);
+                            PickedObject.transform.position = interactionZone.position;
+                            PickedObject.transform.rotation = player.rotation;
+                            PickedObject.transform.Translate(-0.1f, 2f, -0.5f);
+                            animator.SetBool("isCutting", false);
                         }
                     }
                     //Si la comida que llevas esta cortada y tienes un plato delante, dejas el alimento (Se elimina la comida y el alimento y se instancia un nuevo prefab plato lleno del tipo que sea) 

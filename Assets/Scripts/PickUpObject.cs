@@ -16,6 +16,7 @@ public class PickUpObject : MonoBehaviour
 
     public int puntuacion = 0;
     private int counter = 420;
+    public int numCebollasParaCompletar = 3;
     public int numEnsaladas = 0;
 
     private GameObject cuchillo;
@@ -237,6 +238,27 @@ public class PickUpObject : MonoBehaviour
                             tartaObject = null;
                             ObjectToPickUp = null;
                             animator.SetBool("Carry", false);
+
+                        }
+                    }
+                    else if(ObjectToPickUp.tag == "olla")
+                    {
+                        if (PickedObject.tag == "cuttedFood")
+                        {
+                            if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Cebolla"))
+                            {
+                                if (numCebollasParaCompletar > 0)
+                                {
+                                     if( !ObjectToPickUp.GetComponent<OllaScript>().isCooking ) ObjectToPickUp.GetComponent<OllaScript>().isCooking = true;
+
+                                    Destroy(PickedObject);
+                                    if(numCebollasParaCompletar == 3){
+                                        //Cambiar animacion de no cocinar a cocinar, o eliminar el modelo y crear una olla nueva cocinando
+                                    }                                   
+
+                                    --numCebollasParaCompletar;
+                                }
+                            }
 
                         }
                     }

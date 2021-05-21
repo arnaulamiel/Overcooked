@@ -12,6 +12,7 @@ TagManager:
   - cuttedFood
   - tablaCortar
   - cintaServir
+  - olla
   layers:
   - Default
   - TransparentFX

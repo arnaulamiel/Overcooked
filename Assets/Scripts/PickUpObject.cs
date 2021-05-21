@@ -7,6 +7,7 @@ public class PickUpObject : MonoBehaviour
 
     public GameObject ObjectToPickUp;
     public GameObject PickedObject;
+    public GameObject Hand;
     public Transform interactionZone;
     public Animator animator;
     public Transform player;
@@ -14,6 +15,8 @@ public class PickUpObject : MonoBehaviour
 
     private int counter = 420;
     public int numEnsaladas = 0;
+
+    private GameObject cuchillo;
     
     void Update()
     {
@@ -57,6 +60,15 @@ public class PickUpObject : MonoBehaviour
                             PickedObject.transform.SetParent(ObjectToPickUp.transform);
                             PickedObject.transform.position = ObjectToPickUp.transform.position;
                             animator.SetBool("isCutting", true);
+
+                            //Coger cuchillo
+                            cuchillo = ObjectToPickUp.GetComponent<TablaCortar>().cuchillo;
+                            cuchillo.transform.SetParent(Hand.transform);
+                            cuchillo.transform.position = Hand.transform.position;
+                            cuchillo.transform.rotation = Hand.transform.rotation;
+                            cuchillo.transform.Rotate(26.38f, -71.74f, 16.24f, Space.Self);
+                            cuchillo.transform.Translate(0.0204f, 0.0027f, 0.0005f);
+
                         }
                         Debug.Log(counter);
                         //Cuando haya pasado el tiempo que hemos indicado, se para de indicar que estamos cortando, y se indica que el objeto ahora esta cortado
@@ -72,6 +84,13 @@ public class PickUpObject : MonoBehaviour
                             PickedObject.transform.rotation = player.rotation;
                             PickedObject.transform.Translate(-0.1f, 2f, -0.5f);
                             animator.SetBool("isCutting", false);
+
+                            cuchillo = ObjectToPickUp.GetComponent<TablaCortar>().cuchillo;
+                            cuchillo.transform.SetParent(ObjectToPickUp.transform);
+                            cuchillo.transform.position = ObjectToPickUp.transform.position;
+                            cuchillo.transform.rotation = ObjectToPickUp.transform.rotation;
+                            cuchillo.transform.Rotate(90.0f, 0.0f, 0.0f, Space.Self);
+                            cuchillo.transform.Translate(0.2096001f, 0.1074545f, 0.02920001f);
                         }
                     }
                     //Si la comida que llevas esta cortada y tienes un plato delante, dejas el alimento (Se elimina la comida y el alimento y se instancia un nuevo prefab plato lleno del tipo que sea) 

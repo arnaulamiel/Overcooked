@@ -85,6 +85,7 @@ public class PickUpObject : MonoBehaviour
                             PickedObject.transform.Translate(-0.1f, 2f, -0.5f);
                             animator.SetBool("isCutting", false);
 
+                            //dejar cuchillo
                             cuchillo = ObjectToPickUp.GetComponent<TablaCortar>().cuchillo;
                             cuchillo.transform.SetParent(ObjectToPickUp.transform);
                             cuchillo.transform.position = ObjectToPickUp.transform.position;

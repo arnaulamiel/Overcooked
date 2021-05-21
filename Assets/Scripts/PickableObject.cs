@@ -7,6 +7,7 @@ public class PickableObject : MonoBehaviour
     public bool isPickable = true;
     public bool isPicked = false;
     public bool isCutted = false;
+    public bool isEnded = false;
     public string ObjectName;
 
     void Start()

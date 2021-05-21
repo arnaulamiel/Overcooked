@@ -11,6 +11,7 @@ TagManager:
   - plato
   - cuttedFood
   - tablaCortar
+  - cintaServir
   layers:
   - Default
   - TransparentFX

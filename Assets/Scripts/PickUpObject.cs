@@ -8,11 +8,13 @@ public class PickUpObject : MonoBehaviour
     public GameObject ObjectToPickUp;
     public GameObject PickedObject;
     public GameObject Hand;
+    public GameObject ObjectCinta;
     public Transform interactionZone;
     public Animator animator;
     public Transform player;
     public bool hasToCut = false;
 
+    public int puntuacion = 0;
     private int counter = 420;
     public int numEnsaladas = 0;
 
@@ -143,10 +145,11 @@ public class PickUpObject : MonoBehaviour
                                         tartaObject.transform.SetParent(null);
                                         tartaObject.GetComponent<Rigidbody>().useGravity = true;
                                         tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                        tartaObject.GetComponent<PickableObject>().isEnded = true;
                                         tartaObject = null;
                                         ObjectToPickUp = null;
                                         animator.SetBool("Carry", false);
-                                        ++numEnsaladas;
+                                        
                                     }
                                 }
                                 else
@@ -191,17 +194,19 @@ public class PickUpObject : MonoBehaviour
                                         tartaObject.transform.SetParent(null);
                                         tartaObject.GetComponent<Rigidbody>().useGravity = true;
                                         tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                        Debug.Log("IS ENDED IS ENDED IS ENDED");
+                                        tartaObject.GetComponent<PickableObject>().isEnded = true;
                                         tartaObject = null;
                                         ObjectToPickUp = null;
                                         animator.SetBool("Carry", false);
-                                        ++numEnsaladas;
+                                        
                                     }
                                 }
                                 
 
                             }
                             //Se tiene que cambiar por la creación de la nueva instancia con el prefab que sea
-                            PickedObject.GetComponent<PickableObject>().isPickable = true;
+                            /*PickedObject.GetComponent<PickableObject>().isPickable = true;
                             PickedObject.GetComponent<PickableObject>().isPicked = false;
                             PickedObject.transform.Translate(0.0f, -0.5f, 1.6f);
                             PickedObject.transform.SetParent(null);
@@ -209,7 +214,7 @@ public class PickUpObject : MonoBehaviour
                             PickedObject.GetComponent<Rigidbody>().isKinematic = false;
                             PickedObject = null;
                             ObjectToPickUp = null;
-                            animator.SetBool("Carry", false);
+                            animator.SetBool("Carry", false);*/
 
                         }//Esto era para probar la funcionalidad, la tarta no creo que la pongamos 
                         else if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Tarta") )
@@ -235,6 +240,22 @@ public class PickUpObject : MonoBehaviour
 
                         }
                     }
+                    
+                }
+                //si no tienes un objeto delante pero llevas un plato acabado
+                else if (PickedObject.GetComponent<PickableObject>().isEnded && ObjectCinta != null)
+                {
+                    if (PickedObject.GetComponent<PickableObject>().ObjectName.Contains("Ensalada")) {
+                        puntuacion += 10;
+                        ++numEnsaladas;
+                        Debug.Log("Puntuacion? "+puntuacion);
+                    }
+                    Destroy(PickedObject);
+                    PickedObject = null;
+                    ObjectToPickUp = null;
+                    animator.SetBool("Carry", false);
+                    
+
                     
                 }
                 else {

@@ -16,11 +16,15 @@ public class PickUpObject : MonoBehaviour
 
     public int puntuacion = 0;
     private int counter = 420;
-    public int numCebollasParaCompletar = 3;
+    public int numCebollasParaCompletar;
     public int numEnsaladas = 0;
+    public int numSopas = 0;
 
     private GameObject cuchillo;
-    
+    void Start()
+    {
+        numCebollasParaCompletar = 3;
+    }
     void Update()
     {
         
@@ -49,13 +53,13 @@ public class PickUpObject : MonoBehaviour
                 
                 if (ObjectToPickUp != null  )
                 {
-                    Debug.Log("ObjectToPickUp " + ObjectToPickUp.tag + " counter " + counter);
+                   // Debug.Log("ObjectToPickUp " + ObjectToPickUp.tag + " counter " + counter);
 
                     //Si el objeto k tenemos delante es un knife i el objeto que tenemos encima es tipo food, que corte, sino la logica normal
                     if (ObjectToPickUp.tag == "tablaCortar" && PickedObject.tag == "food" && !PickedObject.GetComponent<PickableObject>().isCutted)
                     {
                         --counter;
-                        Debug.Log("NO PLATO");
+                       // Debug.Log("NO PLATO");
                         //Si hay que cortar lo indicamos
                         if (!hasToCut)
                         {
@@ -77,7 +81,7 @@ public class PickUpObject : MonoBehaviour
                         //Cuando haya pasado el tiempo que hemos indicado, se para de indicar que estamos cortando, y se indica que el objeto ahora esta cortado
                         if (counter == 0)
                         {
-                            Debug.Log("COUNTER 0");
+                            //Debug.Log("COUNTER 0");
                             hasToCut = false;
                             counter = 420;
                             PickedObject.GetComponent<PickableObject>().isCutted = true;
@@ -105,10 +109,10 @@ public class PickUpObject : MonoBehaviour
 
                             //Receta Ensalada
                             if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Repollo") || PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Tomate")){
-                                Debug.Log("Reconoce tomate o lechuga");
+                                //Debug.Log("Reconoce tomate o lechuga");
                                 if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Repollo"))
                                 {
-                                    Debug.Log("Reconoce lechuga");
+                                    //Debug.Log("Reconoce lechuga");
                                     if (!ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLleno")) { 
                                         string path = "Prefab/PlatoLlenoEnsaladaL";
                                         GameObject prefab = Resources.Load(path) as GameObject;
@@ -217,7 +221,47 @@ public class PickUpObject : MonoBehaviour
                             ObjectToPickUp = null;
                             animator.SetBool("Carry", false);*/
 
-                        }//Esto era para probar la funcionalidad, la tarta no creo que la pongamos 
+                        }
+                        else if(PickedObject.tag == "ollaEnded")
+                        {
+                            string path = "Prefab/PlatoLlenoSopa";
+                            GameObject prefab = Resources.Load(path) as GameObject;
+                            GameObject ObjectBefore = ObjectToPickUp;
+
+                            Destroy(PickedObject);
+                            Destroy(ObjectToPickUp);
+
+                            GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                            tartaObject.GetComponent<PickableObject>().isPickable = true;
+                            tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                            tartaObject.transform.SetParent(null);
+                            tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                            tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                            tartaObject.GetComponent<PickableObject>().isEnded = true;
+                            tartaObject = null;
+                            ObjectToPickUp = null;
+
+                            string path2 = "Prefab/Olla";
+                            GameObject prefab2 = Resources.Load(path2) as GameObject;
+                            GameObject olla = GameObject.Instantiate(prefab2);
+
+
+                            PickedObject = olla;
+                            PickedObject.GetComponent<PickableObject>().isPickable = false;
+                            PickedObject.GetComponent<PickableObject>().isPicked = true;
+                            PickedObject.transform.SetParent(interactionZone);
+                            PickedObject.GetComponent<Rigidbody>().useGravity = false;
+                            PickedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            PickedObject.transform.position = interactionZone.position;
+                            PickedObject.transform.rotation = player.rotation;
+                            PickedObject.transform.Translate(-0.1f, 2f, -0.5f);
+                            animator.SetBool("Carry", true);
+
+
+                        }
+                        //Esto era para probar la funcionalidad, la tarta no creo que la pongamos 
                         else if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Tarta") )
                         {
                             string path = "Prefab/PlatoLlenoTarta";
@@ -243,21 +287,47 @@ public class PickUpObject : MonoBehaviour
                     }
                     else if(ObjectToPickUp.tag == "olla")
                     {
+                        
                         if (PickedObject.tag == "cuttedFood")
                         {
+                           
                             if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Cebolla"))
                             {
+                                Debug.Log("numCebollasParaCompletar ANTES IF >0" + numCebollasParaCompletar);
                                 if (numCebollasParaCompletar > 0)
                                 {
-                                     if( !ObjectToPickUp.GetComponent<OllaScript>().isCooking ) ObjectToPickUp.GetComponent<OllaScript>().isCooking = true;
-
+                                    
                                     Destroy(PickedObject);
-                                    if(numCebollasParaCompletar == 3){
+                                    if (numCebollasParaCompletar == 3)
+                                    {
                                         //Cambiar animacion de no cocinar a cocinar, o eliminar el modelo y crear una olla nueva cocinando
-                                    }                                   
+                                        string path = "Prefab/OllaBoiling";
+                                        GameObject prefab = Resources.Load(path) as GameObject;
+                                        GameObject ObjectBefore = ObjectToPickUp;
+                                        Destroy(ObjectToPickUp);
 
+                                        GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                                        tartaObject.GetComponent<PickableObject>().isPickable = true;
+                                        tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                                        tartaObject.transform.SetParent(null);
+                                        tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                                        tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                        
+                                        //tartaObject = null;
+                                        ObjectToPickUp = tartaObject;
+                                        animator.SetBool("Carry", false);
+                                    }
+                                    ObjectToPickUp.GetComponent<OllaScript>().isCooking = true;
                                     --numCebollasParaCompletar;
+                                    if(numCebollasParaCompletar == 0)
+                                    {
+                                        ObjectToPickUp.GetComponent<OllaScript>().allIngredients = true;
+                                    }
+                                    Debug.Log("numCebollasParaCompletar" + numCebollasParaCompletar);
                                 }
+
                             }
 
                         }
@@ -270,7 +340,13 @@ public class PickUpObject : MonoBehaviour
                     if (PickedObject.GetComponent<PickableObject>().ObjectName.Contains("Ensalada")) {
                         puntuacion += 10;
                         ++numEnsaladas;
-                        Debug.Log("Puntuacion? "+puntuacion);
+                       
+                    }
+                    if (PickedObject.GetComponent<PickableObject>().ObjectName.Contains("Sopa"))
+                    {
+                        puntuacion += 30;
+                        ++numSopas;
+
                     }
                     Destroy(PickedObject);
                     PickedObject = null;

@@ -7,44 +7,72 @@ public class OllaScript : MonoBehaviour
 
     public bool timeOut = false;
     public bool isCooking = false;
-    private int timeToCook;
+    public int timeToCook;
     private int timeToDelete;
+    public bool allIngredients = false;
     public GameObject player;
-   /* enum State
-    {
-        NoCooking,
-        Cooking,
-        Burning
-    }
-   */
+
+    private const int TIMECOOK = 2500;
+    private const int TIMEDELETE = 1200;
+    /* enum State
+     {
+         NoCooking,
+         Cooking,
+         Burning
+     }
+    */
     // Start is called before the first frame update
     void Start()
     {
         //Ahora solo se hace general, igual necesitamos especificar, en frames
-        timeToCook = 1600;
-        timeToDelete = 180;
+        timeToCook = TIMECOOK;
+        timeToDelete = TIMEDELETE;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isCooking) { 
-            if(timeToCook == 1600)
+        if (isCooking) {
+            //Debug.Log("timeToDelete??: " + timeToDelete);
+            if(timeToCook == TIMECOOK)
             {
                 --timeToCook;
             }
             else {                
                 if(timeToCook == 0)
                 {
-                    --timeToDelete;
                     
-                }else {
+                    if (timeToDelete == TIMEDELETE && allIngredients)
+                    {
+                        string path = "Prefab/OllaEnded";
+                        GameObject prefab = Resources.Load(path) as GameObject;
+                        GameObject ObjectBefore = this.gameObject;
+                        Destroy(this.gameObject); 
+
+                        GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                        tartaObject.GetComponent<PickableObject>().isPickable = true;
+                        tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                        tartaObject.transform.SetParent(null);
+                        tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                        tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                        tartaObject.tag = "ollaEnded";
+                        /*tartaObject = null;
+                        ObjectToPickUp = null;*/
+                        --timeToDelete;
+                        allIngredients = false;
+                    }
+                    else if (timeToDelete != 0) --timeToDelete;
+
+                }
+                else {
                     --timeToCook; 
                 }
             }
 
-            if (timeToDelete != 180)
+            if (timeToDelete != TIMEDELETE)
             {
                 if (timeToDelete != 0) --timeToDelete;
                 else timeOut = true;
@@ -54,12 +82,27 @@ public class OllaScript : MonoBehaviour
         //Si se quema
         if (timeOut)
         {
-            timeToCook = 1600;
-            timeToDelete = 180;
+            timeToCook = TIMECOOK;
+            timeToDelete = TIMEDELETE;
             player.GetComponent<PickUpObject>().numCebollasParaCompletar = 3;
-            Destroy(this.gameObject);
             //Destroy(la olla llena)
+            GameObject ObjectBefore = this.gameObject;
+            Destroy(this.gameObject);
+
             //se crea la olla prefab vacia
+            string path = "Prefab/Olla";
+            GameObject prefab = Resources.Load(path) as GameObject;
+            GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+            tartaObject.GetComponent<PickableObject>().isPickable = true;
+            tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+            tartaObject.transform.SetParent(null);
+            tartaObject.GetComponent<Rigidbody>().useGravity = true;
+            tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+
+
+
         }
     }
 }

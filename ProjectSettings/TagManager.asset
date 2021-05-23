@@ -13,6 +13,7 @@ TagManager:
   - tablaCortar
   - cintaServir
   - olla
+  - ollaEnded
   layers:
   - Default
   - TransparentFX

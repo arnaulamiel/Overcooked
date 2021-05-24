@@ -10,9 +10,11 @@ public class OllaScript : MonoBehaviour
     public int timeToCook;
     private int timeToDelete;
     public bool allIngredients = false;
+    private int numIngredients;
+    
     public GameObject player;
 
-    private const int TIMECOOK = 2500;
+    private const int TIMECOOK = 4500;
     private const int TIMEDELETE = 1200;
     /* enum State
      {
@@ -27,6 +29,13 @@ public class OllaScript : MonoBehaviour
         //Ahora solo se hace general, igual necesitamos especificar, en frames
         timeToCook = TIMECOOK;
         timeToDelete = TIMEDELETE;
+        if (this.gameObject.tag != "ollaEnded") numIngredients = 2;
+        else { 
+            numIngredients = 0;
+            allIngredients = true;
+            timeToDelete = TIMEDELETE -1;
+            timeToCook = 0;
+        }
 
     }
 
@@ -34,21 +43,21 @@ public class OllaScript : MonoBehaviour
     void Update()
     {
         if (isCooking) {
-            //Debug.Log("timeToDelete??: " + timeToDelete);
-            if(timeToCook == TIMECOOK)
+           
+            if (timeToCook == TIMECOOK)
             {
                 --timeToCook;
             }
             else {                
                 if(timeToCook == 0)
                 {
-                    
+                   
                     if (timeToDelete == TIMEDELETE && allIngredients)
                     {
                         string path = "Prefab/OllaEnded";
                         GameObject prefab = Resources.Load(path) as GameObject;
                         GameObject ObjectBefore = this.gameObject;
-                        Destroy(this.gameObject); 
+
 
                         GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
 
@@ -58,13 +67,19 @@ public class OllaScript : MonoBehaviour
                         tartaObject.transform.SetParent(null);
                         tartaObject.GetComponent<Rigidbody>().useGravity = true;
                         tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+
+                        tartaObject.GetComponent<OllaScript>().isCooking = true;
+
                         tartaObject.tag = "ollaEnded";
                         /*tartaObject = null;
                         ObjectToPickUp = null;*/
                         --timeToDelete;
-                        allIngredients = false;
+                        Destroy(this.gameObject);
                     }
-                    else if (timeToDelete != 0) --timeToDelete;
+                    else if (timeToDelete != 0) {
+                        //TODO: HAY QUE MIRAR SI LO TIENE EN LA MANO O NO, SI LO TIENE EN LA MANO NO SE QUEMA PORQUE NO ESTARIA EN EL FUEGO
+                        --timeToDelete;
+                    }
 
                 }
                 else {
@@ -74,17 +89,17 @@ public class OllaScript : MonoBehaviour
 
             if (timeToDelete != TIMEDELETE)
             {
-                if (timeToDelete != 0) --timeToDelete;
-                else timeOut = true;
+               
+                if (timeToDelete == 0)timeOut = true; 
             }
         }
         
         //Si se quema
         if (timeOut)
         {
+            
             timeToCook = TIMECOOK;
             timeToDelete = TIMEDELETE;
-            player.GetComponent<PickUpObject>().numCebollasParaCompletar = 3;
             //Destroy(la olla llena)
             GameObject ObjectBefore = this.gameObject;
             Destroy(this.gameObject);
@@ -96,6 +111,7 @@ public class OllaScript : MonoBehaviour
 
             tartaObject.GetComponent<PickableObject>().isPickable = true;
             tartaObject.GetComponent<PickableObject>().isPicked = false;
+            tartaObject.GetComponent<OllaScript>().isCooking = false;
 
             tartaObject.transform.SetParent(null);
             tartaObject.GetComponent<Rigidbody>().useGravity = true;
@@ -105,4 +121,51 @@ public class OllaScript : MonoBehaviour
 
         }
     }
+
+    public void updateRecipe(bool isFirstTime)
+    {
+       
+        if (numIngredients > 0)
+        {
+            if (isFirstTime)
+            {
+                
+                //Cambiar animacion de no cocinar a cocinar, o eliminar el modelo y crear una olla nueva cocinando
+                string path = "Prefab/OllaBoiling";
+                GameObject prefab = Resources.Load(path) as GameObject;
+                GameObject ObjectBefore = this.gameObject;
+                //Destroy(this.gameObject);
+
+
+                GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                tartaObject.GetComponent<PickableObject>().isPickable = true;
+                tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                tartaObject.transform.SetParent(null);
+                tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+
+                tartaObject.GetComponent<OllaScript>().isCooking = true;
+
+                Destroy(this.gameObject);
+
+                //tartaObject = null;
+                //tartaObject.GetComponent<PickableObject>().ObjectToPickUp = tartaObject;
+                //this.gameObject = tartaObject;
+
+            }
+            isCooking = true;
+            --numIngredients;
+
+            if (numIngredients == 0)
+            {
+                allIngredients = true;
+            }
+            Debug.Log("numIngredients" + numIngredients);
+        }
+        
+    }
+    
+    
 }

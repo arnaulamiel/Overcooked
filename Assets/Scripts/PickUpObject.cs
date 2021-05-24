@@ -293,41 +293,15 @@ public class PickUpObject : MonoBehaviour
                            
                             if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Cebolla"))
                             {
-                                Debug.Log("numCebollasParaCompletar ANTES IF >0" + numCebollasParaCompletar);
-                                if (numCebollasParaCompletar > 0)
+                                bool firstTime = ObjectToPickUp.GetComponent<OllaScript>().isCooking;
+                                
+                                Debug.Log("Cooking?????? " + ObjectToPickUp.GetComponent<OllaScript>().isCooking);
+                                if (!ObjectToPickUp.GetComponent<OllaScript>().allIngredients)
                                 {
-                                    
                                     Destroy(PickedObject);
-                                    if (numCebollasParaCompletar == 3)
-                                    {
-                                        //Cambiar animacion de no cocinar a cocinar, o eliminar el modelo y crear una olla nueva cocinando
-                                        string path = "Prefab/OllaBoiling";
-                                        GameObject prefab = Resources.Load(path) as GameObject;
-                                        GameObject ObjectBefore = ObjectToPickUp;
-                                        Destroy(ObjectToPickUp);
-
-                                        GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
-
-                                        tartaObject.GetComponent<PickableObject>().isPickable = true;
-                                        tartaObject.GetComponent<PickableObject>().isPicked = false;
-
-                                        tartaObject.transform.SetParent(null);
-                                        tartaObject.GetComponent<Rigidbody>().useGravity = true;
-                                        tartaObject.GetComponent<Rigidbody>().isKinematic = false;
-                                        
-                                        //tartaObject = null;
-                                        ObjectToPickUp = tartaObject;
-                                        animator.SetBool("Carry", false);
-                                    }
-                                    ObjectToPickUp.GetComponent<OllaScript>().isCooking = true;
-                                    --numCebollasParaCompletar;
-                                    if(numCebollasParaCompletar == 0)
-                                    {
-                                        ObjectToPickUp.GetComponent<OllaScript>().allIngredients = true;
-                                    }
-                                    Debug.Log("numCebollasParaCompletar" + numCebollasParaCompletar);
+                                    animator.SetBool("Carry", false);
                                 }
-
+                                ObjectToPickUp.GetComponent<OllaScript>().updateRecipe(!firstTime);
                             }
 
                         }

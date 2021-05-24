@@ -63,8 +63,16 @@ public class Interfaz : MonoBehaviour
         receta5 = child.GetComponent<Image>();
         receta5.enabled = false;
 
-        
-        
+        if (!receta1.enabled)
+        {
+            if (!timer1.enabled) timer1.enabled = true;
+            int receta = Random.Range(0, 2);
+            receta1.enabled = true;
+            receta1.sprite = arrayRecetas[receta];
+        }
+
+
+
         //Debug.Log("puntuacion???? " + puntuacion + " Get>Text " + gameObject.GetComponent<Text>() );
     }
 
@@ -76,12 +84,7 @@ public class Interfaz : MonoBehaviour
         if (timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;
-            if (!receta1.enabled)
-            {
-                if (!timer1.enabled) timer1.enabled = true;
-                receta1.enabled = true;
-                receta1.sprite = arrayRecetas[receta];
-            }
+            
         }
         else
         {            

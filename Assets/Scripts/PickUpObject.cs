@@ -55,7 +55,7 @@ public class PickUpObject : MonoBehaviour
                 {
                    // Debug.Log("ObjectToPickUp " + ObjectToPickUp.tag + " counter " + counter);
 
-                    //Si el objeto k tenemos delante es un knife i el objeto que tenemos encima es tipo food, que corte, sino la logica normal
+                    //Si el objeto k tenemos delante es una tabla de cortar i el objeto que tenemos encima es tipo food, que corte, sino la logica normal
                     if (ObjectToPickUp.tag == "tablaCortar" && PickedObject.tag == "food" && !PickedObject.GetComponent<PickableObject>().isCutted)
                     {
                         --counter;

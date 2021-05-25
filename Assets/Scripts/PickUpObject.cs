@@ -84,9 +84,29 @@ public class PickUpObject : MonoBehaviour
                             //Debug.Log("COUNTER 0");
                             hasToCut = false;
                             counter = 420;
+                            string path = "";
+                            if (PickedObject.GetComponent<PickableObject>().ObjectName.Contains("Tomate"))
+                            {
+                                path = "Prefab/TomateCortado";
+                                GameObject prefab = Resources.Load(path) as GameObject;
+                                GameObject ObjectBefore = PickedObject;
+                                Destroy(PickedObject);
+
+                                //GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+
+                                GameObject tomatecortado = GameObject.Instantiate(prefab);
+
+
+                                PickedObject = tomatecortado;
+                            }
                             PickedObject.GetComponent<PickableObject>().isCutted = true;
+                            PickedObject.GetComponent<PickableObject>().isPickable = false;
+                            PickedObject.GetComponent<PickableObject>().isPicked = true;
                             PickedObject.tag = "cuttedFood";
                             PickedObject.transform.SetParent(interactionZone);
+                            PickedObject.GetComponent<Rigidbody>().useGravity = false;
+                            PickedObject.GetComponent<Rigidbody>().isKinematic = true;
                             PickedObject.transform.position = interactionZone.position;
                             PickedObject.transform.rotation = player.rotation;
                             PickedObject.transform.Translate(-0.1f, 2f, -0.5f);

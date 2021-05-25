@@ -21,6 +21,9 @@ public class PickUpObject : MonoBehaviour
     public int numSopas = 0;
 
     private GameObject cuchillo;
+    public float maxTimeCut = 3f;
+    public float timeLeftCut;
+
     void Start()
     {
         numCebollasParaCompletar = 3;
@@ -58,12 +61,13 @@ public class PickUpObject : MonoBehaviour
                     //Si el objeto k tenemos delante es una tabla de cortar i el objeto que tenemos encima es tipo food, que corte, sino la logica normal
                     if (ObjectToPickUp.tag == "tablaCortar" && PickedObject.tag == "food" && !PickedObject.GetComponent<PickableObject>().isCutted)
                     {
-                        --counter;
+                        timeLeftCut -= Time.deltaTime;
                        // Debug.Log("NO PLATO");
                         //Si hay que cortar lo indicamos
                         if (!hasToCut)
                         {
                             hasToCut = true;
+                            timeLeftCut = maxTimeCut;
                             PickedObject.transform.SetParent(ObjectToPickUp.transform);
                             PickedObject.transform.position = ObjectToPickUp.transform.position;
                             animator.SetBool("isCutting", true);
@@ -79,11 +83,12 @@ public class PickUpObject : MonoBehaviour
                         }
                         Debug.Log(counter);
                         //Cuando haya pasado el tiempo que hemos indicado, se para de indicar que estamos cortando, y se indica que el objeto ahora esta cortado
-                        if (counter == 0)
+                        if (timeLeftCut <= 0)
                         {
                             //Debug.Log("COUNTER 0");
                             hasToCut = false;
-                            counter = 420;
+                            //counter = 420;
+                            timeLeftCut = maxTimeCut;
                             string path = "";
                             if (PickedObject.GetComponent<PickableObject>().ObjectName.Contains("Tomate"))
                             {

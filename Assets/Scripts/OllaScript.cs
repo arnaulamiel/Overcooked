@@ -14,8 +14,8 @@ public class OllaScript : MonoBehaviour
     
     public GameObject player;
 
-    private const int TIMECOOK = 4500;
-    private const int TIMEDELETE = 1200;
+    private const int TIMECOOK = 14500;
+    private const int TIMEDELETE = 7200;
     /* enum State
      {
          NoCooking,

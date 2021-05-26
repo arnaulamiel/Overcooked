@@ -17,7 +17,8 @@ public class PickUpObject : MonoBehaviour
     public int puntuacion = 0;
     private int counter = 420;
     public int numCebollasParaCompletar;
-    public int numEnsaladas = 0;
+    public int numEnsaladasSolas = 0;
+    public int numEnsaladasTomate = 0;
     public int numSopasCebolla = 0;
     public int numSopasZanah = 0;
     public int numSopasTomate = 0;
@@ -224,6 +225,8 @@ public class PickUpObject : MonoBehaviour
                                         tartaObject.transform.SetParent(null);
                                         tartaObject.GetComponent<Rigidbody>().useGravity = true;
                                         tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                        tartaObject.GetComponent<PickableObject>().isEnded = true;
+
                                         tartaObject = null;
                                         ObjectToPickUp = null;
                                         animator.SetBool("Carry", false);
@@ -654,11 +657,21 @@ public class PickUpObject : MonoBehaviour
                 else if (PickedObject.GetComponent<PickableObject>().isEnded && ObjectCinta != null)
                 {
                     if (PickedObject.GetComponent<PickableObject>().ObjectName.Contains("Ensalada")) {
-                        puntuacion += 10;
-                        ++numEnsaladas;
+
+                        if (PickedObject.GetComponent<PickableObject>().ObjectName.Contains("EnsaladaL"))
+                        {
+                            puntuacion += 10;
+                            ++numEnsaladasSolas;
+                        }
+                        else
+                        {
+                            puntuacion += 15;
+                            ++numEnsaladasTomate;
+                        }
                        
                     }
-                    if (PickedObject.GetComponent<PickableObject>().ObjectName.Contains("Sopa"))
+                    
+                    else if (PickedObject.GetComponent<PickableObject>().ObjectName.Contains("Sopa"))
                     {
                         Debug.Log("SOPAAA");
                         if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLlenoSopaT")) { 

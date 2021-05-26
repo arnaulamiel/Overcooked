@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6021871595664765766}
   m_Layer: 0
   m_Name: Sarten
-  m_TagString: Untagged
+  m_TagString: sarten
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,6 +93,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6604228af0d4ea54a85d020869cac332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeOut: 0
+  isCooking: 0
+  timeToCook: 0
+  allIngredients: 0
+  player: {fileID: 897829521465234185, guid: 1a25dbd0d7ffc2449b7cc9fa655ce5cd, type: 3}
 --- !u!1 &6021871595826415227
 GameObject:
   m_ObjectHideFlags: 0

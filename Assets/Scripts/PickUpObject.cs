@@ -327,6 +327,8 @@ public class PickUpObject : MonoBehaviour
                             GameObject prefab = Resources.Load(path) as GameObject;
                             GameObject ObjectBefore = ObjectToPickUp;
 
+                            GameObject CanvasOlla = PickedObject.GetComponent<OllaScript>().Canvas;
+
                             Destroy(PickedObject);
                             Destroy(ObjectToPickUp);
 
@@ -353,6 +355,7 @@ public class PickUpObject : MonoBehaviour
                             PickedObject.transform.SetParent(interactionZone);
                             PickedObject.GetComponent<Rigidbody>().useGravity = false;
                             PickedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            PickedObject.GetComponent<OllaScript>().Canvas = CanvasOlla;
                             PickedObject.transform.position = interactionZone.position;
                             PickedObject.transform.rotation = player.rotation;
                             PickedObject.transform.Translate(-0.1f, 2f, -0.5f);

@@ -19,6 +19,7 @@ public class PickUpObject : MonoBehaviour
     public int numCebollasParaCompletar;
     public int numEnsaladas = 0;
     public int numSopas = 0;
+    public int numHamb = 0;
 
     private GameObject cuchillo;
     void Start()
@@ -60,7 +61,7 @@ public class PickUpObject : MonoBehaviour
                     if (ObjectToPickUp.tag == "tablaCortar" && PickedObject.tag == "food" && !PickedObject.GetComponent<PickableObject>().isCutted)
                     {
                         --counter;
-                       // Debug.Log("NO PLATO");
+                       //Debug.Log("NO PLATO");
                         //Si hay que cortar lo indicamos
                         if (!hasToCut)
                         {
@@ -82,7 +83,8 @@ public class PickUpObject : MonoBehaviour
                         //Cuando haya pasado el tiempo que hemos indicado, se para de indicar que estamos cortando, y se indica que el objeto ahora esta cortado
                         if (counter == 0)
                         {
-                            //Debug.Log("COUNTER 0");
+                            Debug.Log("COUNTER 0");
+                            Debug.Log("COUNTER 0 " + PickedObject.GetComponent<PickableObject>().ObjectName);
                             hasToCut = false;
                             counter = 420;
                             string path = "";
@@ -100,6 +102,20 @@ public class PickUpObject : MonoBehaviour
 
 
                                 PickedObject = tomatecortado;
+                            }
+                            else if (PickedObject.GetComponent<PickableObject>().ObjectName.Contains("Pan")) {
+                                path = "Prefab/PanCortado";
+                                GameObject prefab = Resources.Load(path) as GameObject;
+                                GameObject ObjectBefore = PickedObject;
+                                Destroy(PickedObject);
+
+                                //GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+
+                                GameObject pancortado = GameObject.Instantiate(prefab);
+
+
+                                PickedObject = pancortado;
                             }
                             PickedObject.GetComponent<PickableObject>().isCutted = true;
                             PickedObject.GetComponent<PickableObject>().isPickable = false;
@@ -125,7 +141,7 @@ public class PickUpObject : MonoBehaviour
                     //Si la comida que llevas esta cortada y tienes un plato delante, dejas el alimento (Se elimina la comida y el alimento y se instancia un nuevo prefab plato lleno del tipo que sea) 
                     //TODO Hay que programar la parte de si es sartén o olla tambien!!
                     
-                    else if (ObjectToPickUp.tag == "plato"/* && counter == 420*/ )
+                    else if (ObjectToPickUp.tag == "plato")
                     {
                         Debug.Log("ES PLATO");
                         if (PickedObject.tag == "cuttedFood")
@@ -236,6 +252,28 @@ public class PickUpObject : MonoBehaviour
 
 
                             }
+                            
+                            else if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Pan"))
+                            {
+                                string path = "Prefab/HamburguesaPan";
+                                GameObject prefab = Resources.Load(path) as GameObject;
+                                GameObject ObjectBefore = ObjectToPickUp;
+
+                                Destroy(PickedObject);
+                                Destroy(ObjectToPickUp);
+
+                                GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                                tartaObject.GetComponent<PickableObject>().isPickable = true;
+                                tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                                tartaObject.transform.SetParent(null);
+                                tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                                tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                tartaObject = null;
+                                ObjectToPickUp = null;
+                                animator.SetBool("Carry", false);
+                            }
                             //Se tiene que cambiar por la creación de la nueva instancia con el prefab que sea
                             /*PickedObject.GetComponent<PickableObject>().isPickable = true;
                             PickedObject.GetComponent<PickableObject>().isPicked = false;
@@ -312,32 +350,65 @@ public class PickUpObject : MonoBehaviour
 
                         }
                     }
+                    else if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.Contains("Hamburguesa") && PickedObject.tag != "sartenEnded")
+                    {
+                        if (PickedObject.tag == "cuttedFood")
+                        {
+                            if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Repollo") )
+                            {
+                                if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPanC"))
+                                {
+                                    Debug.Log("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                                    //Tienes una lechuga cortada y quieres dejarla en un plato de pan cortado con carne
+                                    string path = "Prefab/Hamburguesa";
+                                    GameObject prefab = Resources.Load(path) as GameObject;
+                                    GameObject ObjectBefore = ObjectToPickUp;
+
+                                    Destroy(PickedObject);
+                                    Destroy(ObjectToPickUp);
+
+                                    GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                                    tartaObject.GetComponent<PickableObject>().isPickable = true;
+                                    tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                                    tartaObject.transform.SetParent(null);
+                                    tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                                    tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                    tartaObject.GetComponent<PickableObject>().isEnded = true;
+                                    tartaObject = null;
+                                    ObjectToPickUp = null;
+                                    animator.SetBool("Carry", false);
+                                }
+                                else if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPan")) {
+                                    //Tienes una lechuga cortada y quieres dejarla en un plato de pan cortado
+                                    string path = "Prefab/HamburguesaPanL";
+                                    GameObject prefab = Resources.Load(path) as GameObject;
+                                    GameObject ObjectBefore = ObjectToPickUp;
+
+                                    Destroy(PickedObject);
+                                    Destroy(ObjectToPickUp);
+
+                                    GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                                    tartaObject.GetComponent<PickableObject>().isPickable = true;
+                                    tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                                    tartaObject.transform.SetParent(null);
+                                    tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                                    tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                    tartaObject = null;
+                                    ObjectToPickUp = null;
+                                    animator.SetBool("Carry", false);
+                                }
+                                
+                            }
+                        }
+                    }
                     else if (PickedObject.tag == "sartenEnded")
                     {
                         Debug.Log("RECONEIX QUE ES Sarten ended " + PickedObject.tag);
-                        if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPan"))
-                        {
-                            Debug.Log("RECONEIX QUE ES PA");
-                            string path = "Prefab/HamburguesaPanC";
-                            GameObject prefab = Resources.Load(path) as GameObject;
-                            GameObject ObjectBefore = ObjectToPickUp;
-
-                            Destroy(PickedObject);
-                            Destroy(ObjectToPickUp);
-
-                            GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
-
-                            tartaObject.GetComponent<PickableObject>().isPickable = true;
-                            tartaObject.GetComponent<PickableObject>().isPicked = false;
-
-                            tartaObject.transform.SetParent(null);
-                            tartaObject.GetComponent<Rigidbody>().useGravity = true;
-                            tartaObject.GetComponent<Rigidbody>().isKinematic = false;
-                            tartaObject.GetComponent<PickableObject>().isEnded = true;
-                            tartaObject = null;
-                            ObjectToPickUp = null;
-                        }
-                        else if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPanL"))
+                        if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPanL"))
                         {
 
                             string path = "Prefab/Hamburguesa";
@@ -359,6 +430,28 @@ public class PickUpObject : MonoBehaviour
                             tartaObject = null;
                             ObjectToPickUp = null;
                         }
+                        else if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPan"))
+                        {
+                            Debug.Log("RECONEIX QUE ES PA");
+                            string path = "Prefab/HamburguesaPanC";
+                            GameObject prefab = Resources.Load(path) as GameObject;
+                            GameObject ObjectBefore = ObjectToPickUp;
+
+                            Destroy(PickedObject);
+                            Destroy(ObjectToPickUp);
+
+                            GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                            tartaObject.GetComponent<PickableObject>().isPickable = true;
+                            tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                            tartaObject.transform.SetParent(null);
+                            tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                            tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                            tartaObject = null;
+                            ObjectToPickUp = null;
+                        }
+                        
 
 
                         string path2 = "Prefab/Sarten";
@@ -435,6 +528,11 @@ public class PickUpObject : MonoBehaviour
                         puntuacion += 30;
                         ++numSopas;
 
+                    }
+                    if(PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Hamburguesa") && !PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPan"))
+                    {
+                        puntuacion += 30;
+                        ++numHamb;
                     }
                     Destroy(PickedObject);
                     PickedObject = null;

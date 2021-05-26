@@ -19,6 +19,8 @@ public class Interfaz : MonoBehaviour
     public float timeEndRecipe5 = 50;
     private float maxTimeRecipe = 50;
 
+    private bool firstRecipe = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -93,57 +95,60 @@ public class Interfaz : MonoBehaviour
             if (recetaHelp.enabled)
             {
                 recetaHelp.enabled = false;
+                firstRecipe = false;
             } 
         }
 
-        //Para que cada 30 sec se muestre una receta nueva
-        int receta = Random.Range(0, 6);
-        if (timeRemaining > 0)
+        if (!firstRecipe)
         {
-            timeRemaining -= Time.deltaTime;
-           
-            if (!receta1.enabled)
+            //Para que cada 30 sec se muestre una receta nueva
+            int receta = Random.Range(0, 6);
+            if (timeRemaining > 0)
             {
-                if (!timer1.enabled) timer1.enabled = true;
-                
-                receta1.enabled = true;
-                receta1.sprite = arrayRecetas[receta];
-            }
-        }
-        else
-        {            
-            if (!receta1.enabled)
-            {
-                receta1.enabled = true;
-                receta1.sprite = arrayRecetas[receta];
-            }
-            else if (!receta2.enabled)
-            {
-                if (!timer2.enabled) timer2.enabled = true;
-                receta2.enabled = true;
-                receta2.sprite = arrayRecetas[receta];
-            }
-            else if (!receta3.enabled)
-            {
-                if (!timer3.enabled) timer3.enabled = true;
-                receta3.enabled = true;
-                receta3.sprite = arrayRecetas[receta];
-            }
-            else if (!receta4.enabled)
-            {
-                if (!timer4.enabled) timer4.enabled = true;
-                receta4.enabled = true;
-                receta4.sprite = arrayRecetas[receta];
-            }
-            else if (!receta5.enabled)
-            {
-                if (!timer5.enabled) timer5.enabled = true;
-                receta5.enabled = true;
-                receta5.sprite = arrayRecetas[receta];
-            }
-            timeRemaining = 30;            
-        }
+                timeRemaining -= Time.deltaTime;
 
+                if (!receta1.enabled)
+                {
+                    if (!timer1.enabled) timer1.enabled = true;
+
+                    receta1.enabled = true;
+                    receta1.sprite = arrayRecetas[receta];
+                }
+            }
+            else
+            {
+                if (!receta1.enabled)
+                {
+                    receta1.enabled = true;
+                    receta1.sprite = arrayRecetas[receta];
+                }
+                else if (!receta2.enabled)
+                {
+                    if (!timer2.enabled) timer2.enabled = true;
+                    receta2.enabled = true;
+                    receta2.sprite = arrayRecetas[receta];
+                }
+                else if (!receta3.enabled)
+                {
+                    if (!timer3.enabled) timer3.enabled = true;
+                    receta3.enabled = true;
+                    receta3.sprite = arrayRecetas[receta];
+                }
+                else if (!receta4.enabled)
+                {
+                    if (!timer4.enabled) timer4.enabled = true;
+                    receta4.enabled = true;
+                    receta4.sprite = arrayRecetas[receta];
+                }
+                else if (!receta5.enabled)
+                {
+                    if (!timer5.enabled) timer5.enabled = true;
+                    receta5.enabled = true;
+                    receta5.sprite = arrayRecetas[receta];
+                }
+                timeRemaining = 30;
+            }
+        }
         
         updateTimers();
 

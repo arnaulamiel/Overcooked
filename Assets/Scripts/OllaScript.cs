@@ -13,6 +13,7 @@ public class OllaScript : MonoBehaviour
     private int numIngredients;
     
     public GameObject player;
+    public GameObject Canvas;
 
     public float TIMECOOK = 15f;
     public float TIMEDELETE = 10f;
@@ -42,6 +43,7 @@ public class OllaScript : MonoBehaviour
             numIngredients = 0;
             allIngredients = true;
             timeToDelete = TIMEDELETE - Time.deltaTime;
+            Canvas.GetComponent<BarraOllaQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
             timeToCook = 0;
         }
 
@@ -55,11 +57,12 @@ public class OllaScript : MonoBehaviour
             if (timeToCook == TIMECOOK)
             {
                 timeToCook -= Time.deltaTime;
+                Canvas.GetComponent<BarraOlla>().RestarTiempo(timeToCook, TIMECOOK);
             }
             else {                
                 if(timeToCook <= 0)
                 {
-                   
+                    Canvas.GetComponent<BarraOlla>().EndCook();
                     if (timeToDelete == TIMEDELETE && allIngredients)
                     {
                         string path = "Prefab/OllaEnded";
@@ -80,27 +83,37 @@ public class OllaScript : MonoBehaviour
 
                         tartaObject.GetComponent<OllaScript>().setComida(this.comida);
 
+                        tartaObject.GetComponent<OllaScript>().Canvas = Canvas;
+
                         tartaObject.tag = "ollaEnded";
+
                         /*tartaObject = null;
                         ObjectToPickUp = null;*/
                         timeToDelete -= Time.deltaTime;
+                        Canvas.GetComponent<BarraOllaQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
                         Destroy(this.gameObject);
                     }
                     else if (timeToDelete > 0) {
                         //TODO: HAY QUE MIRAR SI LO TIENE EN LA MANO O NO, SI LO TIENE EN LA MANO NO SE QUEMA PORQUE NO ESTARIA EN EL FUEGO
                         timeToDelete -= Time.deltaTime;
+                        Canvas.GetComponent<BarraOllaQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
                     }
 
                 }
                 else {
                     timeToCook -= Time.deltaTime;
+                    Canvas.GetComponent<BarraOlla>().RestarTiempo(timeToCook, TIMECOOK);
                 }
             }
 
             if (timeToDelete < TIMEDELETE)
             {
-               
-                if (timeToDelete <= 0) timeOut = true; 
+
+                if (timeToDelete <= 0)
+                {
+                    timeOut = true;
+                    Canvas.GetComponent<BarraOllaQuemar>().EndQuemar();
+                }
             }
         }
         
@@ -127,6 +140,8 @@ public class OllaScript : MonoBehaviour
             tartaObject.GetComponent<Rigidbody>().useGravity = true;
             tartaObject.GetComponent<Rigidbody>().isKinematic = false;
 
+
+            tartaObject.GetComponent<OllaScript>().Canvas = Canvas;
 
 
         }
@@ -158,6 +173,11 @@ public class OllaScript : MonoBehaviour
 
                 tartaObject.GetComponent<OllaScript>().isCooking = true;
                 tartaObject.GetComponent<OllaScript>().setComida(this.comida);
+
+
+                tartaObject.GetComponent<OllaScript>().Canvas = Canvas;
+
+
                 Destroy(this.gameObject);
 
                 //tartaObject = null;

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MenuPass : MonoBehaviour
 {
+    public float time = 2;
     private int pasos = 0;
     public Image image;
     public Sprite sprite;
@@ -21,17 +22,21 @@ public class MenuPass : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
 
+        if (time > 0)
+        {
+            time -= Time.deltaTime;
+        }
+        else
+        {
             if (pasos == 1) SceneManager.LoadScene(sceneName: "MenuScene");
             else
-            {   
+            {
                 image.sprite = sprite;
                 ++pasos;
+                time = 2;
             }
-            
-        }        
+        }
+
     }
 }

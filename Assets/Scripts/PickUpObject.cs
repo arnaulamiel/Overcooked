@@ -345,12 +345,12 @@ public class PickUpObject : MonoBehaviour
                         }
                         else if (PickedObject.tag == "ollaEnded")
                         {
-
+                            GameObject CanvasOlla = null;
                             if (PickedObject.GetComponent<OllaScript>().isSameType("Cebolla")) { 
                                 string path = "Prefab/PlatoLlenoSopa";
                                 GameObject prefab = Resources.Load(path) as GameObject;
                                 GameObject ObjectBefore = ObjectToPickUp;
-                                GameObject CanvasOlla = PickedObject.GetComponent<OllaScript>().Canvas;
+                                CanvasOlla = PickedObject.GetComponent<OllaScript>().Canvas;
 
                                
                                 Destroy(PickedObject);
@@ -373,6 +373,7 @@ public class PickUpObject : MonoBehaviour
                                 string path = "Prefab/PlatoLlenoSopaT";
                                 GameObject prefab = Resources.Load(path) as GameObject;
                                 GameObject ObjectBefore = ObjectToPickUp;
+                                CanvasOlla = PickedObject.GetComponent<OllaScript>().Canvas;
 
                                 Destroy(PickedObject);
                                 Destroy(ObjectToPickUp);
@@ -394,6 +395,7 @@ public class PickUpObject : MonoBehaviour
                                 string path = "Prefab/PlatoLlenoSopaZ";
                                 GameObject prefab = Resources.Load(path) as GameObject;
                                 GameObject ObjectBefore = ObjectToPickUp;
+                                CanvasOlla = PickedObject.GetComponent<OllaScript>().Canvas;
 
                                 Destroy(PickedObject);
                                 Destroy(ObjectToPickUp);

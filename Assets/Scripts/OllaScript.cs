@@ -13,6 +13,7 @@ public class OllaScript : MonoBehaviour
     private int numIngredients;
     
     public GameObject player;
+    public GameObject Canvas;
 
     public float TIMECOOK = 15f;
     public float TIMEDELETE = 10f;

@@ -4536,6 +4536,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRespawned: 0
+--- !u!1 &1907931644 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6776510057174829732, guid: 9b3fe798e7cca1549a885eb03f5fd5ef, type: 3}
+  m_PrefabInstance: {fileID: 7738080132610854787}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1907931648
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907931644}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.900001, y: 4.400002, z: 0.5000001}
+  m_Center: {x: -5.684342e-14, y: -4.21, z: 0.25000003}
+--- !u!65 &1907931649
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907931644}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.900001, y: 4.400002, z: 0.5000001}
+  m_Center: {x: -5.684342e-14, y: 4.23, z: 0.25000003}
+--- !u!65 &1907931650
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907931644}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.900001, y: 4.400002, z: 0.5000001}
+  m_Center: {x: -6.65, y: -0.0000009536743, z: 0.25000003}
+--- !u!65 &1907931651
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907931644}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.900001, y: 4.400002, z: 0.5000001}
+  m_Center: {x: 6.73, y: -0.06, z: 0.25000003}
 --- !u!4 &2001006563 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6037428030874230323, guid: 1a25dbd0d7ffc2449b7cc9fa655ce5cd, type: 3}

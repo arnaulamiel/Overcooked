@@ -8,7 +8,7 @@ public class Interfaz : MonoBehaviour
     public GameObject player;
     private Image receta1, receta2, receta3, receta4, receta5;
     private Image timer1, timer2, timer3, timer4, timer5;
-    private Sprite ensalada, sopaCebolla ;
+    private Sprite ensalada, sopaCebolla,sopaTomate, sopaZanah, ensaladaSola, burguer, burguerqueso ;
     Transform child;
     public  Sprite[] arrayRecetas;
     public float timeRemaining = 30;
@@ -26,8 +26,18 @@ public class Interfaz : MonoBehaviour
        //Init de los sprites de recetas
         ensalada = Resources.Load<Sprite>("Images/Ensalada");
         arrayRecetas[0] = (ensalada);
+        ensaladaSola = Resources.Load<Sprite>("Images/EnsaladaSimple");
+        arrayRecetas[1] = (ensaladaSola);        
+        sopaTomate = Resources.Load<Sprite>("Images/RecetaSopaTomate");
+        arrayRecetas[2] = (sopaTomate);
+        sopaZanah = Resources.Load<Sprite>("Images/RecetaSopaZanahoria");
+        arrayRecetas[3] = (sopaZanah);
         sopaCebolla = Resources.Load<Sprite>("Images/RecetaSopaCebolla");
-        arrayRecetas[1] = (sopaCebolla);
+        arrayRecetas[4] = (sopaCebolla);
+        burguer = Resources.Load<Sprite>("Images/HamburguesaL");
+        arrayRecetas[5] = (burguer);
+        burguerqueso = Resources.Load<Sprite>("Images/HamburguesaQ");
+        arrayRecetas[6] = (burguerqueso);
 
         //Init Barras de cooldown 
         child = transform.Find("Timer1");
@@ -74,7 +84,7 @@ public class Interfaz : MonoBehaviour
     void Update()
     {
         //Para que cada 30 sec se muestre una receta nueva
-        int receta = Random.Range(0, 2);
+        int receta = Random.Range(0, 6);
         if (timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;

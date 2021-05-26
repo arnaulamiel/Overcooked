@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Interfaz : MonoBehaviour
 {
     public GameObject player;
-    private Image receta1, receta2, receta3, receta4, receta5;
+    private Image receta1, receta2, receta3, receta4, receta5, recetaHelp;
     private Image timer1, timer2, timer3, timer4, timer5;
     private Sprite ensalada, sopaCebolla,sopaTomate, sopaZanah, ensaladaSola, burguer, burguerqueso ;
     Transform child;
@@ -38,6 +38,11 @@ public class Interfaz : MonoBehaviour
         arrayRecetas[5] = (burguer);
         burguerqueso = Resources.Load<Sprite>("Images/HamburguesaQ");
         arrayRecetas[6] = (burguerqueso);
+
+
+        child = transform.Find("RecipeHelp");
+        recetaHelp = child.GetComponent<Image>();
+
 
         //Init Barras de cooldown 
         child = transform.Find("Timer1");
@@ -83,6 +88,14 @@ public class Interfaz : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Return)) { 
+            if (recetaHelp.enabled)
+            {
+                recetaHelp.enabled = false;
+            } 
+        }
+
         //Para que cada 30 sec se muestre una receta nueva
         int receta = Random.Range(0, 6);
         if (timeRemaining > 0)

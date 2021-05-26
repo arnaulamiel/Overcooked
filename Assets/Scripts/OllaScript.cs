@@ -7,15 +7,15 @@ public class OllaScript : MonoBehaviour
 
     public bool timeOut = false;
     public bool isCooking = false;
-    public int timeToCook;
-    private int timeToDelete;
+    public float timeToCook;
+    private float timeToDelete;
     public bool allIngredients = false;
     private int numIngredients;
     
     public GameObject player;
 
-    private const int TIMECOOK = 4500;
-    private const int TIMEDELETE = 1200;
+    public float TIMECOOK = 15f;
+    public float TIMEDELETE = 10f;
     /* enum State
      {
          NoCooking,
@@ -33,7 +33,7 @@ public class OllaScript : MonoBehaviour
         else { 
             numIngredients = 0;
             allIngredients = true;
-            timeToDelete = TIMEDELETE -1;
+            timeToDelete = TIMEDELETE - Time.deltaTime;
             timeToCook = 0;
         }
 
@@ -46,10 +46,10 @@ public class OllaScript : MonoBehaviour
            
             if (timeToCook == TIMECOOK)
             {
-                --timeToCook;
+                timeToCook -= Time.deltaTime;
             }
             else {                
-                if(timeToCook == 0)
+                if(timeToCook <= 0)
                 {
                    
                     if (timeToDelete == TIMEDELETE && allIngredients)
@@ -73,24 +73,24 @@ public class OllaScript : MonoBehaviour
                         tartaObject.tag = "ollaEnded";
                         /*tartaObject = null;
                         ObjectToPickUp = null;*/
-                        --timeToDelete;
+                        timeToDelete -= Time.deltaTime;
                         Destroy(this.gameObject);
                     }
-                    else if (timeToDelete != 0) {
+                    else if (timeToDelete > 0) {
                         //TODO: HAY QUE MIRAR SI LO TIENE EN LA MANO O NO, SI LO TIENE EN LA MANO NO SE QUEMA PORQUE NO ESTARIA EN EL FUEGO
-                        --timeToDelete;
+                        timeToDelete -= Time.deltaTime;
                     }
 
                 }
                 else {
-                    --timeToCook; 
+                    timeToCook -= Time.deltaTime;
                 }
             }
 
-            if (timeToDelete != TIMEDELETE)
+            if (timeToDelete < TIMEDELETE)
             {
                
-                if (timeToDelete == 0)timeOut = true; 
+                if (timeToDelete <= 0) timeOut = true; 
             }
         }
         

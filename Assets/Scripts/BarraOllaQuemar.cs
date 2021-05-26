@@ -3,27 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BarraOlla : MonoBehaviour
+public class BarraOllaQuemar : MonoBehaviour
 {
     Transform child;
-    private bool isCooking;
+    private bool isBorning;
     private Image timer;
 
     // Start is called before the first frame update
     void Start()
     {
-        child = transform.Find("TimerOlla");
+        child = transform.Find("TimerOllaQuemar");
         timer = child.GetComponent<Image>();
         timer.enabled = false;
-        isCooking = false;
+        isBorning = false;
     }
 
-    
     public void RestarTiempo(float timeLeft, float maxTime)
     {
-        if (!isCooking)
+        if (!isBorning)
         {
-            isCooking = true;
+            isBorning = true;
             timer.enabled = true;
         }
 
@@ -31,9 +30,9 @@ public class BarraOlla : MonoBehaviour
 
     }
 
-    public void EndCook()
+    public void EndQuemar()
     {
-        isCooking = false;
+        isBorning = false;
         timer.enabled = false;
     }
 }

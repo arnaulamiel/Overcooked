@@ -148,7 +148,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 209dcaa84768a7b47a6f3e6d12f22823, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e6186470bf9f8414c97f6fb335720d54, type: 2}
+      objectReference: {fileID: 2100000, guid: ae38876a0e769df49b0edb62fb3d3b68, type: 2}
     - target: {fileID: 919132149155446097, guid: 209dcaa84768a7b47a6f3e6d12f22823, type: 3}
       propertyPath: m_Name
       value: sopa
@@ -315,7 +315,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 209dcaa84768a7b47a6f3e6d12f22823, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e6186470bf9f8414c97f6fb335720d54, type: 2}
+      objectReference: {fileID: 2100000, guid: ae38876a0e769df49b0edb62fb3d3b68, type: 2}
     - target: {fileID: 919132149155446097, guid: 209dcaa84768a7b47a6f3e6d12f22823, type: 3}
       propertyPath: m_Name
       value: sopa (1)

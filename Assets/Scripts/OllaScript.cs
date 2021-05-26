@@ -16,13 +16,21 @@ public class OllaScript : MonoBehaviour
 
     public float TIMECOOK = 15f;
     public float TIMEDELETE = 10f;
-    /* enum State
+    public enum TipoComida
      {
-         NoCooking,
-         Cooking,
-         Burning
+        Nada,
+        Cebolla,
+        Tomate,
+        Zanahoria
+         
      }
-    */
+    public TipoComida comida;
+
+    public void setComida(TipoComida tipo)
+    {
+        this.comida = tipo;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +77,8 @@ public class OllaScript : MonoBehaviour
                         tartaObject.GetComponent<Rigidbody>().isKinematic = false;
 
                         tartaObject.GetComponent<OllaScript>().isCooking = true;
+
+                        tartaObject.GetComponent<OllaScript>().setComida(this.comida);
 
                         tartaObject.tag = "ollaEnded";
                         /*tartaObject = null;
@@ -147,7 +157,7 @@ public class OllaScript : MonoBehaviour
                 tartaObject.GetComponent<Rigidbody>().isKinematic = false;
 
                 tartaObject.GetComponent<OllaScript>().isCooking = true;
-
+                tartaObject.GetComponent<OllaScript>().setComida(this.comida);
                 Destroy(this.gameObject);
 
                 //tartaObject = null;
@@ -166,6 +176,21 @@ public class OllaScript : MonoBehaviour
         }
         
     }
-    
-    
+
+    public bool isSameType(string type)
+    {
+        Debug.Log("Es tipo: " + type);
+        if(this.comida != TipoComida.Nada)
+        {
+            Debug.Log("Debe ser nulo " + this.comida);
+            if (type == "Cebolla" && this.comida != TipoComida.Cebolla) return false;
+            else if (type == "Tomate" && this.comida != TipoComida.Tomate) return false;
+            else if (type == "Zanahoria" && this.comida != TipoComida.Zanahoria) return false;
+        }
+        return true;
+    }
+
+
+
+
 }

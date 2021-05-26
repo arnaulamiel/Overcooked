@@ -18,12 +18,15 @@ public class PickUpObject : MonoBehaviour
     private int counter = 420;
     public int numCebollasParaCompletar;
     public int numEnsaladas = 0;
-    public int numSopas = 0;
+    public int numSopasCebolla = 0;
+    public int numSopasZanah = 0;
+    public int numSopasTomate = 0;
     public int numHamb = 0;
 
     private GameObject cuchillo;
     public float maxTimeCut = 3f;
     public float timeLeftCut;
+    
 
     void Start()
     {
@@ -338,25 +341,69 @@ public class PickUpObject : MonoBehaviour
                         }
                         else if (PickedObject.tag == "ollaEnded")
                         {
-                            string path = "Prefab/PlatoLlenoSopa";
-                            GameObject prefab = Resources.Load(path) as GameObject;
-                            GameObject ObjectBefore = ObjectToPickUp;
 
-                            Destroy(PickedObject);
-                            Destroy(ObjectToPickUp);
+                            if (PickedObject.GetComponent<OllaScript>().isSameType("Cebolla")) { 
+                                string path = "Prefab/PlatoLlenoSopa";
+                                GameObject prefab = Resources.Load(path) as GameObject;
+                                GameObject ObjectBefore = ObjectToPickUp;
 
-                            GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+                                Destroy(PickedObject);
+                                Destroy(ObjectToPickUp);
 
-                            tartaObject.GetComponent<PickableObject>().isPickable = true;
-                            tartaObject.GetComponent<PickableObject>().isPicked = false;
+                                GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
 
-                            tartaObject.transform.SetParent(null);
-                            tartaObject.GetComponent<Rigidbody>().useGravity = true;
-                            tartaObject.GetComponent<Rigidbody>().isKinematic = false;
-                            tartaObject.GetComponent<PickableObject>().isEnded = true;
-                            tartaObject = null;
-                            ObjectToPickUp = null;
+                                tartaObject.GetComponent<PickableObject>().isPickable = true;
+                                tartaObject.GetComponent<PickableObject>().isPicked = false;
 
+                                tartaObject.transform.SetParent(null);
+                                tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                                tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                tartaObject.GetComponent<PickableObject>().isEnded = true;
+                                tartaObject = null;
+                                ObjectToPickUp = null;
+                            }
+                            else if (PickedObject.GetComponent<OllaScript>().isSameType("Tomate"))
+                            {
+                                string path = "Prefab/PlatoLlenoSopaT";
+                                GameObject prefab = Resources.Load(path) as GameObject;
+                                GameObject ObjectBefore = ObjectToPickUp;
+
+                                Destroy(PickedObject);
+                                Destroy(ObjectToPickUp);
+
+                                GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                                tartaObject.GetComponent<PickableObject>().isPickable = true;
+                                tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                                tartaObject.transform.SetParent(null);
+                                tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                                tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                tartaObject.GetComponent<PickableObject>().isEnded = true;
+                                tartaObject = null;
+                                ObjectToPickUp = null;
+                            }
+                            else if (PickedObject.GetComponent<OllaScript>().isSameType("Zanahoria"))
+                            {
+                                string path = "Prefab/PlatoLlenoSopaZ";
+                                GameObject prefab = Resources.Load(path) as GameObject;
+                                GameObject ObjectBefore = ObjectToPickUp;
+
+                                Destroy(PickedObject);
+                                Destroy(ObjectToPickUp);
+
+                                GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                                tartaObject.GetComponent<PickableObject>().isPickable = true;
+                                tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                                tartaObject.transform.SetParent(null);
+                                tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                                tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                tartaObject.GetComponent<PickableObject>().isEnded = true;
+                                tartaObject = null;
+                                ObjectToPickUp = null;
+                            }
                             string path2 = "Prefab/Olla";
                             GameObject prefab2 = Resources.Load(path2) as GameObject;
                             GameObject olla = GameObject.Instantiate(prefab2);
@@ -522,21 +569,59 @@ public class PickUpObject : MonoBehaviour
                     }
                     else if(ObjectToPickUp.tag == "olla")
                     {
-                        
+
                         if (PickedObject.tag == "cuttedFood")
                         {
-                           
+
                             if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Cebolla"))
                             {
-                                bool firstTime = ObjectToPickUp.GetComponent<OllaScript>().isCooking;
-                                
-                                Debug.Log("Cooking?????? " + ObjectToPickUp.GetComponent<OllaScript>().isCooking);
-                                if (!ObjectToPickUp.GetComponent<OllaScript>().allIngredients)
-                                {
-                                    Destroy(PickedObject);
-                                    animator.SetBool("Carry", false);
+                                if (ObjectToPickUp.GetComponent<OllaScript>().isSameType("Cebolla")) { 
+                                    bool firstTime = ObjectToPickUp.GetComponent<OllaScript>().isCooking;
+
+                                    Debug.Log("Cooking?????? " + ObjectToPickUp.GetComponent<OllaScript>().isCooking);
+                                    if (!ObjectToPickUp.GetComponent<OllaScript>().allIngredients)
+                                    {
+                                        Destroy(PickedObject);
+                                        animator.SetBool("Carry", false);
+                                    }
+                                    ObjectToPickUp.GetComponent<OllaScript>().updateRecipe(!firstTime);
+                                    ObjectToPickUp.GetComponent<OllaScript>().setComida(OllaScript.TipoComida.Cebolla);
                                 }
-                                ObjectToPickUp.GetComponent<OllaScript>().updateRecipe(!firstTime);
+                            }
+                            else if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Tomate"))
+                            {
+                                
+                                if (ObjectToPickUp.GetComponent<OllaScript>().isSameType("Tomate"))
+                                {Debug.Log("Reconeix toato??");
+                                    bool firstTime = ObjectToPickUp.GetComponent<OllaScript>().isCooking;
+
+                                    Debug.Log("Cooking?????? " + ObjectToPickUp.GetComponent<OllaScript>().isCooking);
+                                    if (!ObjectToPickUp.GetComponent<OllaScript>().allIngredients)
+                                    {
+                                        Destroy(PickedObject);
+                                        animator.SetBool("Carry", false);
+                                    }
+                                    ObjectToPickUp.GetComponent<OllaScript>().updateRecipe(!firstTime);
+                                    ObjectToPickUp.GetComponent<OllaScript>().setComida(OllaScript.TipoComida.Tomate);
+                                }
+                            }
+                            else if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Zanahoria"))
+                            {
+
+                                if (ObjectToPickUp.GetComponent<OllaScript>().isSameType("Zanahoria"))
+                                {
+                                    Debug.Log("Reconeix toato??");
+                                    bool firstTime = ObjectToPickUp.GetComponent<OllaScript>().isCooking;
+
+                                    Debug.Log("Cooking?????? " + ObjectToPickUp.GetComponent<OllaScript>().isCooking);
+                                    if (!ObjectToPickUp.GetComponent<OllaScript>().allIngredients)
+                                    {
+                                        Destroy(PickedObject);
+                                        animator.SetBool("Carry", false);
+                                    }
+                                    ObjectToPickUp.GetComponent<OllaScript>().updateRecipe(!firstTime);
+                                    ObjectToPickUp.GetComponent<OllaScript>().setComida(OllaScript.TipoComida.Zanahoria);
+                                }
                             }
 
                         }
@@ -575,9 +660,21 @@ public class PickUpObject : MonoBehaviour
                     }
                     if (PickedObject.GetComponent<PickableObject>().ObjectName.Contains("Sopa"))
                     {
-                        puntuacion += 30;
-                        ++numSopas;
-
+                        Debug.Log("SOPAAA");
+                        if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLlenoSopaT")) { 
+                            puntuacion += 30;
+                            ++numSopasTomate;
+                        }
+                        else if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLlenoSopaZ"))
+                        {
+                            puntuacion += 30;
+                            ++numSopasZanah;
+                        }
+                        else if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLlenoSopa"))
+                        {
+                            puntuacion += 30;
+                            ++numSopasCebolla;
+                        }
                     }
                     if(PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Hamburguesa") && !PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPan"))
                     {

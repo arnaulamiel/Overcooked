@@ -2,20 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PassToLevel : MonoBehaviour
 {
+    public Button play;
+    public Button help;
+    Transform childp;
+    Transform childh;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        childp = transform.Find("Play");
+        Button btn = childp.GetComponent<Button>();
+        btn.onClick.AddListener(TaskOnClickPlay);
+
+        /*childp = transform.Find("Help");
+        Button btn2 = childh.GetComponent<Button>();
+        btn2.onClick.AddListener(TaskOnClickHelp);*/
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    void TaskOnClickPlay()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) {
-            SceneManager.LoadScene(sceneName: "SampleScene");
-        }
+        SceneManager.LoadScene(sceneName: "SampleScene");
+        Debug.Log("You have clicked the button!");
     }
+
+   /* void TaskOnClickHelp()
+    {
+
+        SceneManager.LoadScene(sceneName: "HelpScene");
+        Debug.Log("You have clicked the button!");
+    }*/
+
 }

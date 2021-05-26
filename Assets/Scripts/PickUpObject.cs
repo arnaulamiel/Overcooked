@@ -152,6 +152,21 @@ public class PickUpObject : MonoBehaviour
 
                                 PickedObject = carnecortada;
                             }
+                            else if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Queso"))
+                            {
+                                path = "Prefab/QuesoCortado";
+                                GameObject prefab = Resources.Load(path) as GameObject;
+                                GameObject ObjectBefore = PickedObject;
+                                Destroy(PickedObject);
+
+                                //GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+
+                                GameObject carnecortada = GameObject.Instantiate(prefab);
+
+
+                                PickedObject = carnecortada;
+                            }
                             PickedObject.GetComponent<PickableObject>().isCutted = true;
                             PickedObject.GetComponent<PickableObject>().isPickable = false;
                             PickedObject.GetComponent<PickableObject>().isPicked = true;

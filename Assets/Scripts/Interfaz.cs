@@ -8,11 +8,12 @@ public class Interfaz : MonoBehaviour
 {
     public GameObject player;
     private Image receta1, receta2, receta3, receta4, receta5, recetaHelp;
-    private Image timer1, timer2, timer3, timer4, timer5;
+    private Image timer1, timer2, timer3, timer4, timer5, reloj;
     private Sprite ensalada, sopaCebolla,sopaTomate, sopaZanah, ensaladaSola, burguer, burguerqueso ;
+    private Sprite helpEnsalada, helpBurguer, helpSopa;
     Transform child;
     public Button nivel1,nivel2,nivel3,nivel4,nivel5;
-    public Text textNivel,textQuemado;
+    public Text textNivel,textQuemado, textTimer;
     
     public  Sprite[] arrayRecetas;
     public float timeRemaining = 30;
@@ -36,6 +37,7 @@ public class Interfaz : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (StaticScenes.numEscena == 0) StaticScenes.numEscena = 1;
 
         //Niveles GodMode
         child = transform.Find("Nivell1");
@@ -72,14 +74,23 @@ public class Interfaz : MonoBehaviour
         textQuemado = child.GetComponent<Text>();
         textQuemado.gameObject.SetActive(false);
 
+        //Reloj timer
+        child = transform.Find("TimerNum");
+        textTimer = child.GetComponent<Text>();
+        textTimer.gameObject.SetActive(false);
+
+        child = transform.Find("Reloj");
+        reloj = child.GetComponent<Image>();
+        reloj.enabled = false; ;
+
 
         //Recetas
         arrayRecetas = new Sprite[7];
-       //Init de los sprites de recetas
+        //Init de los sprites de recetas
         ensalada = Resources.Load<Sprite>("Images/Ensalada");
         arrayRecetas[0] = (ensalada);
         ensaladaSola = Resources.Load<Sprite>("Images/EnsaladaSimple");
-        arrayRecetas[1] = (ensaladaSola);        
+        arrayRecetas[1] = (ensaladaSola);
         sopaTomate = Resources.Load<Sprite>("Images/RecetaSopaTomate");
         arrayRecetas[2] = (sopaTomate);
         sopaZanah = Resources.Load<Sprite>("Images/RecetaSopaZanahoria");
@@ -91,9 +102,34 @@ public class Interfaz : MonoBehaviour
         burguerqueso = Resources.Load<Sprite>("Images/HamburguesaQ");
         arrayRecetas[6] = (burguerqueso);
 
-
         child = transform.Find("RecipeHelp");
         recetaHelp = child.GetComponent<Image>();
+
+        if (StaticScenes.numEscena == 1)
+        {
+            helpEnsalada = Resources.Load<Sprite>("Images/RecetaEnsalada");
+            recetaHelp.sprite = helpEnsalada;
+        }
+        else if (StaticScenes.numEscena == 2)
+        {
+            helpBurguer = Resources.Load<Sprite>("Images/RecetaBurguer");
+            recetaHelp.sprite = helpBurguer;
+        }
+        else if (StaticScenes.numEscena == 3)
+        {
+            helpSopa = Resources.Load<Sprite>("Images/RecetaSopa");
+            recetaHelp.sprite = helpSopa;
+        }
+        else if (StaticScenes.numEscena == 4)
+        {
+            helpBurguer = Resources.Load<Sprite>("Images/RecetaBurguer");
+            recetaHelp.sprite = helpBurguer;
+        }
+        else if (StaticScenes.numEscena == 5)
+        {
+            helpSopa = Resources.Load<Sprite>("Images/RecetaSopa");
+            recetaHelp.sprite = helpSopa;
+        }
 
 
         //Init Barras de cooldown 
@@ -153,6 +189,12 @@ public class Interfaz : MonoBehaviour
 
         if (!firstRecipe)
         {
+            if (!reloj.enabled)
+            {
+                reloj.enabled = true;
+                textTimer.gameObject.SetActive(true);
+            }
+
             //GODMODE 1: Carrega el nivell que vulguis -> La 'L'
             if (Input.GetKeyDown(KeyCode.L))
             {
@@ -229,6 +271,20 @@ public class Interfaz : MonoBehaviour
                 }
 
             }
+            //GODMODE 3: Es cuina directament -> La 'K'
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+
+                if (!GodModeEndCook)
+                {
+                    GodModeEndCook = true;
+
+                }
+                else
+                {
+                    GodModeEndCook = false;
+                }
+            }
             //GODMODE 4: Res es pot cremar -> La 'O'
             if (Input.GetKeyDown(KeyCode.O))
             {
@@ -243,30 +299,45 @@ public class Interfaz : MonoBehaviour
                     textQuemado.gameObject.SetActive(false);
                 }
             }
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                
-                if (!GodModeEndCook)
-                {
-                    GodModeEndCook = true;                   
+            
 
-                }
-                else
-                {
-                    GodModeEndCook = false;                    
-                }
-            }
-
-            if (levelTime <= 0)
+            if (levelTime <= 0 )
             {
                 //Salta a la siguiente escena
                 Debug.Log("NEXT LEVEL !!!!!!!!");
-                //Si es escena 2
-                SceneManager.LoadScene(sceneName: "SampleScene2");
+                
+                StaticScenes.puntuacion = puntuacion;
+                if (StaticScenes.numEscena == 1)
+                {//Si es escena 1
+                    StaticScenes.numEscena = 2;
+                    //SceneManager.LoadScene(sceneName: "SampleScene2");
+                }
+                else if (StaticScenes.numEscena == 2)
+                {//Si es escena 1
+                    StaticScenes.numEscena = 3;
+                    //SceneManager.LoadScene(sceneName: "SampleScene3");
+                }
+                else if (StaticScenes.numEscena == 3)
+                {//Si es escena 1
+                    StaticScenes.numEscena = 4;
+                    //SceneManager.LoadScene(sceneName: "SampleScene4");
+                }
+                else if (StaticScenes.numEscena == 4)
+                {//Si es escena 1
+                    StaticScenes.numEscena = 5;
+                   // SceneManager.LoadScene(sceneName: "SampleScene5");
+                }
+                Debug.Log("Que escena es esta??????? " + StaticScenes.numEscena);
+                SceneManager.LoadScene(sceneName: "EndLevel");
 
             }
+
+            int receta = 0;
+            if(StaticScenes.numEscena == 1)receta = Random.Range(0, 2);
+            else if (StaticScenes.numEscena == 2 || StaticScenes.numEscena == 4) receta = Random.Range(5, 7);
+            else if(StaticScenes.numEscena == 3 || StaticScenes.numEscena == 5) receta = Random.Range(2, 5);
+
             //Para que cada 30 sec se muestre una receta nueva
-            int receta = Random.Range(0, 2);
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
@@ -312,7 +383,14 @@ public class Interfaz : MonoBehaviour
                 }
                 timeRemaining = 30;
             }
+            //Disminuir el tiempo de nivel
             levelTime -= Time.deltaTime;
+            float min = levelTime / 60.0f;
+            //Debug.Log("MIN" + min);
+           
+            textTimer.text = levelTime.ToString("f0");
+            //textTimer.text = min.ToString("0.#0");
+
             updateTimers();
         }          
     }
@@ -623,26 +701,31 @@ public class Interfaz : MonoBehaviour
 
     void TaskOnClick1()
     {
+        StaticScenes.numEscena = 1;
         SceneManager.LoadScene(sceneName: "SampleScene");
         Debug.Log("You have clicked the button!");
     }
     void TaskOnClick2()
     {
+        StaticScenes.numEscena = 2;
         SceneManager.LoadScene(sceneName: "SampleScene2");
         Debug.Log("You have clicked the button!");
     }
     void TaskOnClick3()
     {
+        StaticScenes.numEscena = 3;
         SceneManager.LoadScene(sceneName: "SampleScene3");
         Debug.Log("You have clicked the button!");
     }
     void TaskOnClick4()
     {
+        StaticScenes.numEscena = 4;
         SceneManager.LoadScene(sceneName: "SampleScene4");
         Debug.Log("You have clicked the button!");
     }
     void TaskOnClick5()
     {
+        StaticScenes.numEscena = 5;
         SceneManager.LoadScene(sceneName: "SampleScene5");
         Debug.Log("You have clicked the button!");
     }

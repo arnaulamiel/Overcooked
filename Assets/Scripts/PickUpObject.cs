@@ -310,7 +310,7 @@ public class PickUpObject : MonoBehaviour
                                         tartaObject.transform.SetParent(null);
                                         tartaObject.GetComponent<Rigidbody>().useGravity = true;
                                         tartaObject.GetComponent<Rigidbody>().isKinematic = false;
-                                       // Debug.Log("IS ENDED IS ENDED IS ENDED");
+                                        // Debug.Log("IS ENDED IS ENDED IS ENDED");
                                         tartaObject.GetComponent<PickableObject>().isEnded = true;
                                         tartaObject = null;
                                         ObjectToPickUp = null;
@@ -322,27 +322,51 @@ public class PickUpObject : MonoBehaviour
 
 
                             }
-                            
+
                             else if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Pan"))
                             {
-                                string path = "Prefab/HamburguesaPan";
-                                GameObject prefab = Resources.Load(path) as GameObject;
-                                GameObject ObjectBefore = ObjectToPickUp;
+                                if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Repollo"))
+                                {
+                                    string path = "Prefab/HamburguesaPanL";
+                                    GameObject prefab = Resources.Load(path) as GameObject;
+                                    GameObject ObjectBefore = ObjectToPickUp;
 
-                                Destroy(PickedObject);
-                                Destroy(ObjectToPickUp);
+                                    Destroy(PickedObject);
+                                    Destroy(ObjectToPickUp);
 
-                                GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+                                    GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
 
-                                tartaObject.GetComponent<PickableObject>().isPickable = true;
-                                tartaObject.GetComponent<PickableObject>().isPicked = false;
+                                    tartaObject.GetComponent<PickableObject>().isPickable = true;
+                                    tartaObject.GetComponent<PickableObject>().isPicked = false;
 
-                                tartaObject.transform.SetParent(null);
-                                tartaObject.GetComponent<Rigidbody>().useGravity = true;
-                                tartaObject.GetComponent<Rigidbody>().isKinematic = false;
-                                tartaObject = null;
-                                ObjectToPickUp = null;
-                                animator.SetBool("Carry", false);
+                                    tartaObject.transform.SetParent(null);
+                                    tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                                    tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+
+                                    tartaObject = null;
+                                    ObjectToPickUp = null;
+                                    animator.SetBool("Carry", false);
+                                }
+                                else { 
+                                    string path = "Prefab/HamburguesaPan";
+                                    GameObject prefab = Resources.Load(path) as GameObject;
+                                    GameObject ObjectBefore = ObjectToPickUp;
+
+                                    Destroy(PickedObject);
+                                    Destroy(ObjectToPickUp);
+
+                                    GameObject tartaObject = GameObject.Instantiate(prefab, ObjectBefore.transform.position, ObjectBefore.transform.rotation);
+
+                                    tartaObject.GetComponent<PickableObject>().isPickable = true;
+                                    tartaObject.GetComponent<PickableObject>().isPicked = false;
+
+                                    tartaObject.transform.SetParent(null);
+                                    tartaObject.GetComponent<Rigidbody>().useGravity = true;
+                                    tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+                                    tartaObject = null;
+                                    ObjectToPickUp = null;
+                                    animator.SetBool("Carry", false);
+                                }
 
                                 GetComponent<SoundsPlayer>().interactionSound();
                             }

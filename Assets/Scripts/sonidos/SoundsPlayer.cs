@@ -6,6 +6,7 @@ public class SoundsPlayer : MonoBehaviour
 {
     public AudioClip cutSound;
     public AudioClip interaction;
+    public AudioClip cinta;
 
     AudioSource fuenteAudio;
 
@@ -32,6 +33,12 @@ public class SoundsPlayer : MonoBehaviour
     public void interactionSound()
     {
         fuenteAudio.clip = interaction;
+        fuenteAudio.Play();
+    }
+
+    public void platoCinta()
+    {
+        fuenteAudio.clip = cinta;
         fuenteAudio.Play();
     }
 }

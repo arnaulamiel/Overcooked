@@ -2172,6 +2172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutSound: {fileID: 8300000, guid: c24f6238cf9564144b500299721ef200, type: 3}
   interaction: {fileID: 8300000, guid: 4966ef4362e0ccf40bb9974f8b2d8587, type: 3}
+  cinta: {fileID: 8300000, guid: 81537beef2bc7f74e80d9061e4f837a4, type: 3}
 --- !u!82 &1507091434
 AudioSource:
   m_ObjectHideFlags: 0

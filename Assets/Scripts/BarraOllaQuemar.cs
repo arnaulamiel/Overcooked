@@ -18,6 +18,11 @@ public class BarraOllaQuemar : MonoBehaviour
         isBorning = false;
     }
 
+    void Update()
+    {
+
+    }
+
     public void RestarTiempo(float timeLeft, float maxTime)
     {
         if (!isBorning)

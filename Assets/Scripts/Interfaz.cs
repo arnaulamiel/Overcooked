@@ -29,6 +29,8 @@ public class Interfaz : MonoBehaviour
     public float levelTime =  120.0f;
 
     public bool GodModeNoQuemar = false;
+    public bool GodModeEndCook = false;
+    
     private bool firstRecipe = true;
 
     // Start is called before the first frame update
@@ -69,6 +71,7 @@ public class Interfaz : MonoBehaviour
         child = transform.Find("TextNoQuemar");
         textQuemado = child.GetComponent<Text>();
         textQuemado.gameObject.SetActive(false);
+
 
         //Recetas
         arrayRecetas = new Sprite[7];
@@ -238,6 +241,19 @@ public class Interfaz : MonoBehaviour
                 else { 
                     GodModeNoQuemar = false;
                     textQuemado.gameObject.SetActive(false);
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                
+                if (!GodModeEndCook)
+                {
+                    GodModeEndCook = true;                   
+
+                }
+                else
+                {
+                    GodModeEndCook = false;                    
                 }
             }
 

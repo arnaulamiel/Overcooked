@@ -14,7 +14,8 @@ public class SartenScript : MonoBehaviour
     public GameObject player;
     public GameObject Canvas;
 
-    private bool GodModeNoQuemar = false;
+    private bool GodModeNoQuemar = false; 
+    private bool GodModeEndCook = false;
 
     public float TIMECOOK = 15f;
     public float TIMEDELETE = 10f;
@@ -25,6 +26,7 @@ public class SartenScript : MonoBehaviour
     void Start()
     {
         GodModeNoQuemar = Canvas.GetComponent<Interfaz>().GodModeNoQuemar;
+        GodModeEndCook = Canvas.GetComponent<Interfaz>().GodModeEndCook;
         timeToCook = TIMECOOK;
         timeToDelete = TIMEDELETE;
         if (this.gameObject.tag != "sartenEnded") numIngredients = 1;
@@ -42,6 +44,7 @@ public class SartenScript : MonoBehaviour
     void Update()
     {
         if (Canvas.GetComponent<Interfaz>().GodModeNoQuemar != GodModeNoQuemar) GodModeNoQuemar = Canvas.GetComponent<Interfaz>().GodModeNoQuemar;
+        if (Canvas.GetComponent<Interfaz>().GodModeEndCook != GodModeEndCook) GodModeEndCook = Canvas.GetComponent<Interfaz>().GodModeEndCook;
         if (isCooking)
         {
            /// Debug.Log("timeToCook" + timeToCook);
@@ -52,7 +55,7 @@ public class SartenScript : MonoBehaviour
             }
             else
             {
-                if (timeToCook <= 0)
+                if (timeToCook <= 0 || GodModeEndCook)
                 {
                     //Debug.Log("timeToDelete" + timeToDelete);
                     Canvas.GetComponent<BarraSarten>().EndCook();
@@ -88,6 +91,7 @@ public class SartenScript : MonoBehaviour
                         ObjectToPickUp = null;*/
                         if (!GodModeNoQuemar) timeToDelete -= Time.deltaTime;
                         Canvas.GetComponent<BarraSartenQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
+                        Canvas.GetComponent<Interfaz>().GodModeEndCook = false;
                         Destroy(this.gameObject);
                     }
                     else if (timeToDelete > 0)

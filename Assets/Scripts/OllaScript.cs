@@ -16,6 +16,7 @@ public class OllaScript : MonoBehaviour
     public GameObject Canvas;
 
     private bool GodModeNoQuemar = false;
+    private bool GodModeEndCook = false;
 
     public float TIMECOOK = 15f;
     public float TIMEDELETE = 10f;
@@ -40,6 +41,7 @@ public class OllaScript : MonoBehaviour
     void Start()
     {
         GodModeNoQuemar = Canvas.GetComponent<Interfaz>().GodModeNoQuemar;
+        GodModeEndCook = Canvas.GetComponent<Interfaz>().GodModeEndCook;
         //Ahora solo se hace general, igual necesitamos especificar, en frames
         timeToCook = TIMECOOK;
         timeToDelete = TIMEDELETE;
@@ -59,8 +61,9 @@ public class OllaScript : MonoBehaviour
     void Update()
     {
         if (Canvas.GetComponent<Interfaz>().GodModeNoQuemar != GodModeNoQuemar ) GodModeNoQuemar = Canvas.GetComponent<Interfaz>().GodModeNoQuemar;
-
-        if (isCooking) {
+        if (Canvas.GetComponent<Interfaz>().GodModeEndCook != GodModeEndCook) GodModeEndCook = Canvas.GetComponent<Interfaz>().GodModeEndCook;
+        if (isCooking)
+            if (isCooking) {
            
             if (timeToCook == TIMECOOK)
             {
@@ -68,10 +71,10 @@ public class OllaScript : MonoBehaviour
                 Canvas.GetComponent<BarraOlla>().RestarTiempo(timeToCook, TIMECOOK);
             }
             else {                
-                if(timeToCook <= 0)
+                if(timeToCook <= 0 || GodModeEndCook)
                 {
                     Canvas.GetComponent<BarraOlla>().EndCook();
-                    if (timeToDelete == TIMEDELETE && allIngredients)
+                    if ((timeToDelete == TIMEDELETE && allIngredients) || GodModeEndCook)
                     {
                         string path = "Prefab/OllaEnded";
                         GameObject prefab = Resources.Load(path) as GameObject;
@@ -99,8 +102,12 @@ public class OllaScript : MonoBehaviour
                         ObjectToPickUp = null;*/
                         if(!GodModeNoQuemar) timeToDelete -= Time.deltaTime;
                         Canvas.GetComponent<BarraOllaQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
-
-
+                            Debug.Log("ENDCOOOOOK "+ GodModeEndCook);
+                        if (GodModeEndCook)
+                        {
+                            Canvas.GetComponent<BarraOllaQuemar>().EndQuemar();
+                            Canvas.GetComponent<Interfaz>().GodModeEndCook = false;
+                        }
                         Destroy(this.gameObject);
                     }
                     else if (timeToDelete > 0) {

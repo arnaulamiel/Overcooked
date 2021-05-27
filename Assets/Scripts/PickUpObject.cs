@@ -173,6 +173,7 @@ public class PickUpObject : MonoBehaviour
 
                                 PickedObject = carnecortada;
                             }
+
                             PickedObject.GetComponent<PickableObject>().isCutted = true;
                             PickedObject.GetComponent<PickableObject>().isPickable = false;
                             PickedObject.GetComponent<PickableObject>().isPicked = true;
@@ -814,5 +815,66 @@ public class PickUpObject : MonoBehaviour
                 }
             }
         }
+    }
+
+
+
+    public void generateReceipt(string name)
+    {
+        string path;
+        GameObject prefab = new GameObject();
+        if (name == "EnsaladaSimple") {
+
+            path = "Prefab/PlatoLlenoEnsaladaL";
+            prefab = Resources.Load(path) as GameObject;
+        }
+        else if (name == "Ensalada")
+        {
+            path = "Prefab/PlatoLlenoEnsalada";
+            prefab = Resources.Load(path) as GameObject;
+        }
+        else if (name == "RecetaSopaTomate")
+        {
+            path = "Prefab/PlatoLlenoSopaT";
+            prefab = Resources.Load(path) as GameObject;
+        }
+        else if (name == "RecetaSopaZanahoria")
+        {
+            path = "Prefab/PlatoLlenoSopaZ";
+            prefab = Resources.Load(path) as GameObject;
+        }
+        else if (name == "RecetaSopaCebolla")
+        {
+            path = "Prefab/PlatoLlenoSopa";
+            prefab = Resources.Load(path) as GameObject;
+        }
+        else if (name == "HamburguesaQ")
+        {
+            path = "Prefab/HamburguesaPanQC";
+            prefab = Resources.Load(path) as GameObject;
+        }
+        else if (name == "HamburguesaL")
+        {
+            path = "Prefab/Hamburguesa";
+            prefab = Resources.Load(path) as GameObject;
+        }
+       
+        if(PickedObject != null ) Destroy(PickedObject);
+
+
+        GameObject receta = GameObject.Instantiate(prefab);
+        PickedObject = receta;
+        PickedObject.GetComponent<PickableObject>().isPickable = false;
+        PickedObject.GetComponent<PickableObject>().isPicked = true;
+        PickedObject.GetComponent<PickableObject>().isEnded = true;
+        PickedObject.transform.SetParent(interactionZone);
+        PickedObject.GetComponent<Rigidbody>().useGravity = false;
+        PickedObject.GetComponent<Rigidbody>().isKinematic = true;
+        PickedObject.transform.position = interactionZone.position;
+        PickedObject.transform.rotation = player.rotation;
+        PickedObject.transform.Translate(-0.1f, 2f, -0.5f);
+        animator.SetBool("Carry", true);
+        
+
     }
 }

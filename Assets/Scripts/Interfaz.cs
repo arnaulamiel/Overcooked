@@ -144,7 +144,7 @@ public class Interfaz : MonoBehaviour
 
         if (!firstRecipe)
         {
-            //GODMODE: Carrega el nivell que vulguis
+            //GODMODE 1: Carrega el nivell que vulguis -> La 'L'
             if (Input.GetKeyDown(KeyCode.L))
             {
                 Debug.Log("Pulsando L");
@@ -167,6 +167,61 @@ public class Interfaz : MonoBehaviour
                     nivel5.gameObject.SetActive(false);
                 }
             }
+            //GODMODE 2: Fer que al xef li aparegui la seguent recepta -> La 'P'
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                Debug.Log("La P");
+                float minTime = timeEndRecipe1;
+                int num = 1; 
+                if(minTime > timeEndRecipe2)
+                {
+                    minTime = timeEndRecipe2;
+                    num = 2;
+                }
+                if (minTime > timeEndRecipe3)
+                {
+                    minTime = timeEndRecipe3;
+                    num = 3;
+                }
+                if (minTime > timeEndRecipe4)
+                {
+                    minTime = timeEndRecipe4;
+                    num = 4;
+                }
+                if (minTime > timeEndRecipe5)
+                {
+                    minTime = timeEndRecipe5;
+                    num = 5;
+                }
+
+                Debug.Log("minTime: "+minTime);
+                Debug.Log("num: " + num);
+
+                Debug.Log("generateReceipt: " + receta1.sprite.name);
+                if (num == 1)
+                {                   
+                    player.GetComponent<PickUpObject>().generateReceipt(receta1.sprite.name);
+                }
+                else if (num == 2)
+                {
+                    player.GetComponent<PickUpObject>().generateReceipt(receta2.sprite.name);
+                }
+                else if (num == 3)
+                {
+                    player.GetComponent<PickUpObject>().generateReceipt(receta3.sprite.name);
+                }
+                else if (num == 4)
+                {
+                    player.GetComponent<PickUpObject>().generateReceipt(receta4.sprite.name);
+                }
+                else if (num == 5)
+                {
+                    player.GetComponent<PickUpObject>().generateReceipt(receta5.sprite.name);
+                }
+
+            }
+
+
             if (levelTime <= 0)
             {
                 //Salta a la siguiente escena
@@ -222,12 +277,9 @@ public class Interfaz : MonoBehaviour
                 }
                 timeRemaining = 30;
             }
-        }
-
-        updateTimers();
-
-        levelTime -= Time.deltaTime;
-        
+            levelTime -= Time.deltaTime;
+            updateTimers();
+        }          
     }
 
     public void updateRecetas(string tipo)

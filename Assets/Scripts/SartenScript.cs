@@ -22,11 +22,15 @@ public class SartenScript : MonoBehaviour
     public ParticleSystem ps;
     public Transform childp;
 
+    public AudioClip OllaSound;
+    AudioSource fuenteAudio;
+
     // Start is called before the first frame update
     void Start()
     {
         GodModeNoQuemar = Canvas.GetComponent<Interfaz>().GodModeNoQuemar;
         GodModeEndCook = Canvas.GetComponent<Interfaz>().GodModeEndCook;
+        fuenteAudio = GetComponent<AudioSource>();
         timeToCook = TIMECOOK;
         timeToDelete = TIMEDELETE;
         if (this.gameObject.tag != "sartenEnded") numIngredients = 1;
@@ -40,6 +44,8 @@ public class SartenScript : MonoBehaviour
         }
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
@@ -50,6 +56,8 @@ public class SartenScript : MonoBehaviour
            /// Debug.Log("timeToCook" + timeToCook);
             if (timeToCook == TIMECOOK)
             {
+                fuenteAudio.clip = OllaSound;
+                fuenteAudio.Play();
                 timeToCook -= Time.deltaTime;
                 Canvas.GetComponent<BarraSarten>().RestarTiempo(timeToCook, TIMECOOK);
             }
@@ -85,6 +93,8 @@ public class SartenScript : MonoBehaviour
                         this.isCooking = true;
 
                         tartaObject.GetComponent<SartenScript>().Canvas = Canvas;
+
+                        tartaObject.GetComponent<SartenScript>().OllaSound = OllaSound;
 
                         tartaObject.tag = "sartenEnded";
                         /*tartaObject = null;
@@ -122,6 +132,7 @@ public class SartenScript : MonoBehaviour
 
                 if (timeToDelete <= 0)
                 {
+                    fuenteAudio.clip = null;
                     timeOut = true;
                     Canvas.GetComponent<BarraSartenQuemar>().EndQuemar();
                 }
@@ -153,7 +164,7 @@ public class SartenScript : MonoBehaviour
 
             tartaObject.GetComponent<SartenScript>().Canvas = Canvas;
 
-
+            tartaObject.GetComponent<SartenScript>().OllaSound = OllaSound;
 
         }
     }
@@ -187,6 +198,7 @@ public class SartenScript : MonoBehaviour
 
                 
                 tartaObject.GetComponent<SartenScript>().Canvas = Canvas;
+                tartaObject.GetComponent<SartenScript>().OllaSound = OllaSound;
 
                 Destroy(this.gameObject);
 

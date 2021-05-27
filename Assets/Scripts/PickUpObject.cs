@@ -52,6 +52,7 @@ public class PickUpObject : MonoBehaviour
                 PickedObject.transform.rotation = player.rotation;
                 PickedObject.transform.Translate(-0.1f, 2f, -0.5f);
                 animator.SetBool("Carry", true);
+                GetComponent<SoundsPlayer>().interactionSound();
                 ObjectToPickUp = null;
             }
         }
@@ -79,6 +80,8 @@ public class PickUpObject : MonoBehaviour
                             PickedObject.transform.SetParent(ObjectToPickUp.transform);
                             PickedObject.transform.position = ObjectToPickUp.transform.position;
                             animator.SetBool("isCutting", true);
+
+                            GetComponent<SoundsPlayer>().isCutting();
 
                             //Coger cuchillo
                             cuchillo = ObjectToPickUp.GetComponent<TablaCortar>().cuchillo;
@@ -186,6 +189,8 @@ public class PickUpObject : MonoBehaviour
                             PickedObject.transform.Translate(-0.1f, 2f, -0.5f);
                             animator.SetBool("isCutting", false);
 
+                            GetComponent<SoundsPlayer>().stopCutting();
+
                             //dejar cuchillo
                             cuchillo = ObjectToPickUp.GetComponent<TablaCortar>().cuchillo;
                             cuchillo.transform.SetParent(ObjectToPickUp.transform);
@@ -233,6 +238,8 @@ public class PickUpObject : MonoBehaviour
                                         tartaObject = null;
                                         ObjectToPickUp = null;
                                         animator.SetBool("Carry", false);
+
+                                        GetComponent<SoundsPlayer>().interactionSound();
                                     }//Si donde queremos poner el repollo es un plato ya lleno pero de tomate, creamos la ensalada
                                     else if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLlenoEnsaladaT"))
                                     {
@@ -256,6 +263,7 @@ public class PickUpObject : MonoBehaviour
                                         ObjectToPickUp = null;
                                         animator.SetBool("Carry", false);
 
+                                        GetComponent<SoundsPlayer>().interactionSound();
                                     }
                                 }
                                 else
@@ -282,6 +290,8 @@ public class PickUpObject : MonoBehaviour
                                         tartaObject = null;
                                         ObjectToPickUp = null;
                                         animator.SetBool("Carry", false);
+
+                                        GetComponent<SoundsPlayer>().interactionSound();
                                     }//Si donde queremos poner el repollo es un plato ya lleno pero de tomate, creamos la ensalada
                                     else if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLlenoEnsaladaL"))
                                     {
@@ -306,6 +316,7 @@ public class PickUpObject : MonoBehaviour
                                         ObjectToPickUp = null;
                                         animator.SetBool("Carry", false);
 
+                                        GetComponent<SoundsPlayer>().interactionSound();
                                     }
                                 }
 
@@ -332,6 +343,8 @@ public class PickUpObject : MonoBehaviour
                                 tartaObject = null;
                                 ObjectToPickUp = null;
                                 animator.SetBool("Carry", false);
+
+                                GetComponent<SoundsPlayer>().interactionSound();
                             }
                             //Se tiene que cambiar por la creaci�n de la nueva instancia con el prefab que sea
                             /*PickedObject.GetComponent<PickableObject>().isPickable = true;
@@ -431,6 +444,8 @@ public class PickUpObject : MonoBehaviour
                             PickedObject.transform.Translate(-0.1f, 2f, -0.5f);
                             animator.SetBool("Carry", true);
 
+                            GetComponent<SoundsPlayer>().interactionSound();
+
 
                         }
                         
@@ -455,6 +470,8 @@ public class PickUpObject : MonoBehaviour
                             tartaObject = null;
                             ObjectToPickUp = null;
                             animator.SetBool("Carry", false);
+
+                            GetComponent<SoundsPlayer>().interactionSound();
 
                         }
                     }
@@ -487,6 +504,8 @@ public class PickUpObject : MonoBehaviour
                                     tartaObject = null;
                                     ObjectToPickUp = null;
                                     animator.SetBool("Carry", false);
+
+                                    GetComponent<SoundsPlayer>().interactionSound();
                                 }
                                 else if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPan")) {
                                     //Tienes una lechuga cortada y quieres dejarla en un plato de pan cortado
@@ -508,6 +527,8 @@ public class PickUpObject : MonoBehaviour
                                     tartaObject = null;
                                     ObjectToPickUp = null;
                                     animator.SetBool("Carry", false);
+
+                                    GetComponent<SoundsPlayer>().interactionSound();
                                 }
                                 
                             }
@@ -536,6 +557,8 @@ public class PickUpObject : MonoBehaviour
                                     tartaObject = null;
                                     ObjectToPickUp = null;
                                     animator.SetBool("Carry", false);
+
+                                    GetComponent<SoundsPlayer>().interactionSound();
                                 }
                                 else if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPan"))
                                 {
@@ -558,6 +581,8 @@ public class PickUpObject : MonoBehaviour
                                     tartaObject = null;
                                     ObjectToPickUp = null;
                                     animator.SetBool("Carry", false);
+
+                                    GetComponent<SoundsPlayer>().interactionSound();
                                 }
 
                             }
@@ -655,6 +680,8 @@ public class PickUpObject : MonoBehaviour
                         PickedObject.transform.rotation = player.rotation;
                         PickedObject.transform.Translate(-0.1f, 2f, -0.5f);
                         animator.SetBool("Carry", true);
+
+                        GetComponent<SoundsPlayer>().interactionSound();
                     }
                     else if(ObjectToPickUp.tag == "olla")
                     {
@@ -672,6 +699,8 @@ public class PickUpObject : MonoBehaviour
                                     {
                                         Destroy(PickedObject);
                                         animator.SetBool("Carry", false);
+
+                                        GetComponent<SoundsPlayer>().interactionSound();
                                     }
                                     ObjectToPickUp.GetComponent<OllaScript>().updateRecipe(!firstTime);
                                     ObjectToPickUp.GetComponent<OllaScript>().setComida(OllaScript.TipoComida.Cebolla);
@@ -689,6 +718,8 @@ public class PickUpObject : MonoBehaviour
                                     {
                                         Destroy(PickedObject);
                                         animator.SetBool("Carry", false);
+
+                                        GetComponent<SoundsPlayer>().interactionSound();
                                     }
                                     ObjectToPickUp.GetComponent<OllaScript>().updateRecipe(!firstTime);
                                     ObjectToPickUp.GetComponent<OllaScript>().setComida(OllaScript.TipoComida.Tomate);
@@ -707,6 +738,7 @@ public class PickUpObject : MonoBehaviour
                                     {
                                         Destroy(PickedObject);
                                         animator.SetBool("Carry", false);
+                                        GetComponent<SoundsPlayer>().interactionSound();
                                     }
                                     ObjectToPickUp.GetComponent<OllaScript>().updateRecipe(!firstTime);
                                     ObjectToPickUp.GetComponent<OllaScript>().setComida(OllaScript.TipoComida.Zanahoria);
@@ -731,6 +763,7 @@ public class PickUpObject : MonoBehaviour
                                 {
                                     Destroy(PickedObject);
                                     animator.SetBool("Carry", false);
+                                    GetComponent<SoundsPlayer>().interactionSound();
                                 }
                                 ObjectToPickUp.GetComponent<SartenScript>().updateRecipe(!firstTime);
                             }
@@ -798,9 +831,11 @@ public class PickUpObject : MonoBehaviour
                     PickedObject = null;
                     ObjectToPickUp = null;
                     animator.SetBool("Carry", false);
-                    
 
-                    
+                    GetComponent<SoundsPlayer>().interactionSound();
+
+
+
                 }
                 else {
                     PickedObject.GetComponent<PickableObject>().isPickable = true;
@@ -811,7 +846,9 @@ public class PickUpObject : MonoBehaviour
                     PickedObject.GetComponent<Rigidbody>().isKinematic = false;
                     PickedObject = null;
                     ObjectToPickUp = null;
-                    animator.SetBool("Carry", false); 
+                    animator.SetBool("Carry", false);
+
+                    GetComponent<SoundsPlayer>().interactionSound();
                 }
             }
         }

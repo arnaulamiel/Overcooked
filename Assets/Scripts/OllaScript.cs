@@ -60,6 +60,7 @@ public class OllaScript : MonoBehaviour
            
             if (timeToCook == TIMECOOK)
             {
+                //GetComponent<SoundsOlla>().isCooking();
                 timeToCook -= Time.deltaTime;
                 Canvas.GetComponent<BarraOlla>().RestarTiempo(timeToCook, TIMECOOK);
             }
@@ -122,6 +123,7 @@ public class OllaScript : MonoBehaviour
                 {
                     timeOut = true;
                     Canvas.GetComponent<BarraOllaQuemar>().EndQuemar();
+                    //GetComponent<SoundsOlla>().isEmpty();
                 }
             }
         }

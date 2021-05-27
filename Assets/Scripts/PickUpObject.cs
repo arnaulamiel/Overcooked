@@ -679,6 +679,9 @@ public class PickUpObject : MonoBehaviour
                         PickedObject.transform.position = interactionZone.position;
                         PickedObject.transform.rotation = player.rotation;
                         PickedObject.transform.Translate(-0.1f, 2f, -0.5f);
+                        Debug.Log("EndQuemar");
+                        canvas.GetComponent<BarraOllaQuemar>().EndQuemar();
+                        canvas.GetComponent<BarraSartenQuemar>().EndQuemar();
                         animator.SetBool("Carry", true);
 
                         GetComponent<SoundsPlayer>().interactionSound();

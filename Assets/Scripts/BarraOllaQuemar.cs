@@ -37,6 +37,7 @@ public class BarraOllaQuemar : MonoBehaviour
 
     public void EndQuemar()
     {
+        Debug.Log("EndQuemarOlla");
         isBorning = false;
         timer.enabled = false;
     }

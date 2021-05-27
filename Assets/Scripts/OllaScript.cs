@@ -49,7 +49,6 @@ public class OllaScript : MonoBehaviour
             timeToCook = 0;
         }
         
-        Debug.Log("ParticleStart " + ps);
 
     }
 
@@ -101,6 +100,7 @@ public class OllaScript : MonoBehaviour
                     }
                     else if (timeToDelete > 0) {
                         //TODO: HAY QUE MIRAR SI LO TIENE EN LA MANO O NO, SI LO TIENE EN LA MANO NO SE QUEMA PORQUE NO ESTARIA EN EL FUEGO
+                                               
                         timeToDelete -= Time.deltaTime;
                         Canvas.GetComponent<BarraOllaQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
                         var main = ps.main;

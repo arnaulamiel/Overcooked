@@ -16,6 +16,9 @@ public class SartenScript : MonoBehaviour
 
     public float TIMECOOK = 15f;
     public float TIMEDELETE = 10f;
+    public ParticleSystem ps;
+    public Transform childp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +70,11 @@ public class SartenScript : MonoBehaviour
                         tartaObject.GetComponent<Rigidbody>().useGravity = true;
                         tartaObject.GetComponent<Rigidbody>().isKinematic = false;
 
+                        tartaObject.GetComponent<SartenScript>().isCooking = true;
+                        tartaObject.GetComponent<SartenScript>().timeToCook = 0;
+
+                        childp = tartaObject.transform.Find("Particle System");
+                        tartaObject.GetComponent<SartenScript>().ps = childp.GetComponent<ParticleSystem>();
                         this.isCooking = true;
 
                         tartaObject.GetComponent<SartenScript>().Canvas = Canvas;
@@ -83,6 +91,12 @@ public class SartenScript : MonoBehaviour
                         //TODO: HAY QUE MIRAR SI LO TIENE EN LA MANO O NO, SI LO TIENE EN LA MANO NO SE QUEMA PORQUE NO ESTARIA EN EL FUEGO
                         timeToDelete -= Time.deltaTime;
                         Canvas.GetComponent<BarraSartenQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
+                        Debug.Log("PSD?????? " + ps);
+                        if (timeToDelete <= TIMEDELETE / 2)
+                        {
+                            var main = ps.main;
+                            main.startColor = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+                        }
                     }
 
                 }
@@ -161,6 +175,7 @@ public class SartenScript : MonoBehaviour
                 tartaObject.GetComponent<SartenScript>().isCooking = true;
                 tartaObject.GetComponent<SartenScript>().allIngredients = true;
 
+                
                 tartaObject.GetComponent<SartenScript>().Canvas = Canvas;
 
                 Destroy(this.gameObject);

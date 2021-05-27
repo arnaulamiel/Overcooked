@@ -32,11 +32,7 @@ public class PuntuacionUI : MonoBehaviour
     {
         int puntosAct = gameObject.GetComponent<Interfaz>().puntuacion;
         puntuacion.text = "Puntuación : " + puntosAct;
-        Debug.Log("PUNTUACION ANTES" + puntosAct);
         
-        
-        Debug.Log("PUNTUACION NOW" + prevPuntos);
-
         if (puntosAct > prevPuntos) {
             Debug.Log("Actualizado " + (puntosAct - prevPuntos) );
             puntos.enabled = true;

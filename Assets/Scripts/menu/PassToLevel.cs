@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class PassToLevel : MonoBehaviour
 {
-    public Button play;
-    public Button help;
     Transform childp;
     Transform childh;
 

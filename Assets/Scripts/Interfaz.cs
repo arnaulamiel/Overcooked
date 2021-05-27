@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Interfaz : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class Interfaz : MonoBehaviour
     private Image timer1, timer2, timer3, timer4, timer5;
     private Sprite ensalada, sopaCebolla,sopaTomate, sopaZanah, ensaladaSola, burguer, burguerqueso ;
     Transform child;
+    public Button nivel1,nivel2,nivel3,nivel4,nivel5;
+    public Text textNivel;
+    
     public  Sprite[] arrayRecetas;
     public float timeRemaining = 30;
     public float timeEndRecipe1 = 50;
@@ -29,6 +33,38 @@ public class Interfaz : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        //Niveles GodMode
+        child = transform.Find("Nivell1");
+        nivel1 = child.GetComponent<Button>();
+        nivel1.onClick.AddListener(TaskOnClick1);
+        nivel1.gameObject.SetActive(false);
+
+        child = transform.Find("Nivell2");
+        nivel2 = child.GetComponent<Button>();
+        nivel2.onClick.AddListener(TaskOnClick2);
+        nivel2.gameObject.SetActive(false);
+
+        child = transform.Find("Nivell3");
+        nivel3 = child.GetComponent<Button>();
+        nivel3.onClick.AddListener(TaskOnClick2);
+        nivel3.gameObject.SetActive(false);
+
+        child = transform.Find("Nivell4");
+        nivel4 = child.GetComponent<Button>();
+        nivel4.onClick.AddListener(TaskOnClick2);
+        nivel4.gameObject.SetActive(false);
+
+        child = transform.Find("Nivell5");
+        nivel5 = child.GetComponent<Button>();
+        nivel5.onClick.AddListener(TaskOnClick2);
+        nivel5.gameObject.SetActive(false);
+
+        child = transform.Find("TextNivel");
+        textNivel = child.GetComponent<Text>();
+        textNivel.gameObject.SetActive(false);
+
+        //Recetas
         arrayRecetas = new Sprite[7];
        //Init de los sprites de recetas
         ensalada = Resources.Load<Sprite>("Images/Ensalada");
@@ -94,12 +130,7 @@ public class Interfaz : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (levelTime <= 0)
-        {
-            //Salta a la siguiente escena
-            
-        }
+    {      
 
         //Si le das a alguna tecla desaparece la receta principal y se puede jugar
         if (Input.anyKeyDown) { 
@@ -113,8 +144,39 @@ public class Interfaz : MonoBehaviour
 
         if (!firstRecipe)
         {
+            //GODMODE: Carrega el nivell que vulguis
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                Debug.Log("Pulsando L");
+                
+                if (!nivel1.gameObject.activeSelf) {
+                    textNivel.gameObject.SetActive(true);
+                    nivel1.gameObject.SetActive(true);
+                    nivel2.gameObject.SetActive(true);
+                    nivel3.gameObject.SetActive(true);
+                    nivel4.gameObject.SetActive(true);
+                    nivel5.gameObject.SetActive(true);
+                }
+                else
+                {
+                    textNivel.gameObject.SetActive(false);
+                    nivel1.gameObject.SetActive(false);
+                    nivel2.gameObject.SetActive(false);
+                    nivel3.gameObject.SetActive(false);
+                    nivel4.gameObject.SetActive(false);
+                    nivel5.gameObject.SetActive(false);
+                }
+            }
+            if (levelTime <= 0)
+            {
+                //Salta a la siguiente escena
+                Debug.Log("NEXT LEVEL !!!!!!!!");
+                //Si es escena 2
+                SceneManager.LoadScene(sceneName: "SampleScene2");
+
+            }
             //Para que cada 30 sec se muestre una receta nueva
-            int receta = Random.Range(0, 6);
+            int receta = Random.Range(0, 2);
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
@@ -170,7 +232,8 @@ public class Interfaz : MonoBehaviour
 
     public void updateRecetas(string tipo)
     {
-        Debug.Log("SPRITE? " + receta2.sprite );
+        bool hasActualizado = false;
+        Debug.Log("SPRITE? " + receta2.sprite);
         if (receta1.enabled)
         {
             if (tipo == "EnsaladaL" && receta1.sprite.name == "EnsaladaSimple")
@@ -179,6 +242,7 @@ public class Interfaz : MonoBehaviour
                 timer1.enabled = false;
                 timeEndRecipe1 = 50;
                 puntuacion += 10;
+                hasActualizado = true;
             }
             else if (tipo == "EnsaladaLT" && receta1.sprite.name == "Ensalada")
             {
@@ -186,6 +250,7 @@ public class Interfaz : MonoBehaviour
                 timer1.enabled = false;
                 timeEndRecipe1 = 50;
                 puntuacion += 15;
+                hasActualizado = true;
             }
             else if (tipo == "SopaT" && receta1.sprite.name == "RecetaSopaTomate")
             {
@@ -193,6 +258,7 @@ public class Interfaz : MonoBehaviour
                 timer1.enabled = false;
                 timeEndRecipe1 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "SopaZ" && receta1.sprite.name == "RecetaSopaZanahoria")
             {
@@ -200,6 +266,7 @@ public class Interfaz : MonoBehaviour
                 timer1.enabled = false;
                 timeEndRecipe1 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "SopaC" && receta1.sprite.name == "RecetaSopaCebolla")
             {
@@ -207,6 +274,7 @@ public class Interfaz : MonoBehaviour
                 timer1.enabled = false;
                 timeEndRecipe1 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "HamburguesaQC" && receta1.sprite.name == "HamburguesaQ")
             {
@@ -214,6 +282,7 @@ public class Interfaz : MonoBehaviour
                 timer1.enabled = false;
                 timeEndRecipe1 = 50;
                 puntuacion += 30;
+                hasActualizado = true;
             }
             else if (tipo == "HamburguesaLC" && receta1.sprite.name == "HamburguesaL")
             {
@@ -221,9 +290,10 @@ public class Interfaz : MonoBehaviour
                 timer1.enabled = false;
                 timeEndRecipe1 = 50;
                 puntuacion += 30;
+                hasActualizado = true;
             }
         }
-        if (receta2.enabled)
+        if (receta2.enabled && !hasActualizado)
         {
             Debug.Log("receta2? PRE " + receta2.enabled);
             if (tipo == "EnsaladaL" && receta2.sprite.name == "EnsaladaSimple")
@@ -232,6 +302,7 @@ public class Interfaz : MonoBehaviour
                 timer2.enabled = false;
                 timeEndRecipe2 = 50;
                 puntuacion += 10;
+                hasActualizado = true;
             }
             else if (tipo == "EnsaladaLT" && receta2.sprite.name == "Ensalada")
             {
@@ -239,6 +310,7 @@ public class Interfaz : MonoBehaviour
                 timer2.enabled = false;
                 timeEndRecipe2 = 50;
                 puntuacion += 15;
+                hasActualizado = true;
             }
             else if (tipo == "SopaT" && receta2.sprite.name == "RecetaSopaTomate")
             {
@@ -246,6 +318,7 @@ public class Interfaz : MonoBehaviour
                 timer2.enabled = false;
                 timeEndRecipe2 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "SopaZ" && receta2.sprite.name == "RecetaSopaZanahoria")
             {
@@ -253,6 +326,7 @@ public class Interfaz : MonoBehaviour
                 timer2.enabled = false;
                 timeEndRecipe2 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "SopaC" && receta2.sprite.name == "RecetaSopaCebolla")
             {
@@ -260,6 +334,7 @@ public class Interfaz : MonoBehaviour
                 timer2.enabled = false;
                 timeEndRecipe2 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "HamburguesaQC" && receta2.sprite.name == "HamburguesaQ")
             {
@@ -267,6 +342,7 @@ public class Interfaz : MonoBehaviour
                 timer2.enabled = false;
                 timeEndRecipe2 = 50;
                 puntuacion += 30;
+                hasActualizado = true;
             }
             else if (tipo == "HamburguesaLC" && receta2.sprite.name == "HamburguesaL")
             {
@@ -274,10 +350,11 @@ public class Interfaz : MonoBehaviour
                 timer2.enabled = false;
                 timeEndRecipe2 = 50;
                 puntuacion += 30;
+                hasActualizado = true;
             }
             Debug.Log("receta2? POST " + receta2.enabled);
         }
-        if (receta3.enabled)
+        if (receta3.enabled && !hasActualizado)
         {
             if (tipo == "EnsaladaL" && receta3.sprite.name == "EnsaladaSimple")
             {
@@ -285,6 +362,7 @@ public class Interfaz : MonoBehaviour
                 timer3.enabled = false;
                 timeEndRecipe3 = 50;
                 puntuacion += 10;
+                hasActualizado = true;
             }
             else if (tipo == "EnsaladaLT" && receta3.sprite.name == "Ensalada")
             {
@@ -292,6 +370,7 @@ public class Interfaz : MonoBehaviour
                 timer3.enabled = false;
                 timeEndRecipe3 = 50;
                 puntuacion += 15;
+                hasActualizado = true;
             }
             else if (tipo == "SopaT" && receta3.sprite.name == "RecetaSopaTomate")
             {
@@ -299,6 +378,7 @@ public class Interfaz : MonoBehaviour
                 timer3.enabled = false;
                 timeEndRecipe3 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "SopaZ" && receta3.sprite.name == "RecetaSopaZanahoria")
             {
@@ -306,6 +386,7 @@ public class Interfaz : MonoBehaviour
                 timer3.enabled = false;
                 timeEndRecipe3 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "SopaC" && receta3.sprite.name == "RecetaSopaCebolla")
             {
@@ -313,6 +394,7 @@ public class Interfaz : MonoBehaviour
                 timer3.enabled = false;
                 timeEndRecipe3 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "HamburguesaQC" && receta3.sprite.name == "HamburguesaQ")
             {
@@ -320,6 +402,7 @@ public class Interfaz : MonoBehaviour
                 timer3.enabled = false;
                 timeEndRecipe3 = 50;
                 puntuacion += 30;
+                hasActualizado = true;
             }
             else if (tipo == "HamburguesaLC" && receta3.sprite.name == "HamburguesaL")
             {
@@ -327,9 +410,10 @@ public class Interfaz : MonoBehaviour
                 timer3.enabled = false;
                 timeEndRecipe3 = 50;
                 puntuacion += 30;
+                hasActualizado = true;
             }
         }
-        if (receta4.enabled)
+        if (receta4.enabled && !hasActualizado)
         {
             if (tipo == "EnsaladaL" && receta4.sprite.name == "EnsaladaSimple")
             {
@@ -337,6 +421,7 @@ public class Interfaz : MonoBehaviour
                 timer4.enabled = false;
                 timeEndRecipe4 = 50;
                 puntuacion += 10;
+                hasActualizado = true;
             }
             else if (tipo == "EnsaladaLT" && receta4.sprite.name == "Ensalada")
             {
@@ -344,6 +429,7 @@ public class Interfaz : MonoBehaviour
                 timer4.enabled = false;
                 timeEndRecipe4 = 50;
                 puntuacion += 15;
+                hasActualizado = true;
             }
             else if (tipo == "SopaT" && receta4.sprite.name == "RecetaSopaTomate")
             {
@@ -351,6 +437,7 @@ public class Interfaz : MonoBehaviour
                 timer4.enabled = false;
                 timeEndRecipe4 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "SopaZ" && receta4.sprite.name == "RecetaSopaZanahoria")
             {
@@ -358,6 +445,7 @@ public class Interfaz : MonoBehaviour
                 timer4.enabled = false;
                 timeEndRecipe4 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "SopaC" && receta4.sprite.name == "RecetaSopaCebolla")
             {
@@ -365,6 +453,7 @@ public class Interfaz : MonoBehaviour
                 timer4.enabled = false;
                 timeEndRecipe4 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "HamburguesaQC" && receta4.sprite.name == "HamburguesaQ")
             {
@@ -372,6 +461,7 @@ public class Interfaz : MonoBehaviour
                 timer4.enabled = false;
                 timeEndRecipe4 = 50;
                 puntuacion += 30;
+                hasActualizado = true;
             }
             else if (tipo == "HamburguesaLC" && receta4.sprite.name == "HamburguesaL")
             {
@@ -379,9 +469,10 @@ public class Interfaz : MonoBehaviour
                 timer4.enabled = false;
                 timeEndRecipe4 = 50;
                 puntuacion += 30;
+                hasActualizado = true;
             }
         }
-        if (receta5.enabled)
+        if (receta5.enabled && !hasActualizado)
         {
             if (tipo == "EnsaladaL" && receta5.sprite.name == "EnsaladaSimple")
             {
@@ -389,6 +480,7 @@ public class Interfaz : MonoBehaviour
                 timer5.enabled = false;
                 timeEndRecipe5 = 50;
                 puntuacion += 10;
+                hasActualizado = true;
             }
             else if (tipo == "EnsaladaLT" && receta5.sprite.name == "Ensalada")
             {
@@ -396,6 +488,7 @@ public class Interfaz : MonoBehaviour
                 timer5.enabled = false;
                 timeEndRecipe5 = 50;
                 puntuacion += 15;
+                hasActualizado = true;
             }
             else if (tipo == "SopaT" && receta5.sprite.name == "RecetaSopaTomate")
             {
@@ -403,6 +496,7 @@ public class Interfaz : MonoBehaviour
                 timer5.enabled = false;
                 timeEndRecipe5 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "SopaZ" && receta5.sprite.name == "RecetaSopaZanahoria")
             {
@@ -410,6 +504,7 @@ public class Interfaz : MonoBehaviour
                 timer5.enabled = false;
                 timeEndRecipe5 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "SopaC" && receta5.sprite.name == "RecetaSopaCebolla")
             {
@@ -417,6 +512,7 @@ public class Interfaz : MonoBehaviour
                 timer5.enabled = false;
                 timeEndRecipe5 = 50;
                 puntuacion += 25;
+                hasActualizado = true;
             }
             else if (tipo == "HamburguesaQC" && receta5.sprite.name == "HamburguesaQ")
             {
@@ -424,6 +520,7 @@ public class Interfaz : MonoBehaviour
                 timer5.enabled = false;
                 timeEndRecipe5 = 50;
                 puntuacion += 30;
+                hasActualizado = true;
             }
             else if (tipo == "HamburguesaLC" && receta5.sprite.name == "HamburguesaL")
             {
@@ -431,10 +528,38 @@ public class Interfaz : MonoBehaviour
                 timer5.enabled = false;
                 timeEndRecipe5 = 50;
                 puntuacion += 30;
+                hasActualizado = true;
             }
         }
 
     }
+
+    void TaskOnClick1()
+    {
+        SceneManager.LoadScene(sceneName: "SampleScene");
+        Debug.Log("You have clicked the button!");
+    }
+    void TaskOnClick2()
+    {
+        SceneManager.LoadScene(sceneName: "SampleScene2");
+        Debug.Log("You have clicked the button!");
+    }
+    void TaskOnClick3()
+    {
+        SceneManager.LoadScene(sceneName: "SampleScene3");
+        Debug.Log("You have clicked the button!");
+    }
+    void TaskOnClick4()
+    {
+        SceneManager.LoadScene(sceneName: "SampleScene4");
+        Debug.Log("You have clicked the button!");
+    }
+    void TaskOnClick5()
+    {
+        SceneManager.LoadScene(sceneName: "SampleScene5");
+        Debug.Log("You have clicked the button!");
+    }
+
 
     void updateTimers()
     {

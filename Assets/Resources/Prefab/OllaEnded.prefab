@@ -982,6 +982,7 @@ MonoBehaviour:
   timeToCook: 0
   allIngredients: 0
   player: {fileID: 897829521465234185, guid: 1a25dbd0d7ffc2449b7cc9fa655ce5cd, type: 3}
+  Canvas: {fileID: 0}
   TIMECOOK: 15
   TIMEDELETE: 10
   comida: 0

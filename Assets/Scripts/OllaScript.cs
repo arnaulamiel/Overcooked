@@ -26,6 +26,8 @@ public class OllaScript : MonoBehaviour
          
      }
     public TipoComida comida;
+    public ParticleSystem ps;
+    public Transform childp;
 
     public void setComida(TipoComida tipo)
     {
@@ -46,6 +48,8 @@ public class OllaScript : MonoBehaviour
             Canvas.GetComponent<BarraOllaQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
             timeToCook = 0;
         }
+        
+        Debug.Log("ParticleStart " + ps);
 
     }
 
@@ -91,12 +95,17 @@ public class OllaScript : MonoBehaviour
                         ObjectToPickUp = null;*/
                         timeToDelete -= Time.deltaTime;
                         Canvas.GetComponent<BarraOllaQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
+
+
                         Destroy(this.gameObject);
                     }
                     else if (timeToDelete > 0) {
                         //TODO: HAY QUE MIRAR SI LO TIENE EN LA MANO O NO, SI LO TIENE EN LA MANO NO SE QUEMA PORQUE NO ESTARIA EN EL FUEGO
                         timeToDelete -= Time.deltaTime;
                         Canvas.GetComponent<BarraOllaQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
+                        var main = ps.main;
+                        main.startColor = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+
                     }
 
                 }
@@ -173,8 +182,10 @@ public class OllaScript : MonoBehaviour
 
                 tartaObject.GetComponent<OllaScript>().isCooking = true;
                 tartaObject.GetComponent<OllaScript>().setComida(this.comida);
-
-
+                childp = tartaObject.transform.Find("Particle System");
+                tartaObject.GetComponent<OllaScript>().ps = childp.GetComponent<ParticleSystem>();
+               
+                Debug.Log("Boiling " + tartaObject.GetComponent<OllaScript>().ps);
                 tartaObject.GetComponent<OllaScript>().Canvas = Canvas;
 
 

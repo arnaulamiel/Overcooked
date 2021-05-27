@@ -120,7 +120,8 @@ public class SartenScript : MonoBehaviour
 
             tartaObject.GetComponent<PickableObject>().isPickable = true;
             tartaObject.GetComponent<PickableObject>().isPicked = false;
-            this.isCooking = false;
+            
+            //this.isCooking = false;
 
             tartaObject.transform.SetParent(null);
             tartaObject.GetComponent<Rigidbody>().useGravity = true;

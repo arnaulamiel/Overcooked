@@ -34,9 +34,14 @@ public class OllaScript : MonoBehaviour
         this.comida = tipo;
     }
 
+    public AudioClip OllaSound;
+
+    AudioSource fuenteAudio;
+
     // Start is called before the first frame update
     void Start()
     {
+        fuenteAudio = GetComponent<AudioSource>();
         //Ahora solo se hace general, igual necesitamos especificar, en frames
         timeToCook = TIMECOOK;
         timeToDelete = TIMEDELETE;
@@ -60,7 +65,8 @@ public class OllaScript : MonoBehaviour
            
             if (timeToCook == TIMECOOK)
             {
-                //GetComponent<SoundsOlla>().isCooking();
+                fuenteAudio.clip = OllaSound;
+                fuenteAudio.Play();
                 timeToCook -= Time.deltaTime;
                 Canvas.GetComponent<BarraOlla>().RestarTiempo(timeToCook, TIMECOOK);
             }
@@ -89,6 +95,8 @@ public class OllaScript : MonoBehaviour
                         tartaObject.GetComponent<OllaScript>().setComida(this.comida);
 
                         tartaObject.GetComponent<OllaScript>().Canvas = Canvas;
+
+                        tartaObject.GetComponent<OllaScript>().OllaSound = OllaSound;
 
                         tartaObject.tag = "ollaEnded";
 
@@ -121,9 +129,9 @@ public class OllaScript : MonoBehaviour
 
                 if (timeToDelete <= 0)
                 {
+                    fuenteAudio.clip = null;
                     timeOut = true;
                     Canvas.GetComponent<BarraOllaQuemar>().EndQuemar();
-                    //GetComponent<SoundsOlla>().isEmpty();
                 }
             }
         }
@@ -154,6 +162,7 @@ public class OllaScript : MonoBehaviour
 
             tartaObject.GetComponent<OllaScript>().Canvas = Canvas;
 
+            tartaObject.GetComponent<OllaScript>().OllaSound = OllaSound;
 
         }
     }
@@ -190,6 +199,7 @@ public class OllaScript : MonoBehaviour
                 Debug.Log("Boiling " + tartaObject.GetComponent<OllaScript>().ps);
                 tartaObject.GetComponent<OllaScript>().Canvas = Canvas;
 
+                tartaObject.GetComponent<OllaScript>().OllaSound = OllaSound;
 
                 Destroy(this.gameObject);
 

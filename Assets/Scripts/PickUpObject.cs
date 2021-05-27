@@ -835,7 +835,7 @@ public class PickUpObject : MonoBehaviour
                     ObjectToPickUp = null;
                     animator.SetBool("Carry", false);
 
-                    GetComponent<SoundsPlayer>().interactionSound();
+                    GetComponent<SoundsPlayer>().platoCinta();
 
 
 

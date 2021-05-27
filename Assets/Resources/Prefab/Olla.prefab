@@ -176,7 +176,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeOut: 0
   isCooking: 0
-  player: {fileID: 0}
+  timeToCook: 0
+  allIngredients: 0
+  player: {fileID: 897829521465234185, guid: 1a25dbd0d7ffc2449b7cc9fa655ce5cd, type: 3}
+  Canvas: {fileID: 2647070875483995872, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
+  TIMECOOK: 15
+  TIMEDELETE: 10
+  comida: 0
+  ps: {fileID: 0}
+  childp: {fileID: 0}
 --- !u!1 &2597028076092036061
 GameObject:
   m_ObjectHideFlags: 0

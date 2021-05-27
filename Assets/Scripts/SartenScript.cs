@@ -14,6 +14,8 @@ public class SartenScript : MonoBehaviour
     public GameObject player;
     public GameObject Canvas;
 
+    private bool GodModeNoQuemar = false;
+
     public float TIMECOOK = 15f;
     public float TIMEDELETE = 10f;
     public ParticleSystem ps;
@@ -22,6 +24,7 @@ public class SartenScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GodModeNoQuemar = Canvas.GetComponent<Interfaz>().GodModeNoQuemar;
         timeToCook = TIMECOOK;
         timeToDelete = TIMEDELETE;
         if (this.gameObject.tag != "sartenEnded") numIngredients = 1;
@@ -29,7 +32,7 @@ public class SartenScript : MonoBehaviour
         {
             numIngredients = 0;
             allIngredients = true;
-            timeToDelete = TIMEDELETE - Time.deltaTime;
+            if (!GodModeNoQuemar) timeToDelete = TIMEDELETE - Time.deltaTime;
             Canvas.GetComponent<BarraSartenQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
             timeToCook = 0;
         }
@@ -38,6 +41,7 @@ public class SartenScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Canvas.GetComponent<Interfaz>().GodModeNoQuemar != GodModeNoQuemar) GodModeNoQuemar = Canvas.GetComponent<Interfaz>().GodModeNoQuemar;
         if (isCooking)
         {
            /// Debug.Log("timeToCook" + timeToCook);
@@ -82,20 +86,22 @@ public class SartenScript : MonoBehaviour
                         tartaObject.tag = "sartenEnded";
                         /*tartaObject = null;
                         ObjectToPickUp = null;*/
-                        timeToDelete -= Time.deltaTime;
-                        Canvas.GetComponent<BarraSartenQuemar>().RestarTiempo(timeToDelete, TIMEDELETE); 
+                        if (!GodModeNoQuemar) timeToDelete -= Time.deltaTime;
+                        Canvas.GetComponent<BarraSartenQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
                         Destroy(this.gameObject);
                     }
                     else if (timeToDelete > 0)
                     {
-                        //TODO: HAY QUE MIRAR SI LO TIENE EN LA MANO O NO, SI LO TIENE EN LA MANO NO SE QUEMA PORQUE NO ESTARIA EN EL FUEGO
-                        timeToDelete -= Time.deltaTime;
-                        Canvas.GetComponent<BarraSartenQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
-                        Debug.Log("PSD?????? " + ps);
-                        if (timeToDelete <= TIMEDELETE / 2)
-                        {
-                            var main = ps.main;
-                            main.startColor = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+                        if (!GodModeNoQuemar) { 
+                            //TODO: HAY QUE MIRAR SI LO TIENE EN LA MANO O NO, SI LO TIENE EN LA MANO NO SE QUEMA PORQUE NO ESTARIA EN EL FUEGO
+                            timeToDelete -= Time.deltaTime;
+                            Canvas.GetComponent<BarraSartenQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
+                            Debug.Log("PSD?????? " + ps);
+                            if (timeToDelete <= TIMEDELETE / 2)
+                            {
+                                var main = ps.main;
+                                main.startColor = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+                            }
                         }
                     }
 

@@ -98,6 +98,11 @@ MonoBehaviour:
   timeToCook: 0
   allIngredients: 0
   player: {fileID: 897829521465234185, guid: 1a25dbd0d7ffc2449b7cc9fa655ce5cd, type: 3}
+  Canvas: {fileID: 2647070875483995872, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
+  TIMECOOK: 15
+  TIMEDELETE: 10
+  ps: {fileID: 0}
+  childp: {fileID: 0}
 --- !u!1 &6021871595826415227
 GameObject:
   m_ObjectHideFlags: 0

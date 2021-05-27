@@ -12,7 +12,7 @@ public class Interfaz : MonoBehaviour
     private Sprite ensalada, sopaCebolla,sopaTomate, sopaZanah, ensaladaSola, burguer, burguerqueso ;
     Transform child;
     public Button nivel1,nivel2,nivel3,nivel4,nivel5;
-    public Text textNivel;
+    public Text textNivel,textQuemado;
     
     public  Sprite[] arrayRecetas;
     public float timeRemaining = 30;
@@ -28,6 +28,7 @@ public class Interfaz : MonoBehaviour
     //El nivel 1 seran 2 minutos
     public float levelTime =  120.0f;
 
+    public bool GodModeNoQuemar = false;
     private bool firstRecipe = true;
 
     // Start is called before the first frame update
@@ -63,6 +64,11 @@ public class Interfaz : MonoBehaviour
         child = transform.Find("TextNivel");
         textNivel = child.GetComponent<Text>();
         textNivel.gameObject.SetActive(false);
+
+        //No se puede quemar godmode
+        child = transform.Find("TextNoQuemar");
+        textQuemado = child.GetComponent<Text>();
+        textQuemado.gameObject.SetActive(false);
 
         //Recetas
         arrayRecetas = new Sprite[7];
@@ -220,7 +226,20 @@ public class Interfaz : MonoBehaviour
                 }
 
             }
+            //GODMODE 4: Res es pot cremar -> La 'O'
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                if (!GodModeNoQuemar)
+                {
+                    GodModeNoQuemar = true;
+                    textQuemado.gameObject.SetActive(true);
 
+                }
+                else { 
+                    GodModeNoQuemar = false;
+                    textQuemado.gameObject.SetActive(false);
+                }
+            }
 
             if (levelTime <= 0)
             {

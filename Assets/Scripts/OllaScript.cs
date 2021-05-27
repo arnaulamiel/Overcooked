@@ -15,6 +15,8 @@ public class OllaScript : MonoBehaviour
     public GameObject player;
     public GameObject Canvas;
 
+    private bool GodModeNoQuemar = false;
+
     public float TIMECOOK = 15f;
     public float TIMEDELETE = 10f;
     public enum TipoComida
@@ -37,6 +39,7 @@ public class OllaScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GodModeNoQuemar = Canvas.GetComponent<Interfaz>().GodModeNoQuemar;
         //Ahora solo se hace general, igual necesitamos especificar, en frames
         timeToCook = TIMECOOK;
         timeToDelete = TIMEDELETE;
@@ -44,7 +47,7 @@ public class OllaScript : MonoBehaviour
         else { 
             numIngredients = 0;
             allIngredients = true;
-            timeToDelete = TIMEDELETE - Time.deltaTime;
+            if(!GodModeNoQuemar) timeToDelete = TIMEDELETE - Time.deltaTime;
             Canvas.GetComponent<BarraOllaQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
             timeToCook = 0;
         }
@@ -55,6 +58,8 @@ public class OllaScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Canvas.GetComponent<Interfaz>().GodModeNoQuemar != GodModeNoQuemar ) GodModeNoQuemar = Canvas.GetComponent<Interfaz>().GodModeNoQuemar;
+
         if (isCooking) {
            
             if (timeToCook == TIMECOOK)
@@ -92,7 +97,7 @@ public class OllaScript : MonoBehaviour
 
                         /*tartaObject = null;
                         ObjectToPickUp = null;*/
-                        timeToDelete -= Time.deltaTime;
+                        if(!GodModeNoQuemar) timeToDelete -= Time.deltaTime;
                         Canvas.GetComponent<BarraOllaQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
 
 
@@ -100,11 +105,14 @@ public class OllaScript : MonoBehaviour
                     }
                     else if (timeToDelete > 0) {
                         //TODO: HAY QUE MIRAR SI LO TIENE EN LA MANO O NO, SI LO TIENE EN LA MANO NO SE QUEMA PORQUE NO ESTARIA EN EL FUEGO
-                                               
-                        timeToDelete -= Time.deltaTime;
-                        Canvas.GetComponent<BarraOllaQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
-                        var main = ps.main;
-                        main.startColor = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+
+                        if (!GodModeNoQuemar)
+                        {
+                            timeToDelete -= Time.deltaTime;
+                            Canvas.GetComponent<BarraOllaQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
+                            var main = ps.main;
+                            main.startColor = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+                        }
 
                     }
 

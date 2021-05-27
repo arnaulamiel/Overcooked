@@ -21,6 +21,9 @@ public class Interfaz : MonoBehaviour
     private float numReceta;
     public int puntuacion = 0;
 
+    //El nivel 1 seran 2 minutos
+    public float levelTime =  120.0f;
+
     private bool firstRecipe = true;
 
     // Start is called before the first frame update
@@ -92,8 +95,14 @@ public class Interfaz : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Si le das al enter desaparece la receta principal y se puede jugar
-        if (Input.GetKeyDown(KeyCode.Return)) { 
+        if (levelTime <= 0)
+        {
+            //Salta a la siguiente escena
+            
+        }
+
+        //Si le das a alguna tecla desaparece la receta principal y se puede jugar
+        if (Input.anyKeyDown) { 
             if (recetaHelp.enabled)
             {
                 recetaHelp.enabled = false;
@@ -154,12 +163,14 @@ public class Interfaz : MonoBehaviour
         }
 
         updateTimers();
+
+        levelTime -= Time.deltaTime;
         
     }
 
     public void updateRecetas(string tipo)
     {
-        //Debug.Log("SPRITE? " + receta1.sprite + " bool=???? " + (receta1.sprite.name == "RecetaSopaCebolla"));
+        Debug.Log("SPRITE? " + receta2.sprite );
         if (receta1.enabled)
         {
             if (tipo == "EnsaladaL" && receta1.sprite.name == "EnsaladaSimple")
@@ -212,8 +223,9 @@ public class Interfaz : MonoBehaviour
                 puntuacion += 30;
             }
         }
-        else if (receta2.enabled)
+        if (receta2.enabled)
         {
+            Debug.Log("receta2? PRE " + receta2.enabled);
             if (tipo == "EnsaladaL" && receta2.sprite.name == "EnsaladaSimple")
             {
                 receta2.enabled = false;
@@ -263,8 +275,9 @@ public class Interfaz : MonoBehaviour
                 timeEndRecipe2 = 50;
                 puntuacion += 30;
             }
+            Debug.Log("receta2? POST " + receta2.enabled);
         }
-        else if (receta3.enabled)
+        if (receta3.enabled)
         {
             if (tipo == "EnsaladaL" && receta3.sprite.name == "EnsaladaSimple")
             {
@@ -316,7 +329,7 @@ public class Interfaz : MonoBehaviour
                 puntuacion += 30;
             }
         }
-        else if (receta4.enabled)
+        if (receta4.enabled)
         {
             if (tipo == "EnsaladaL" && receta4.sprite.name == "EnsaladaSimple")
             {
@@ -368,7 +381,7 @@ public class Interfaz : MonoBehaviour
                 puntuacion += 30;
             }
         }
-        else if (receta5.enabled)
+        if (receta5.enabled)
         {
             if (tipo == "EnsaladaL" && receta5.sprite.name == "EnsaladaSimple")
             {

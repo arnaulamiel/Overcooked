@@ -18,6 +18,8 @@ public class Interfaz : MonoBehaviour
     public float timeEndRecipe4 = 50;
     public float timeEndRecipe5 = 50;
     private float maxTimeRecipe = 50;
+    private float numReceta;
+    public int puntuacion = 0;
 
     private bool firstRecipe = true;
 
@@ -90,12 +92,13 @@ public class Interfaz : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //Si le das al enter desaparece la receta principal y se puede jugar
         if (Input.GetKeyDown(KeyCode.Return)) { 
             if (recetaHelp.enabled)
             {
                 recetaHelp.enabled = false;
                 firstRecipe = false;
+                
             } 
         }
 
@@ -149,8 +152,274 @@ public class Interfaz : MonoBehaviour
                 timeRemaining = 30;
             }
         }
-        
+
         updateTimers();
+        
+    }
+
+    public void updateRecetas(string tipo)
+    {
+        //Debug.Log("SPRITE? " + receta1.sprite + " bool=???? " + (receta1.sprite.name == "RecetaSopaCebolla"));
+        if (receta1.enabled)
+        {
+            if (tipo == "EnsaladaL" && receta1.sprite.name == "EnsaladaSimple")
+            {
+                receta1.enabled = false;
+                timer1.enabled = false;
+                timeEndRecipe1 = 50;
+                puntuacion += 10;
+            }
+            else if (tipo == "EnsaladaLT" && receta1.sprite.name == "Ensalada")
+            {
+                receta1.enabled = false;
+                timer1.enabled = false;
+                timeEndRecipe1 = 50;
+                puntuacion += 15;
+            }
+            else if (tipo == "SopaT" && receta1.sprite.name == "RecetaSopaTomate")
+            {
+                receta1.enabled = false;
+                timer1.enabled = false;
+                timeEndRecipe1 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "SopaZ" && receta1.sprite.name == "RecetaSopaZanahoria")
+            {
+                receta1.enabled = false;
+                timer1.enabled = false;
+                timeEndRecipe1 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "SopaC" && receta1.sprite.name == "RecetaSopaCebolla")
+            {
+                receta1.enabled = false;
+                timer1.enabled = false;
+                timeEndRecipe1 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "HamburguesaQC" && receta1.sprite.name == "HamburguesaQ")
+            {
+                receta1.enabled = false;
+                timer1.enabled = false;
+                timeEndRecipe1 = 50;
+                puntuacion += 30;
+            }
+            else if (tipo == "HamburguesaLC" && receta1.sprite.name == "HamburguesaL")
+            {
+                receta1.enabled = false;
+                timer1.enabled = false;
+                timeEndRecipe1 = 50;
+                puntuacion += 30;
+            }
+        }
+        else if (receta2.enabled)
+        {
+            if (tipo == "EnsaladaL" && receta2.sprite.name == "EnsaladaSimple")
+            {
+                receta2.enabled = false;
+                timer2.enabled = false;
+                timeEndRecipe2 = 50;
+                puntuacion += 10;
+            }
+            else if (tipo == "EnsaladaLT" && receta2.sprite.name == "Ensalada")
+            {
+                receta2.enabled = false;
+                timer2.enabled = false;
+                timeEndRecipe2 = 50;
+                puntuacion += 15;
+            }
+            else if (tipo == "SopaT" && receta2.sprite.name == "RecetaSopaTomate")
+            {
+                receta2.enabled = false;
+                timer2.enabled = false;
+                timeEndRecipe2 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "SopaZ" && receta2.sprite.name == "RecetaSopaZanahoria")
+            {
+                receta2.enabled = false;
+                timer2.enabled = false;
+                timeEndRecipe2 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "SopaC" && receta2.sprite.name == "RecetaSopaCebolla")
+            {
+                receta2.enabled = false;
+                timer2.enabled = false;
+                timeEndRecipe2 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "HamburguesaQC" && receta2.sprite.name == "HamburguesaQ")
+            {
+                receta2.enabled = false;
+                timer2.enabled = false;
+                timeEndRecipe2 = 50;
+                puntuacion += 30;
+            }
+            else if (tipo == "HamburguesaLC" && receta2.sprite.name == "HamburguesaL")
+            {
+                receta2.enabled = false;
+                timer2.enabled = false;
+                timeEndRecipe2 = 50;
+                puntuacion += 30;
+            }
+        }
+        else if (receta3.enabled)
+        {
+            if (tipo == "EnsaladaL" && receta3.sprite.name == "EnsaladaSimple")
+            {
+                receta3.enabled = false;
+                timer3.enabled = false;
+                timeEndRecipe3 = 50;
+                puntuacion += 10;
+            }
+            else if (tipo == "EnsaladaLT" && receta3.sprite.name == "Ensalada")
+            {
+                receta3.enabled = false;
+                timer3.enabled = false;
+                timeEndRecipe3 = 50;
+                puntuacion += 15;
+            }
+            else if (tipo == "SopaT" && receta3.sprite.name == "RecetaSopaTomate")
+            {
+                receta3.enabled = false;
+                timer3.enabled = false;
+                timeEndRecipe3 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "SopaZ" && receta3.sprite.name == "RecetaSopaZanahoria")
+            {
+                receta3.enabled = false;
+                timer3.enabled = false;
+                timeEndRecipe3 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "SopaC" && receta3.sprite.name == "RecetaSopaCebolla")
+            {
+                receta3.enabled = false;
+                timer3.enabled = false;
+                timeEndRecipe3 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "HamburguesaQC" && receta3.sprite.name == "HamburguesaQ")
+            {
+                receta3.enabled = false;
+                timer3.enabled = false;
+                timeEndRecipe3 = 50;
+                puntuacion += 30;
+            }
+            else if (tipo == "HamburguesaLC" && receta3.sprite.name == "HamburguesaL")
+            {
+                receta3.enabled = false;
+                timer3.enabled = false;
+                timeEndRecipe3 = 50;
+                puntuacion += 30;
+            }
+        }
+        else if (receta4.enabled)
+        {
+            if (tipo == "EnsaladaL" && receta4.sprite.name == "EnsaladaSimple")
+            {
+                receta4.enabled = false;
+                timer4.enabled = false;
+                timeEndRecipe4 = 50;
+                puntuacion += 10;
+            }
+            else if (tipo == "EnsaladaLT" && receta4.sprite.name == "Ensalada")
+            {
+                receta4.enabled = false;
+                timer4.enabled = false;
+                timeEndRecipe4 = 50;
+                puntuacion += 15;
+            }
+            else if (tipo == "SopaT" && receta4.sprite.name == "RecetaSopaTomate")
+            {
+                receta4.enabled = false;
+                timer4.enabled = false;
+                timeEndRecipe4 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "SopaZ" && receta4.sprite.name == "RecetaSopaZanahoria")
+            {
+                receta4.enabled = false;
+                timer4.enabled = false;
+                timeEndRecipe4 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "SopaC" && receta4.sprite.name == "RecetaSopaCebolla")
+            {
+                receta4.enabled = false;
+                timer4.enabled = false;
+                timeEndRecipe4 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "HamburguesaQC" && receta4.sprite.name == "HamburguesaQ")
+            {
+                receta4.enabled = false;
+                timer4.enabled = false;
+                timeEndRecipe4 = 50;
+                puntuacion += 30;
+            }
+            else if (tipo == "HamburguesaLC" && receta4.sprite.name == "HamburguesaL")
+            {
+                receta4.enabled = false;
+                timer4.enabled = false;
+                timeEndRecipe4 = 50;
+                puntuacion += 30;
+            }
+        }
+        else if (receta5.enabled)
+        {
+            if (tipo == "EnsaladaL" && receta5.sprite.name == "EnsaladaSimple")
+            {
+                receta5.enabled = false;
+                timer5.enabled = false;
+                timeEndRecipe5 = 50;
+                puntuacion += 10;
+            }
+            else if (tipo == "EnsaladaLT" && receta5.sprite.name == "Ensalada")
+            {
+                receta5.enabled = false;
+                timer5.enabled = false;
+                timeEndRecipe5 = 50;
+                puntuacion += 15;
+            }
+            else if (tipo == "SopaT" && receta5.sprite.name == "RecetaSopaTomate")
+            {
+                receta5.enabled = false;
+                timer5.enabled = false;
+                timeEndRecipe5 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "SopaZ" && receta5.sprite.name == "RecetaSopaZanahoria")
+            {
+                receta5.enabled = false;
+                timer5.enabled = false;
+                timeEndRecipe5 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "SopaC" && receta5.sprite.name == "RecetaSopaCebolla")
+            {
+                receta5.enabled = false;
+                timer5.enabled = false;
+                timeEndRecipe5 = 50;
+                puntuacion += 25;
+            }
+            else if (tipo == "HamburguesaQC" && receta5.sprite.name == "HamburguesaQ")
+            {
+                receta5.enabled = false;
+                timer5.enabled = false;
+                timeEndRecipe5 = 50;
+                puntuacion += 30;
+            }
+            else if (tipo == "HamburguesaLC" && receta5.sprite.name == "HamburguesaL")
+            {
+                receta5.enabled = false;
+                timer5.enabled = false;
+                timeEndRecipe5 = 50;
+                puntuacion += 30;
+            }
+        }
 
     }
 

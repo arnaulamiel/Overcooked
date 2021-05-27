@@ -12,6 +12,7 @@ public class PickUpObject : MonoBehaviour
     public Transform interactionZone;
     public Animator animator;
     public Transform player;
+    public GameObject canvas;
     public bool hasToCut = false;
 
     public int puntuacion = 0;
@@ -59,10 +60,10 @@ public class PickUpObject : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.F) || (hasToCut && Input.GetKey(KeyCode.F) ))
             {
-                Debug.Log("TAG DEL PICKED???? " + PickedObject.tag);
+                //Debug.Log("TAG DEL PICKED???? " + PickedObject.tag);
                 if (ObjectToPickUp != null  )
                 {
-                    Debug.Log("NAME DEL TO PICK UP???? " + ObjectToPickUp.GetComponent<PickableObject>().ObjectName);
+                    //Debug.Log("NAME DEL TO PICK UP???? " + ObjectToPickUp.GetComponent<PickableObject>().ObjectName);
                     // Debug.Log("ObjectToPickUp " + ObjectToPickUp.tag + " counter " + counter);
 
                     //Si el objeto k tenemos delante es una tabla de cortar i el objeto que tenemos encima es tipo food, que corte, sino la logica normal
@@ -88,12 +89,12 @@ public class PickUpObject : MonoBehaviour
                             cuchillo.transform.Translate(0.0204f, 0.0027f, 0.0005f);
 
                         }
-                        Debug.Log(counter);
+                        //Debug.Log(counter);
                         //Cuando haya pasado el tiempo que hemos indicado, se para de indicar que estamos cortando, y se indica que el objeto ahora esta cortado
                         if (timeLeftCut <= 0)
                         {
-                            Debug.Log("COUNTER 0");
-                            Debug.Log("COUNTER 0 " + PickedObject.GetComponent<PickableObject>().ObjectName);
+                            //Debug.Log("COUNTER 0");
+                            //Debug.Log("COUNTER 0 " + PickedObject.GetComponent<PickableObject>().ObjectName);
                             hasToCut = false;
                             //counter = 420;
                             timeLeftCut = maxTimeCut;
@@ -198,7 +199,7 @@ public class PickUpObject : MonoBehaviour
                     
                     else if (ObjectToPickUp.tag == "plato")
                     {
-                        Debug.Log("ES PLATO");
+                       // Debug.Log("ES PLATO");
                         if (PickedObject.tag == "cuttedFood")
                         {
 
@@ -258,7 +259,7 @@ public class PickUpObject : MonoBehaviour
                                 }
                                 else
                                 {
-                                    Debug.Log("Reconoce toamte");
+                                    //Debug.Log("Reconoce toamte");
                                     if (!ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLleno"))
                                     {
 
@@ -298,7 +299,7 @@ public class PickUpObject : MonoBehaviour
                                         tartaObject.transform.SetParent(null);
                                         tartaObject.GetComponent<Rigidbody>().useGravity = true;
                                         tartaObject.GetComponent<Rigidbody>().isKinematic = false;
-                                        Debug.Log("IS ENDED IS ENDED IS ENDED");
+                                       // Debug.Log("IS ENDED IS ENDED IS ENDED");
                                         tartaObject.GetComponent<PickableObject>().isEnded = true;
                                         tartaObject = null;
                                         ObjectToPickUp = null;
@@ -464,7 +465,7 @@ public class PickUpObject : MonoBehaviour
                             {
                                 if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPanC"))
                                 {
-                                    Debug.Log("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                                    
                                     //Tienes una lechuga cortada y quieres dejarla en un plato de pan cortado con carne
                                     string path = "Prefab/Hamburguesa";
                                     GameObject prefab = Resources.Load(path) as GameObject;
@@ -564,7 +565,7 @@ public class PickUpObject : MonoBehaviour
                     else if (PickedObject.tag == "sartenEnded")
                     {
                         GameObject CanvasSarten = null;
-                        Debug.Log("RECONEIX QUE ES Sarten ended " + PickedObject.tag);
+                        //Debug.Log("RECONEIX QUE ES Sarten ended " + PickedObject.tag);
                         if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPanL"))
                         {
 
@@ -665,7 +666,7 @@ public class PickUpObject : MonoBehaviour
                                 if (ObjectToPickUp.GetComponent<OllaScript>().isSameType("Cebolla")) { 
                                     bool firstTime = ObjectToPickUp.GetComponent<OllaScript>().isCooking;
 
-                                    Debug.Log("Cooking?????? " + ObjectToPickUp.GetComponent<OllaScript>().isCooking);
+                                    //Debug.Log("Cooking?????? " + ObjectToPickUp.GetComponent<OllaScript>().isCooking);
                                     if (!ObjectToPickUp.GetComponent<OllaScript>().allIngredients)
                                     {
                                         Destroy(PickedObject);
@@ -679,10 +680,10 @@ public class PickUpObject : MonoBehaviour
                             {
                                 
                                 if (ObjectToPickUp.GetComponent<OllaScript>().isSameType("Tomate"))
-                                {Debug.Log("Reconeix toato??");
+                                {//Debug.Log("Reconeix toato??");
                                     bool firstTime = ObjectToPickUp.GetComponent<OllaScript>().isCooking;
 
-                                    Debug.Log("Cooking?????? " + ObjectToPickUp.GetComponent<OllaScript>().isCooking);
+                                    //Debug.Log("Cooking?????? " + ObjectToPickUp.GetComponent<OllaScript>().isCooking);
                                     if (!ObjectToPickUp.GetComponent<OllaScript>().allIngredients)
                                     {
                                         Destroy(PickedObject);
@@ -697,10 +698,10 @@ public class PickUpObject : MonoBehaviour
 
                                 if (ObjectToPickUp.GetComponent<OllaScript>().isSameType("Zanahoria"))
                                 {
-                                    Debug.Log("Reconeix toato??");
+                                    //Debug.Log("Reconeix toato??");
                                     bool firstTime = ObjectToPickUp.GetComponent<OllaScript>().isCooking;
 
-                                    Debug.Log("Cooking?????? " + ObjectToPickUp.GetComponent<OllaScript>().isCooking);
+                                    //Debug.Log("Cooking?????? " + ObjectToPickUp.GetComponent<OllaScript>().isCooking);
                                     if (!ObjectToPickUp.GetComponent<OllaScript>().allIngredients)
                                     {
                                         Destroy(PickedObject);
@@ -723,8 +724,8 @@ public class PickUpObject : MonoBehaviour
                             {
                                 bool firstTime = ObjectToPickUp.GetComponent<SartenScript>().isCooking;
 
-                                Debug.Log("Cooking?????? " + ObjectToPickUp.GetComponent<SartenScript>().isCooking);
-                                Debug.Log("allIngredients?????? " + ObjectToPickUp.GetComponent<SartenScript>().allIngredients);
+                                //Debug.Log("Cooking?????? " + ObjectToPickUp.GetComponent<SartenScript>().isCooking);
+                                //Debug.Log("allIngredients?????? " + ObjectToPickUp.GetComponent<SartenScript>().allIngredients);
                                 if (!ObjectToPickUp.GetComponent<SartenScript>().allIngredients)
                                 {
                                     Destroy(PickedObject);
@@ -745,11 +746,13 @@ public class PickUpObject : MonoBehaviour
 
                         if (PickedObject.GetComponent<PickableObject>().ObjectName.Contains("EnsaladaL"))
                         {
+                            canvas.GetComponent<Interfaz>().updateRecetas("EnsaladaL");
                             puntuacion += 10;
                             ++numEnsaladasSolas;
                         }
                         else
                         {
+                            canvas.GetComponent<Interfaz>().updateRecetas("EnsaladaLT");
                             puntuacion += 15;
                             ++numEnsaladasTomate;
                         }
@@ -758,29 +761,35 @@ public class PickUpObject : MonoBehaviour
 
                     else if (PickedObject.GetComponent<PickableObject>().ObjectName.Contains("Sopa"))
                     {
-                        Debug.Log("SOPAAA");
+                        
+                       
                         if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLlenoSopaT"))
                         {
+                            canvas.GetComponent<Interfaz>().updateRecetas("SopaT");
                             puntuacion += 30;
                             ++numSopasTomate;
                         }
                         else if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLlenoSopaZ"))
                         {
+                            canvas.GetComponent<Interfaz>().updateRecetas("SopaZ");
                             puntuacion += 30;
                             ++numSopasZanah;
                         }
                         else if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("PlatoLlenoSopa"))
                         {
+                            canvas.GetComponent<Interfaz>().updateRecetas("SopaC");
                             puntuacion += 30;
                             ++numSopasCebolla;
                         }
                     }
                     else if (PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPanQC")) {
+                        canvas.GetComponent<Interfaz>().updateRecetas("HamburguesaQC");
                         puntuacion += 30;
                         ++numHambQueso;
                     }
                     if(PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("Hamburguesa") && !PickedObject.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPan"))
                     {
+                        canvas.GetComponent<Interfaz>().updateRecetas("HamburguesaLC");
                         puntuacion += 30;
                         ++numHamb;
                     }

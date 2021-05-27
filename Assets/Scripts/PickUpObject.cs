@@ -563,6 +563,7 @@ public class PickUpObject : MonoBehaviour
                     }
                     else if (PickedObject.tag == "sartenEnded")
                     {
+                        GameObject CanvasSarten = null;
                         Debug.Log("RECONEIX QUE ES Sarten ended " + PickedObject.tag);
                         if (ObjectToPickUp.GetComponent<PickableObject>().ObjectName.StartsWith("HamburguesaPanL"))
                         {
@@ -570,6 +571,7 @@ public class PickUpObject : MonoBehaviour
                             string path = "Prefab/Hamburguesa";
                             GameObject prefab = Resources.Load(path) as GameObject;
                             GameObject ObjectBefore = ObjectToPickUp;
+                            CanvasSarten = PickedObject.GetComponent<SartenScript>().Canvas;
 
                             Destroy(PickedObject);
                             Destroy(ObjectToPickUp);
@@ -592,6 +594,7 @@ public class PickUpObject : MonoBehaviour
                             string path = "Prefab/HamburguesaPanQC";
                             GameObject prefab = Resources.Load(path) as GameObject;
                             GameObject ObjectBefore = ObjectToPickUp;
+                            CanvasSarten = PickedObject.GetComponent<SartenScript>().Canvas;
 
                             Destroy(PickedObject);
                             Destroy(ObjectToPickUp);
@@ -615,6 +618,7 @@ public class PickUpObject : MonoBehaviour
                             string path = "Prefab/HamburguesaPanC";
                             GameObject prefab = Resources.Load(path) as GameObject;
                             GameObject ObjectBefore = ObjectToPickUp;
+                            CanvasSarten = PickedObject.GetComponent<SartenScript>().Canvas;
 
                             Destroy(PickedObject);
                             Destroy(ObjectToPickUp);
@@ -644,6 +648,7 @@ public class PickUpObject : MonoBehaviour
                         PickedObject.transform.SetParent(interactionZone);
                         PickedObject.GetComponent<Rigidbody>().useGravity = false;
                         PickedObject.GetComponent<Rigidbody>().isKinematic = true;
+                        PickedObject.GetComponent<SartenScript>().Canvas = CanvasSarten;
                         PickedObject.transform.position = interactionZone.position;
                         PickedObject.transform.rotation = player.rotation;
                         PickedObject.transform.Translate(-0.1f, 2f, -0.5f);

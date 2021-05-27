@@ -6,15 +6,16 @@ public class SartenScript : MonoBehaviour
 {
     public bool timeOut = false;
     public bool isCooking = false;
-    public int timeToCook;
-    private int timeToDelete;
+    public float timeToCook;
+    private float timeToDelete;
     public bool allIngredients = false;
     private int numIngredients;
 
     public GameObject player;
+    public GameObject Canvas;
 
-    private const int TIMECOOK = 4500;
-    private const int TIMEDELETE = 3200;
+    public float TIMECOOK = 15f;
+    public float TIMEDELETE = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,8 @@ public class SartenScript : MonoBehaviour
         {
             numIngredients = 0;
             allIngredients = true;
-            timeToDelete = TIMEDELETE - 1;
+            timeToDelete = TIMEDELETE - Time.deltaTime;
+            Canvas.GetComponent<BarraSartenQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
             timeToCook = 0;
         }
     }
@@ -38,14 +40,15 @@ public class SartenScript : MonoBehaviour
            /// Debug.Log("timeToCook" + timeToCook);
             if (timeToCook == TIMECOOK)
             {
-                --timeToCook;
+                timeToCook -= Time.deltaTime;
+                Canvas.GetComponent<BarraSarten>().RestarTiempo(timeToCook, TIMECOOK);
             }
             else
             {
-                if (timeToCook == 0)
+                if (timeToCook <= 0)
                 {
                     //Debug.Log("timeToDelete" + timeToDelete);
-
+                    Canvas.GetComponent<BarraSarten>().EndCook();
                     Debug.Log("allIngredients???" + allIngredients);
                     if (timeToDelete == TIMEDELETE && allIngredients)
                     {
@@ -66,29 +69,38 @@ public class SartenScript : MonoBehaviour
 
                         this.isCooking = true;
 
+                        tartaObject.GetComponent<SartenScript>().Canvas = Canvas;
+
                         tartaObject.tag = "sartenEnded";
                         /*tartaObject = null;
                         ObjectToPickUp = null;*/
-                        --timeToDelete;
+                        timeToDelete -= Time.deltaTime;
+                        Canvas.GetComponent<BarraSartenQuemar>().RestarTiempo(timeToDelete, TIMEDELETE); 
                         Destroy(this.gameObject);
                     }
-                    else if (timeToDelete != 0)
+                    else if (timeToDelete > 0)
                     {
                         //TODO: HAY QUE MIRAR SI LO TIENE EN LA MANO O NO, SI LO TIENE EN LA MANO NO SE QUEMA PORQUE NO ESTARIA EN EL FUEGO
-                        --timeToDelete;
+                        timeToDelete -= Time.deltaTime;
+                        Canvas.GetComponent<BarraSartenQuemar>().RestarTiempo(timeToDelete, TIMEDELETE);
                     }
 
                 }
                 else
                 {
-                    --timeToCook;
+                    timeToCook -= Time.deltaTime;
+                    Canvas.GetComponent<BarraSarten>().RestarTiempo(timeToCook, TIMECOOK);
                 }
             }
 
-            if (timeToDelete != TIMEDELETE)
+            if (timeToDelete < TIMEDELETE)
             {
 
-                if (timeToDelete == 0) timeOut = true;
+                if (timeToDelete <= 0)
+                {
+                    timeOut = true;
+                    Canvas.GetComponent<BarraSartenQuemar>().EndQuemar();
+                }
             }
         }
 
@@ -113,6 +125,8 @@ public class SartenScript : MonoBehaviour
             tartaObject.transform.SetParent(null);
             tartaObject.GetComponent<Rigidbody>().useGravity = true;
             tartaObject.GetComponent<Rigidbody>().isKinematic = false;
+
+            tartaObject.GetComponent<SartenScript>().Canvas = Canvas;
 
 
 
@@ -145,6 +159,8 @@ public class SartenScript : MonoBehaviour
 
                 tartaObject.GetComponent<SartenScript>().isCooking = true;
                 tartaObject.GetComponent<SartenScript>().allIngredients = true;
+
+                tartaObject.GetComponent<SartenScript>().Canvas = Canvas;
 
                 Destroy(this.gameObject);
 

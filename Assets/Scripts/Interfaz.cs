@@ -16,13 +16,13 @@ public class Interfaz : MonoBehaviour
     public Text textNivel,textQuemado, textTimer;
     
     public  Sprite[] arrayRecetas;
-    public float timeRemaining = 30;
-    public float timeEndRecipe1 = 50;
-    public float timeEndRecipe2 = 50;
-    public float timeEndRecipe3 = 50;
-    public float timeEndRecipe4 = 50;
-    public float timeEndRecipe5 = 50;
-    private float maxTimeRecipe = 50;
+    public float timeRemaining = 40;
+    public float timeEndRecipe1 = 70;
+    public float timeEndRecipe2 = 70;
+    public float timeEndRecipe3 = 70;
+    public float timeEndRecipe4 = 70;
+    public float timeEndRecipe5 = 70;
+    private float maxTimeRecipe = 70;
     private float numReceta;
 
     public AudioClip recetaSound;

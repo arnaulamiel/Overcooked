@@ -58,17 +58,17 @@ public class Interfaz : MonoBehaviour
 
         child = transform.Find("Nivell3");
         nivel3 = child.GetComponent<Button>();
-        nivel3.onClick.AddListener(TaskOnClick2);
+        nivel3.onClick.AddListener(TaskOnClick3);
         nivel3.gameObject.SetActive(false);
 
         child = transform.Find("Nivell4");
         nivel4 = child.GetComponent<Button>();
-        nivel4.onClick.AddListener(TaskOnClick2);
+        nivel4.onClick.AddListener(TaskOnClick4);
         nivel4.gameObject.SetActive(false);
 
         child = transform.Find("Nivell5");
         nivel5 = child.GetComponent<Button>();
-        nivel5.onClick.AddListener(TaskOnClick2);
+        nivel5.onClick.AddListener(TaskOnClick5);
         nivel5.gameObject.SetActive(false);
 
         child = transform.Find("TextNivel");
@@ -738,8 +738,9 @@ public class Interfaz : MonoBehaviour
     }
     void TaskOnClick4()
     {
+        Debug.Log("ESTIC 4");
         StaticScenes.numEscena = 4;
-        SceneManager.LoadScene(sceneName: "SampleScene4");
+        SceneManager.LoadScene(sceneName: "SimpleScene4");
         Debug.Log("You have clicked the button!");
     }
     void TaskOnClick5()

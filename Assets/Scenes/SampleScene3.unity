@@ -5057,7 +5057,7 @@ PrefabInstance:
       objectReference: {fileID: 1297935016}
     - target: {fileID: 2647070875483995870, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
       propertyPath: levelTime
-      value: 160
+      value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 2647070875483995870, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
       propertyPath: timeRemaining

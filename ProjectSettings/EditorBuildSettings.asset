@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 039501ba8b46e784fac02021c8b91d89
+  - enabled: 1
+    path: Assets/Scenes/GodMode.unity
+    guid: 80682ea35ee5d2246baf2565e3cf36ca
   m_configObjects: {}

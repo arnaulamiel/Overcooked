@@ -24,6 +24,11 @@ public class Interfaz : MonoBehaviour
     public float timeEndRecipe5 = 50;
     private float maxTimeRecipe = 50;
     private float numReceta;
+
+    public AudioClip recetaSound;
+
+    AudioSource fuenteAudio;
+
     public int puntuacion = 0;
 
     //El nivel 1 seran 2 minutos
@@ -38,6 +43,7 @@ public class Interfaz : MonoBehaviour
     void Start()
     {
         if (StaticScenes.numEscena == 0) StaticScenes.numEscena = 1;
+        fuenteAudio = GetComponent<AudioSource>();
 
         //Niveles GodMode
         child = transform.Find("Nivell1");
@@ -341,9 +347,12 @@ public class Interfaz : MonoBehaviour
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
+                
 
                 if (!receta1.enabled)
                 {
+                    fuenteAudio.clip = recetaSound;
+                    fuenteAudio.Play();
                     if (!timer1.enabled) timer1.enabled = true;
 
                     receta1.enabled = true;
@@ -354,29 +363,39 @@ public class Interfaz : MonoBehaviour
             {
                 if (!receta1.enabled)
                 {
+                    fuenteAudio.clip = recetaSound;
+                    fuenteAudio.Play();
                     receta1.enabled = true;
                     receta1.sprite = arrayRecetas[receta];
                 }
                 else if (!receta2.enabled)
                 {
+                    fuenteAudio.clip = recetaSound;
+                    fuenteAudio.Play();
                     if (!timer2.enabled) timer2.enabled = true;
                     receta2.enabled = true;
                     receta2.sprite = arrayRecetas[receta];
                 }
                 else if (!receta3.enabled)
                 {
+                    fuenteAudio.clip = recetaSound;
+                    fuenteAudio.Play();
                     if (!timer3.enabled) timer3.enabled = true;
                     receta3.enabled = true;
                     receta3.sprite = arrayRecetas[receta];
                 }
                 else if (!receta4.enabled)
                 {
+                    fuenteAudio.clip = recetaSound;
+                    fuenteAudio.Play();
                     if (!timer4.enabled) timer4.enabled = true;
                     receta4.enabled = true;
                     receta4.sprite = arrayRecetas[receta];
                 }
                 else if (!receta5.enabled)
                 {
+                    fuenteAudio.clip = recetaSound;
+                    fuenteAudio.Play();
                     if (!timer5.enabled) timer5.enabled = true;
                     receta5.enabled = true;
                     receta5.sprite = arrayRecetas[receta];

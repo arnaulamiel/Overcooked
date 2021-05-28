@@ -93,7 +93,7 @@ public class EndLevelScript : MonoBehaviour
                     StaticScenes.numEscena = 3;
                 }
                 else if (StaticScenes.numEscena == 5)
-                {//Si es escena 1
+                {//Si es escena 5
                     SceneManager.LoadScene(sceneName: "SampleScene4");
                     StaticScenes.numEscena = 4;
                 }

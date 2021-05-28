@@ -36,7 +36,7 @@ public class EndLevelScript : MonoBehaviour
     {
 
         int aux = StaticScenes.numEscena - 1;
-        bool minpunt = (StaticScenes.puntuacion > 100);
+        bool minpunt = (StaticScenes.puntuacion > 40);
 
         if (minpunt)congrats.enabled = true;        
         else fail.enabled = true;

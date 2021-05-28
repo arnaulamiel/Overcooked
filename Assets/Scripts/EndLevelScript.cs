@@ -24,8 +24,11 @@ public class EndLevelScript : MonoBehaviour
     {
         int aux = StaticScenes.numEscena - 1;
         puntos.text = StaticScenes.puntuacion.ToString();
+        //Si no llega al min de puntos que no pase, vaya atras
+        
         level.text = aux.ToString();
 
+        //Esperar 5sec antes de esto
         if (Input.anyKeyDown)
         {
             if (StaticScenes.numEscena == 2)

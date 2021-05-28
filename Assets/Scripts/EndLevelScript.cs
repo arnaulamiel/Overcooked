@@ -89,12 +89,12 @@ public class EndLevelScript : MonoBehaviour
                 }
                 else if (StaticScenes.numEscena == 4)
                 {//Si es escena 1
-                    SceneManager.LoadScene(sceneName: "SimpleScene3");
+                    SceneManager.LoadScene(sceneName: "SampleScene3");
                     StaticScenes.numEscena = 3;
                 }
                 else if (StaticScenes.numEscena == 5)
                 {//Si es escena 5
-                    SceneManager.LoadScene(sceneName: "SampleScene4");
+                    SceneManager.LoadScene(sceneName: "SimpleScene4");
                     StaticScenes.numEscena = 4;
                 }
             }

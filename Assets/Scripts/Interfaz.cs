@@ -333,6 +333,11 @@ public class Interfaz : MonoBehaviour
                     StaticScenes.numEscena = 5;
                    // SceneManager.LoadScene(sceneName: "SampleScene5");
                 }
+                else if (StaticScenes.numEscena == 5)
+                {//Si es escena 1
+                    StaticScenes.numEscena = 6;
+                    // SceneManager.LoadScene(sceneName: "SampleScene5");
+                }
                 Debug.Log("Que escena es esta??????? " + StaticScenes.numEscena);
                 SceneManager.LoadScene(sceneName: "EndLevel");
 

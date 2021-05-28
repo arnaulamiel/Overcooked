@@ -9,7 +9,7 @@ public class EndLevelScript : MonoBehaviour
     private Text puntos, level;
     private Image congrats, fail;
     Transform child;
-    public float time = 4;
+    public float time;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +28,7 @@ public class EndLevelScript : MonoBehaviour
         child = transform.Find("Fail");
         fail = child.GetComponent<Image>();
         fail.enabled = false;
+        time = 4;
     }
 
     // Update is called once per frame
@@ -48,7 +49,6 @@ public class EndLevelScript : MonoBehaviour
 
             if (minpunt)
             {
-                fail.enabled = false;
                 //Esperar 5sec antes de esto
                 if (Input.anyKeyDown)
                 {

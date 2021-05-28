@@ -68,10 +68,9 @@ public class EndLevelScript : MonoBehaviour
                     {//Si es escena 1
                         SceneManager.LoadScene(sceneName: "SampleScene5");
                     }
-                    else
+                    else if(StaticScenes.numEscena == 6)
                     {
-                        //Game over
-                       
+                        SceneManager.LoadScene(sceneName: "GameOver");
 
                     }
                 }

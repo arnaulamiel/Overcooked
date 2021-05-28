@@ -18,8 +18,8 @@ public class OllaScript : MonoBehaviour
     private bool GodModeNoQuemar = false;
     private bool GodModeEndCook = false;
 
-    public float TIMECOOK = 20f;
-    public float TIMEDELETE = 15f;
+    public float TIMECOOK = 30f;
+    public float TIMEDELETE = 20f;
     public enum TipoComida
      {
         Nada,
@@ -48,6 +48,7 @@ public class OllaScript : MonoBehaviour
         GodModeEndCook = Canvas.GetComponent<Interfaz>().GodModeEndCook;
         fuenteAudio = GetComponent<AudioSource>();
         //Ahora solo se hace general, igual necesitamos especificar, en frames
+        
         timeToCook = TIMECOOK;
         timeToDelete = TIMEDELETE;
         if (this.gameObject.tag != "ollaEnded") numIngredients = 2;
@@ -75,6 +76,7 @@ public class OllaScript : MonoBehaviour
                 fuenteAudio.clip = OllaSound;
                 fuenteAudio.Play();
                 timeToCook -= Time.deltaTime;
+                    Debug.Log("DEBUGDEBUG "+timeToCook); ;
                 Canvas.GetComponent<BarraOlla>().RestarTiempo(timeToCook, TIMECOOK);
             }
             else {                
@@ -136,7 +138,8 @@ public class OllaScript : MonoBehaviour
                 else {
                     timeToCook -= Time.deltaTime;
                     Canvas.GetComponent<BarraOlla>().RestarTiempo(timeToCook, TIMECOOK);
-                }
+                        Debug.Log("DEBUGDEBUG2 " + timeToCook); ;
+                    }
             }
 
             if (timeToDelete < TIMEDELETE)

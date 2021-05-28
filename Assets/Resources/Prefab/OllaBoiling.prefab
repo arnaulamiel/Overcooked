@@ -4924,8 +4924,8 @@ MonoBehaviour:
   allIngredients: 0
   player: {fileID: 897829521465234185, guid: 1a25dbd0d7ffc2449b7cc9fa655ce5cd, type: 3}
   Canvas: {fileID: 2647070875483995872, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
-  TIMECOOK: 20
-  TIMEDELETE: 15
+  TIMECOOK: 30
+  TIMEDELETE: 20
   comida: 0
   ps: {fileID: 0}
   childp: {fileID: 0}

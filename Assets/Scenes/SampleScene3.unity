@@ -6736,6 +6736,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1297935016}
+    - target: {fileID: 881875009091833097, guid: 088e32f498f570d48926a040917be24b, type: 3}
+      propertyPath: TIMECOOK
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 881875009091833097, guid: 088e32f498f570d48926a040917be24b, type: 3}
+      propertyPath: TIMEDELETE
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1357136437412051672, guid: 088e32f498f570d48926a040917be24b, type: 3}
       propertyPath: m_RootOrder
       value: 4

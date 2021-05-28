@@ -670,7 +670,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2894.7, y: 1454}
+  m_AnchoredPosition: {x: -2681, y: 2125}
   m_SizeDelta: {x: 2035.042, y: 375.556}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2647070875298990624
@@ -1072,6 +1072,7 @@ MonoBehaviour:
   nivel5: {fileID: 0}
   textNivel: {fileID: 0}
   textQuemado: {fileID: 0}
+  textTimer: {fileID: 0}
   arrayRecetas: []
   timeRemaining: 30
   timeEndRecipe1: 0
@@ -1654,7 +1655,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2894.7, y: 1454}
+  m_AnchoredPosition: {x: -2681, y: 2125}
   m_SizeDelta: {x: 2035.042, y: 375.556}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2647070875735529748
@@ -2308,7 +2309,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2894.7, y: 1454}
+  m_AnchoredPosition: {x: -2681, y: 2125}
   m_SizeDelta: {x: 2035.042, y: 375.556}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2647070876026884486
@@ -2462,7 +2463,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2894.7, y: 1454}
+  m_AnchoredPosition: {x: -2681, y: 2125}
   m_SizeDelta: {x: 2035.042, y: 375.556}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2647070876215064584

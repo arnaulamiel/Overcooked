@@ -18,8 +18,8 @@ public class OllaScript : MonoBehaviour
     private bool GodModeNoQuemar = false;
     private bool GodModeEndCook = false;
 
-    public float TIMECOOK = 15f;
-    public float TIMEDELETE = 10f;
+    public float TIMECOOK = 20f;
+    public float TIMEDELETE = 15f;
     public enum TipoComida
      {
         Nada,

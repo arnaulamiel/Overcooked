@@ -17,12 +17,12 @@ public class Interfaz : MonoBehaviour
     
     public  Sprite[] arrayRecetas;
     public float timeRemaining = 40;
-    public float timeEndRecipe1 = 70;
-    public float timeEndRecipe2 = 70;
-    public float timeEndRecipe3 = 70;
-    public float timeEndRecipe4 = 70;
-    public float timeEndRecipe5 = 70;
-    private float maxTimeRecipe = 70;
+    public float timeEndRecipe1 = 80;
+    public float timeEndRecipe2 = 80;
+    public float timeEndRecipe3 = 80;
+    public float timeEndRecipe4 = 80;
+    public float timeEndRecipe5 = 80;
+    private float maxTimeRecipe = 80;
     private float numReceta;
 
     public AudioClip recetaSound;
@@ -32,7 +32,7 @@ public class Interfaz : MonoBehaviour
     public int puntuacion = 0;
 
     //El nivel 1 seran 2 minutos
-    public float levelTime =  120.0f;
+    public float levelTime =  130.0f;
 
     public bool GodModeNoQuemar = false;
     public bool GodModeEndCook = false;

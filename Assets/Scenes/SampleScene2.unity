@@ -591,6 +591,34 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1433727824}
+    - target: {fileID: 2647070875483995870, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
+      propertyPath: levelTime
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 2647070875483995870, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
+      propertyPath: timeRemaining
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2647070875483995870, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
+      propertyPath: timeEndRecipe1
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2647070875483995870, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
+      propertyPath: timeEndRecipe2
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2647070875483995870, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
+      propertyPath: timeEndRecipe3
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2647070875483995870, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
+      propertyPath: timeEndRecipe4
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2647070875483995870, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
+      propertyPath: timeEndRecipe5
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 2647070875483995871, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
       propertyPath: player
       value: 

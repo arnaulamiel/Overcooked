@@ -18,7 +18,7 @@ public class SartenScript : MonoBehaviour
     private bool GodModeEndCook = false;
 
     public float TIMECOOK = 15f;
-    public float TIMEDELETE = 10f;
+    public float TIMEDELETE = 15f;
     public ParticleSystem ps;
     public Transform childp;
 

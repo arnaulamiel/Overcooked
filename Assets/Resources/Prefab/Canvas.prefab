@@ -1074,15 +1074,15 @@ MonoBehaviour:
   textQuemado: {fileID: 0}
   textTimer: {fileID: 0}
   arrayRecetas: []
-  timeRemaining: 30
-  timeEndRecipe1: 0
-  timeEndRecipe2: 0
-  timeEndRecipe3: 0
-  timeEndRecipe4: 0
-  timeEndRecipe5: 50
+  timeRemaining: 40
+  timeEndRecipe1: 80
+  timeEndRecipe2: 80
+  timeEndRecipe3: 80
+  timeEndRecipe4: 80
+  timeEndRecipe5: 80
   recetaSound: {fileID: 8300000, guid: 81537beef2bc7f74e80d9061e4f837a4, type: 3}
   puntuacion: 0
-  levelTime: 120
+  levelTime: 140
   GodModeNoQuemar: 0
   GodModeEndCook: 0
 --- !u!114 &2647070875483995865

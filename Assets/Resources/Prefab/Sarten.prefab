@@ -101,7 +101,7 @@ MonoBehaviour:
   player: {fileID: 897829521465234185, guid: 1a25dbd0d7ffc2449b7cc9fa655ce5cd, type: 3}
   Canvas: {fileID: 2647070875483995872, guid: 81bc7ac0d8deed042bec557cef8b0a0e, type: 3}
   TIMECOOK: 15
-  TIMEDELETE: 10
+  TIMEDELETE: 15
   ps: {fileID: 0}
   childp: {fileID: 0}
   OllaSound: {fileID: 8300000, guid: 320f676675faf504f9e22a30d8be029e, type: 3}

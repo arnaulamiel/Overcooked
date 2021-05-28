@@ -358,7 +358,7 @@ public class Interfaz : MonoBehaviour
                 {
                     fuenteAudio.clip = recetaSound;
                     fuenteAudio.Play();
-                    if (!timer1.enabled) timer1.enabled = true;
+                    timer1.enabled = true;
 
                     receta1.enabled = true;
                     receta1.sprite = arrayRecetas[receta];
@@ -429,7 +429,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta1.enabled = false;
                 timer1.enabled = false;
-                timeEndRecipe1 = 50;
+                timeEndRecipe1 = 80;
                 puntuacion += 10;
                 hasActualizado = true;
             }
@@ -437,7 +437,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta1.enabled = false;
                 timer1.enabled = false;
-                timeEndRecipe1 = 50;
+                timeEndRecipe1 = 80;
                 puntuacion += 15;
                 hasActualizado = true;
             }
@@ -445,7 +445,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta1.enabled = false;
                 timer1.enabled = false;
-                timeEndRecipe1 = 50;
+                timeEndRecipe1 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -453,7 +453,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta1.enabled = false;
                 timer1.enabled = false;
-                timeEndRecipe1 = 50;
+                timeEndRecipe1 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -461,7 +461,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta1.enabled = false;
                 timer1.enabled = false;
-                timeEndRecipe1 = 50;
+                timeEndRecipe1 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -469,7 +469,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta1.enabled = false;
                 timer1.enabled = false;
-                timeEndRecipe1 = 50;
+                timeEndRecipe1 = 80;
                 puntuacion += 30;
                 hasActualizado = true;
             }
@@ -477,7 +477,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta1.enabled = false;
                 timer1.enabled = false;
-                timeEndRecipe1 = 50;
+                timeEndRecipe1 = 80;
                 puntuacion += 30;
                 hasActualizado = true;
             }
@@ -489,7 +489,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta2.enabled = false;
                 timer2.enabled = false;
-                timeEndRecipe2 = 50;
+                timeEndRecipe2 = 80;
                 puntuacion += 10;
                 hasActualizado = true;
             }
@@ -497,7 +497,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta2.enabled = false;
                 timer2.enabled = false;
-                timeEndRecipe2 = 50;
+                timeEndRecipe2 = 80;
                 puntuacion += 15;
                 hasActualizado = true;
             }
@@ -505,7 +505,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta2.enabled = false;
                 timer2.enabled = false;
-                timeEndRecipe2 = 50;
+                timeEndRecipe2 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -513,7 +513,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta2.enabled = false;
                 timer2.enabled = false;
-                timeEndRecipe2 = 50;
+                timeEndRecipe2 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -521,7 +521,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta2.enabled = false;
                 timer2.enabled = false;
-                timeEndRecipe2 = 50;
+                timeEndRecipe2 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -529,7 +529,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta2.enabled = false;
                 timer2.enabled = false;
-                timeEndRecipe2 = 50;
+                timeEndRecipe2 = 80;
                 puntuacion += 30;
                 hasActualizado = true;
             }
@@ -537,7 +537,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta2.enabled = false;
                 timer2.enabled = false;
-                timeEndRecipe2 = 50;
+                timeEndRecipe2 = 80;
                 puntuacion += 30;
                 hasActualizado = true;
             }
@@ -549,7 +549,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta3.enabled = false;
                 timer3.enabled = false;
-                timeEndRecipe3 = 50;
+                timeEndRecipe3 = 80;
                 puntuacion += 10;
                 hasActualizado = true;
             }
@@ -557,7 +557,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta3.enabled = false;
                 timer3.enabled = false;
-                timeEndRecipe3 = 50;
+                timeEndRecipe3 = 80;
                 puntuacion += 15;
                 hasActualizado = true;
             }
@@ -565,7 +565,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta3.enabled = false;
                 timer3.enabled = false;
-                timeEndRecipe3 = 50;
+                timeEndRecipe3 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -573,7 +573,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta3.enabled = false;
                 timer3.enabled = false;
-                timeEndRecipe3 = 50;
+                timeEndRecipe3 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -581,7 +581,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta3.enabled = false;
                 timer3.enabled = false;
-                timeEndRecipe3 = 50;
+                timeEndRecipe3 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -589,7 +589,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta3.enabled = false;
                 timer3.enabled = false;
-                timeEndRecipe3 = 50;
+                timeEndRecipe3 = 80;
                 puntuacion += 30;
                 hasActualizado = true;
             }
@@ -597,7 +597,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta3.enabled = false;
                 timer3.enabled = false;
-                timeEndRecipe3 = 50;
+                timeEndRecipe3 = 80;
                 puntuacion += 30;
                 hasActualizado = true;
             }
@@ -608,7 +608,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta4.enabled = false;
                 timer4.enabled = false;
-                timeEndRecipe4 = 50;
+                timeEndRecipe4 = 80;
                 puntuacion += 10;
                 hasActualizado = true;
             }
@@ -616,7 +616,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta4.enabled = false;
                 timer4.enabled = false;
-                timeEndRecipe4 = 50;
+                timeEndRecipe4 = 80;
                 puntuacion += 15;
                 hasActualizado = true;
             }
@@ -624,7 +624,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta4.enabled = false;
                 timer4.enabled = false;
-                timeEndRecipe4 = 50;
+                timeEndRecipe4 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -632,7 +632,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta4.enabled = false;
                 timer4.enabled = false;
-                timeEndRecipe4 = 50;
+                timeEndRecipe4 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -640,7 +640,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta4.enabled = false;
                 timer4.enabled = false;
-                timeEndRecipe4 = 50;
+                timeEndRecipe4 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -648,7 +648,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta4.enabled = false;
                 timer4.enabled = false;
-                timeEndRecipe4 = 50;
+                timeEndRecipe4 = 80;
                 puntuacion += 30;
                 hasActualizado = true;
             }
@@ -656,7 +656,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta4.enabled = false;
                 timer4.enabled = false;
-                timeEndRecipe4 = 50;
+                timeEndRecipe4 = 80;
                 puntuacion += 30;
                 hasActualizado = true;
             }
@@ -667,7 +667,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta5.enabled = false;
                 timer5.enabled = false;
-                timeEndRecipe5 = 50;
+                timeEndRecipe5 = 80;
                 puntuacion += 10;
                 hasActualizado = true;
             }
@@ -675,7 +675,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta5.enabled = false;
                 timer5.enabled = false;
-                timeEndRecipe5 = 50;
+                timeEndRecipe5 = 80;
                 puntuacion += 15;
                 hasActualizado = true;
             }
@@ -683,7 +683,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta5.enabled = false;
                 timer5.enabled = false;
-                timeEndRecipe5 = 50;
+                timeEndRecipe5 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -691,7 +691,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta5.enabled = false;
                 timer5.enabled = false;
-                timeEndRecipe5 = 50;
+                timeEndRecipe5 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -699,7 +699,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta5.enabled = false;
                 timer5.enabled = false;
-                timeEndRecipe5 = 50;
+                timeEndRecipe5 = 80;
                 puntuacion += 25;
                 hasActualizado = true;
             }
@@ -707,7 +707,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta5.enabled = false;
                 timer5.enabled = false;
-                timeEndRecipe5 = 50;
+                timeEndRecipe5 = 80;
                 puntuacion += 30;
                 hasActualizado = true;
             }
@@ -715,7 +715,7 @@ public class Interfaz : MonoBehaviour
             {
                 receta5.enabled = false;
                 timer5.enabled = false;
-                timeEndRecipe5 = 50;
+                timeEndRecipe5 = 80;
                 puntuacion += 30;
                 hasActualizado = true;
             }
